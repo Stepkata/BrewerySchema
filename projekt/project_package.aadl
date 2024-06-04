@@ -37,6 +37,11 @@ public
   	data DateTime --@TODO--
   		
   	end DateTime;
+  	
+  	data KeyboardInputData
+  		
+  	end KeyboardInputData;
+  	
 
 	
 	--- Hardware ---
@@ -97,6 +102,12 @@ public
 		
 	end Czasomierz.impl;
 	
+	device Klawiatura
+		features 
+			KeyInput: out data port KeyboardInputData;
+	end Klawiatura;
+	
+	
 		-- wstepna obrobka --
 	
 	device Kadz
@@ -127,6 +138,15 @@ public
 	device implementation CzajnikDoZacieru.impl
 		
 	end CzajnikDoZacieru.impl;
+	
+	device SystemControlCenter
+		features
+			UserInput: in data port KeyboardInputData;
+			MieszadloTime: out data port DateTime;
+			CzajnikTime: out data port DateTime;
+			TotalTime: out data port DateTime;
+			CzajnikDesiredTemp: out data port TemperatureType;
+	end SystemControlCenter;
 	
 		-- filtracja --
 		
@@ -308,9 +328,142 @@ public
 		
 	end HeaterControl.impl;
 	
-	--- Processes ---
+	--- Wspolne procesy ---
+	process Heater_Control_Process
+		features 
+			sensor_data: in data port TemperatureType;
+			input_data: in data port TemperatureType;
+			heater_control: out data port SwitchTrigger;
+	end Heater_Control_Process;
 	
-	--- System ---
+	process implementation Heater_Control_Process.impl
+		subcomponents
+	    read_temp: thread ReadTemp.impl;
+	    control: thread DecideToTurnHeatOn.impl;
+	    heater_ctrl: thread HeaterControl.impl;
+	  connections
+	    sensor_data_conn: port sensor_data -> read_temp.sensor_data;
+	    control_sensor_conn: port read_temp.read_data -> control.temp_data;
+	    control_input_conn: port input_data -> control.desired_temp_data;
+	    heater_conn: port control.decision_heater -> heater_ctrl.turn_on;
+	    heater_final_conn: port heater_ctrl.control_heater -> heater_control;
+	  end Heater_Control_Process.impl;
+	
+	--- Wstepna obrobka ---
+	
+	thread InputGateControl
+		features
+			Open: in data port SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end InputGateControl;
+	
+	thread implementation InputGateControl.impl
+		
+	end InputGateControl.impl;
+	
+	thread OutputGateControl
+		features
+			Open: in data port SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end OutputGateControl;
+	
+	thread implementation OutputGateControl.impl
+		
+	end OutputGateControl.impl;
+		
+	thread MieszadloControl
+		features
+			On: in data port SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end MieszadloControl;
+	
+	thread implementation MieszadloControl.impl
+		
+	end MieszadloControl.impl;
+	
+	thread KeyboardControl
+		features
+			PureInput: in data port KeyboardInputData;
+			KeyboardInput: out data port KeyboardInputData;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;		
+	end KeyboardControl;
+	
+	thread implementation KeyboardControl.impl
+		
+	end KeyboardControl.impl;
+	
+	thread TimerControl
+		features
+			ReadTime: in data port DateTime;
+			CurrTime: out data port DateTime;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;		
+	end TimerControl;
+	
+	thread MieszadloDecisionCenter
+		features
+			CurrTime: in data port DateTime;
+			DesiredTime: in data port DateTime;
+			OpenInputGate: out data port SwitchTrigger;
+			OpenOutputGate: out data port SwitchTrigger;
+			TurnMieszadloOn: out data port SwitchTrigger;		
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end MieszadloDecisionCenter;
+	
+	thread implementation TimerControl.impl
+		
+	end TimerControl.impl;
+	
+	process Mieszanie
+		features
+			MieszadloTime: in data port DateTime;		
+	end Mieszanie;
+	
+	process implementation Mieszanie.impl
+		subcomponents
+			
+	end Mieszanie.impl;
+	
+	process PodgrzewanieWCzajniku
+		features
+			CzajnikTime: out data port DateTime;
+			CzajnikDesiredTemp: out data port TemperatureType;
+		
+	end PodgrzewanieWCzajniku;
+	
+	
+	system WstepnaObrobka
+		
+	end WstepnaObrobka;
 	
 	
 	
