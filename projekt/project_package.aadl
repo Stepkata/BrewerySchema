@@ -8,7 +8,7 @@ public
 	data TemperatureType
      	properties
        		Data_Model::Data_Representation => Integer;
-       		Data_Size => 4 Bytes;
+       		Data_Size => 8 Bytes;
   	end TemperatureType;
   	
   	data SwitchTrigger 
@@ -19,7 +19,7 @@ public
   	data PressureType
   		properties
        		Data_Model::Data_Representation => Integer;
-       		Data_Size => 4 Bytes;
+       		Data_Size => 16 Bytes;
   	end PressureType;
   	
   	data WaterLevelType
@@ -139,14 +139,19 @@ public
 		
 	end CzajnikDoZacieru.impl;
 	
-	device SystemControlCenter
+	device WOSystemControlCenterDevice
 		features
 			UserInput: in data port KeyboardInputData;
 			MieszadloTime: out data port DateTime;
 			CzajnikTime: out data port DateTime;
 			TotalTime: out data port DateTime;
 			CzajnikDesiredTemp: out data port TemperatureType;
-	end SystemControlCenter;
+			CzajnikDesiredPressure: out data port PressureType;
+	end WOSystemControlCenterDevice;
+	
+	device implementation WOSystemControlCenterDevice.impl
+		
+	end WOSystemControlCenterDevice.impl;
 	
 		-- filtracja --
 		
@@ -328,15 +333,66 @@ public
 		
 	end HeaterControl.impl;
 	
+	thread ReadPressure
+		features
+			sensor_data: in data port PressureType;
+			read_data: out data port PressureType;
+		properties
+			Dispatch_Protocol => Periodic;
+			Dispatch_Offset => 2ms;
+			Deadline => 15ms;	
+			Period => 20ms;
+			Compute_Execution_Time => 0ms..2ms;		
+	end ReadPressure;
+	
+	thread implementation ReadPressure.impl
+		
+	end ReadPressure.impl;
+	
+	thread DecideToTurnPressureOn
+		features
+			pressure_data: in data port PressureType;
+			desired_pressure_data: in data port PressureType;
+			decision_pressure_on: out data port SwitchTrigger;
+			decision_pressure_off: out data port SwitchTrigger;
+		properties
+			Dispatch_Protocol => Periodic;
+			Dispatch_Offset => 2ms;
+			Deadline => 15ms;	
+			Period => 20ms;
+			Compute_Execution_Time => 0ms..2ms;	
+	end DecideToTurnPressureOn;
+	
+	thread implementation DecideToTurnPressureOn.impl
+		
+	end DecideToTurnPressureOn.impl;
+	
+	thread PressureControl
+		features
+			turn_on: in data port SwitchTrigger;
+			control_pressure: out data port SwitchTrigger;
+		properties
+			Dispatch_Protocol => Periodic;
+			Dispatch_Offset => 2ms;
+			Deadline => 15ms;	
+			Period => 20ms;
+			Compute_Execution_Time => 0ms..2ms;	
+	end PressureControl;
+	
+	thread implementation PressureControl.impl
+		
+	end PressureControl.impl;
+	
+	
 	--- Wspolne procesy ---
-	process Heater_Control_Process
+	process HeaterControlProcess
 		features 
 			sensor_data: in data port TemperatureType;
 			input_data: in data port TemperatureType;
 			heater_control: out data port SwitchTrigger;
-	end Heater_Control_Process;
+	end HeaterControlProcess;
 	
-	process implementation Heater_Control_Process.impl
+	process implementation HeaterControlProcess.impl
 		subcomponents
 	    read_temp: thread ReadTemp.impl;
 	    control: thread DecideToTurnHeatOn.impl;
@@ -347,13 +403,35 @@ public
 	    control_input_conn: port input_data -> control.desired_temp_data;
 	    heater_conn: port control.decision_heater -> heater_ctrl.turn_on;
 	    heater_final_conn: port heater_ctrl.control_heater -> heater_control;
-	  end Heater_Control_Process.impl;
+	  end HeaterControlProcess.impl;
+	  
+	process PressureControlProcess
+		features 
+			sensor_data: in data port PressureType;
+			input_data: in data port PressureType;
+			pressure_control: out data port SwitchTrigger;
+	end PressureControlProcess;
 	
+	process implementation PressureControlProcess.impl
+		subcomponents
+			read_pressure: thread ReadPressure.impl;
+			control: thread DecideToTurnPressureOn.impl;
+			pressure_ctrl: thread PressureControl.impl;
+		connections
+			sensor_data_conn: port sensor_data -> read_pressure.sensor_data;
+			control_sensor_conn: port read_pressure.read_data -> control.pressure_data;
+			control_input_conn: port input_data -> control.desired_pressure_data;
+			pressure_conn: port control.decision_pressure_on -> pressure_ctrl.turn_on;
+			pressure_final_conn: port pressure_ctrl.control_pressure -> pressure_control;
+	end PressureControlProcess.impl;
+	
+	  
 	--- Wstepna obrobka ---
 	
 	thread InputGateControl
 		features
 			Open: in data port SwitchTrigger;
+			OpenGate: out data port SwitchTrigger;
 		properties
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
@@ -369,6 +447,7 @@ public
 	thread OutputGateControl
 		features
 			Open: in data port SwitchTrigger;
+			OpenGate: out data port SwitchTrigger;
 		properties
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
@@ -384,6 +463,7 @@ public
 	thread MieszadloControl
 		features
 			On: in data port SwitchTrigger;
+			TurnOn: out data port SwitchTrigger;
 		properties
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
@@ -424,13 +504,19 @@ public
 		    Compute_Execution_Time => 0ms..2ms;		
 	end TimerControl;
 	
+	thread implementation TimerControl.impl
+		
+	end TimerControl.impl;
+	
 	thread MieszadloDecisionCenter
 		features
+			Start: in data port Base_Types::Boolean;
 			CurrTime: in data port DateTime;
 			DesiredTime: in data port DateTime;
 			OpenInputGate: out data port SwitchTrigger;
 			OpenOutputGate: out data port SwitchTrigger;
-			TurnMieszadloOn: out data port SwitchTrigger;		
+			TurnMieszadloOn: out data port SwitchTrigger;	
+			Done: out data port Base_Types::Boolean;		
 		properties
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
@@ -439,26 +525,57 @@ public
 		    Compute_Execution_Time => 0ms..2ms;	
 	end MieszadloDecisionCenter;
 	
-	thread implementation TimerControl.impl
+	thread implementation MieszadloDecisionCenter.impl
 		
-	end TimerControl.impl;
+	end MieszadloDecisionCenter.impl;
+	
 	
 	process Mieszanie
 		features
-			MieszadloTime: in data port DateTime;		
+			Start: in data port Base_Types::Boolean;
+			MieszadloTime: in data port DateTime;
+			CurrentTime: in data port DateTime;
+			IGateOpen: out data port SwitchTrigger;
+			OGateOpen: out data port SwitchTrigger;
+			TurnOn: out data port SwitchTrigger;
+			MieszadloProcessDone: out data port Base_Types::Boolean;		
 	end Mieszanie;
 	
 	process implementation Mieszanie.impl
 		subcomponents
-			
+			input_gate_c: thread InputGateControl.impl;
+			output_gate_c: thread OutputGateControl.impl;
+			timer_control: thread TimerCOntrol.impl;
+			mieszadlo_control: thread MieszadloControl.impl;
+			mieszadlo_decision_center: thread MieszadloDecisionCenter.impl;
+		connections
+			start_conn: port Start -> mieszadlo_decision_center.Start;
+			desired_time_conn: port MieszadloTime -> mieszadlo_decision_center.DesiredTime;
+			curr_time_conn: port CurrentTime -> mieszadlo_decision_center.CurrTime;
+			open_igate_dec_conn: port mieszadlo_decision_center.OpenInputGate -> input_gate_c.Open;
+			open_ogate_dec_conn: port mieszadlo_decision_center.OpenOutputGate -> output_gate_c.Open;
+			turn_on_dec_conn: port mieszadlo_decision_center.TurnMieszadloOn -> mieszadlo_control.On;
+			open_igate_conn: port input_gate_c.OpenGate -> IGateOpen;
+			open_ogate_conn: port output_gate_c.OpenGate -> OGateOpen;
+			turn_on_conn: port mieszadlo_control.TurnOn -> TurnOn;
+			signal_end_proc_conn: port mieszadlo_decision_center.Done -> MieszadloProcessDone;
 	end Mieszanie.impl;
 	
 	process PodgrzewanieWCzajniku
 		features
+			Start: in data port Base_Types::Boolean;
 			CzajnikTime: out data port DateTime;
 			CzajnikDesiredTemp: out data port TemperatureType;
-		
+			
 	end PodgrzewanieWCzajniku;
+	
+	process implementation PodgrzewanieWCzajniku.impl
+		
+	end PodgrzewanieWCzajniku.impl;
+	
+	process WOSysControlProcess
+		
+	end WOSysControlProcess;
 	
 	
 	system WstepnaObrobka
