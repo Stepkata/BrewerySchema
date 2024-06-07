@@ -3,6 +3,29 @@ public
 	with Base_Types;
 	with Data_Model;
 	
+	--- Hardware --- 
+	bus Marine
+	end Marine;
+	
+	bus implementation Marine.Standard
+	end Marine.Standard;
+	
+	processor corei5
+	  features
+	    eth: requires bus access Marine.Standard;
+	  properties
+	   Scheduling_Protocol => (Round_Robin_Protocol);
+	   Clock_Period => 1 ms;	
+	end corei5;
+	
+	memory RAM
+	  features
+	    BA1: requires bus access Marine.Standard;
+	end RAM;
+	
+	memory implementation RAM.Standard
+	end RAM.Standard;
+	
 	--- Data Types ---
 	
 	data TemperatureType
@@ -49,6 +72,8 @@ public
 	--- Devices ---
 	
 		-- common --
+		
+		
 	device TempSensor
       features
 		Temp: out data port TemperatureType;
@@ -107,7 +132,19 @@ public
 			KeyInput: out data port KeyboardInputData;
 	end Klawiatura;
 	
+	device implementation Klawiatura.impl
+		
+	end Klawiatura.impl;
 	
+	device StartButtonWithRemoteControl
+		features
+			RemoteStart: in data port SwitchTrigger;
+			Start: out data port SwitchTrigger;
+	end StartButtonWithRemoteControl;
+	
+	device implementation StartButtonWithRemoteControl.impl
+		
+	end StartButtonWithRemoteControl.impl;
 		-- wstepna obrobka --
 	
 	device Kadz
@@ -138,20 +175,6 @@ public
 	device implementation CzajnikDoZacieru.impl
 		
 	end CzajnikDoZacieru.impl;
-	
-	device WOSystemControlCenterDevice
-		features
-			UserInput: in data port KeyboardInputData;
-			MieszadloTime: out data port DateTime;
-			CzajnikTime: out data port DateTime;
-			TotalTime: out data port DateTime;
-			CzajnikDesiredTemp: out data port TemperatureType;
-			CzajnikDesiredPressure: out data port PressureType;
-	end WOSystemControlCenterDevice;
-	
-	device implementation WOSystemControlCenterDevice.impl
-		
-	end WOSystemControlCenterDevice.impl;
 	
 		-- filtracja --
 		
@@ -299,6 +322,8 @@ public
    
    thread DecideToTurnHeatOn
    	features
+   		start: in data port SwitchTrigger;
+   		stop_thread: in data port SwitchTrigger;
    		temp_data: in data port TemperatureType;
    		desired_temp_data: in data port TemperatureType;
    		decision_heater: out data port SwitchTrigger;
@@ -319,6 +344,7 @@ public
 	thread HeaterControl
 		features
 			turn_on: in data port SwitchTrigger;
+			stop_thread: in data port SwitchTrigger;
 			control_heater: out data port SwitchTrigger;
 		properties
 		    Dispatch_Protocol => Periodic;
@@ -351,6 +377,8 @@ public
 	
 	thread DecideToTurnPressureOn
 		features
+			start: in data port SwitchTrigger;
+			stop_thread: in data port SwitchTrigger;
 			pressure_data: in data port PressureType;
 			desired_pressure_data: in data port PressureType;
 			decision_pressure_on: out data port SwitchTrigger;
@@ -371,6 +399,7 @@ public
 		features
 			turn_on: in data port SwitchTrigger;
 			control_pressure: out data port SwitchTrigger;
+			
 		properties
 			Dispatch_Protocol => Periodic;
 			Dispatch_Offset => 2ms;
@@ -387,6 +416,9 @@ public
 	--- Wspolne procesy ---
 	process HeaterControlProcess
 		features 
+			start: in data port SwitchTrigger;
+			stop: in data port SwitchTrigger;
+			stop_thread: in data port SwitchTrigger;
 			sensor_data: in data port TemperatureType;
 			input_data: in data port TemperatureType;
 			heater_control: out data port SwitchTrigger;
@@ -394,19 +426,24 @@ public
 	
 	process implementation HeaterControlProcess.impl
 		subcomponents
-	    read_temp: thread ReadTemp.impl;
-	    control: thread DecideToTurnHeatOn.impl;
-	    heater_ctrl: thread HeaterControl.impl;
-	  connections
-	    sensor_data_conn: port sensor_data -> read_temp.sensor_data;
-	    control_sensor_conn: port read_temp.read_data -> control.temp_data;
-	    control_input_conn: port input_data -> control.desired_temp_data;
-	    heater_conn: port control.decision_heater -> heater_ctrl.turn_on;
-	    heater_final_conn: port heater_ctrl.control_heater -> heater_control;
+		    read_temp: thread ReadTemp.impl;
+		    control: thread DecideToTurnHeatOn.impl;
+		    heater_ctrl: thread HeaterControl.impl;
+		connections
+			start_thread_conn: port start -> control.start;
+			stop_thread_conn: port stop -> control.stop_thread;
+			stop_heater_conn: port stop -> heater_ctrl.stop_thread;
+		    sensor_data_conn: port sensor_data -> read_temp.sensor_data;
+		    control_sensor_conn: port read_temp.read_data -> control.temp_data;
+		    control_input_conn: port input_data -> control.desired_temp_data;
+		    heater_conn: port control.decision_heater -> heater_ctrl.turn_on;
+		    heater_final_conn: port heater_ctrl.control_heater -> heater_control;
 	  end HeaterControlProcess.impl;
 	  
 	process PressureControlProcess
 		features 
+			start_thread: out data port SwitchTrigger;
+			start: in data port SwitchTrigger;
 			sensor_data: in data port PressureType;
 			input_data: in data port PressureType;
 			pressure_control: out data port SwitchTrigger;
@@ -418,6 +455,7 @@ public
 			control: thread DecideToTurnPressureOn.impl;
 			pressure_ctrl: thread PressureControl.impl;
 		connections
+			start_thread_conn: port start -> control.start;
 			sensor_data_conn: port sensor_data -> read_pressure.sensor_data;
 			control_sensor_conn: port read_pressure.read_data -> control.pressure_data;
 			control_input_conn: port input_data -> control.desired_pressure_data;
@@ -508,15 +546,29 @@ public
 		
 	end TimerControl.impl;
 	
+	process TimerControlProcess
+		features
+			ReadTime: in data port DateTime;
+			CurrTime: out data port DateTime;
+	end TimerControlProcess;
+	
+	process implementation TimerControlProcess.impl
+		subcomponents
+			timer_thread: thread TimerControl.impl;
+		connections
+			conn1: port ReadTime -> timer_thread.ReadTime;
+			conn2: port timer_thread.CurrTime -> CurrTime;
+	end TimerControlProcess.impl;
+	
 	thread MieszadloDecisionCenter
 		features
-			Start: in data port Base_Types::Boolean;
+			Start: in data port SwitchTrigger;
 			CurrTime: in data port DateTime;
 			DesiredTime: in data port DateTime;
 			OpenInputGate: out data port SwitchTrigger;
 			OpenOutputGate: out data port SwitchTrigger;
 			TurnMieszadloOn: out data port SwitchTrigger;	
-			Done: out data port Base_Types::Boolean;		
+			Done: out data port SwitchTrigger;		
 		properties
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
@@ -532,26 +584,25 @@ public
 	
 	process Mieszanie
 		features
-			Start: in data port Base_Types::Boolean;
+			Start: in data port SwitchTrigger;
 			MieszadloTime: in data port DateTime;
-			CurrentTime: in data port DateTime;
+			CurrTime: in data port DateTime;
 			IGateOpen: out data port SwitchTrigger;
 			OGateOpen: out data port SwitchTrigger;
 			TurnOn: out data port SwitchTrigger;
-			MieszadloProcessDone: out data port Base_Types::Boolean;		
+			MieszadloProcessDone: out data port SwitchTrigger;		
 	end Mieszanie;
 	
 	process implementation Mieszanie.impl
 		subcomponents
 			input_gate_c: thread InputGateControl.impl;
 			output_gate_c: thread OutputGateControl.impl;
-			timer_control: thread TimerCOntrol.impl;
 			mieszadlo_control: thread MieszadloControl.impl;
 			mieszadlo_decision_center: thread MieszadloDecisionCenter.impl;
 		connections
 			start_conn: port Start -> mieszadlo_decision_center.Start;
 			desired_time_conn: port MieszadloTime -> mieszadlo_decision_center.DesiredTime;
-			curr_time_conn: port CurrentTime -> mieszadlo_decision_center.CurrTime;
+			curr_time_conn: port CurrTime -> mieszadlo_decision_center.CurrTime;
 			open_igate_dec_conn: port mieszadlo_decision_center.OpenInputGate -> input_gate_c.Open;
 			open_ogate_dec_conn: port mieszadlo_decision_center.OpenOutputGate -> output_gate_c.Open;
 			turn_on_dec_conn: port mieszadlo_decision_center.TurnMieszadloOn -> mieszadlo_control.On;
@@ -561,26 +612,190 @@ public
 			signal_end_proc_conn: port mieszadlo_decision_center.Done -> MieszadloProcessDone;
 	end Mieszanie.impl;
 	
+	thread CzajnikDecisionCenter
+		features
+			Start: in data port SwitchTrigger;
+			CurrTime: in data port DateTime;
+			DesiredTime: in data port DateTime;
+			OpenInputGate: out data port SwitchTrigger;
+			OpenOutputGate: out data port SwitchTrigger;
+			Done: out data port SwitchTrigger;		
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end CzajnikDecisionCenter;
+	
+	thread implementation CzajnikDecisionCenter.impl
+		
+	end CzajnikDecisionCenter.impl;
+	
+	
 	process PodgrzewanieWCzajniku
 		features
-			Start: in data port Base_Types::Boolean;
-			CzajnikTime: out data port DateTime;
-			CzajnikDesiredTemp: out data port TemperatureType;
-			
+			Start: in data port SwitchTrigger;
+			CzajnikTime: in data port DateTime;
+			CurrTime: in data port DateTime;
+			IGateOpen: out data port SwitchTrigger;
+			OGateOpen: out data port SwitchTrigger;
+			ProcessDone: out data port SwitchTrigger;
 	end PodgrzewanieWCzajniku;
 	
 	process implementation PodgrzewanieWCzajniku.impl
-		
+		subcomponents
+			input_gate_c: thread InputGateControl.impl;
+			output_gate_c: thread OutputGateControl.impl;
+			czajnik_decision_center: thread CzajnikDecisionCenter.impl;
+		connections
+			start_conn: port Start -> czajnik_decision_center.Start;
+			desired_time_conn: port CzajnikTime -> czajnik_decision_center.DesiredTime;
+			curr_time_conn: port CurrTime -> czajnik_decision_center.CurrTime;
+			open_igate_dec_conn: port czajnik_decision_center.OpenInputGate -> input_gate_c.Open;
+			open_ogate_dec_conn: port czajnik_decision_center.OpenOutputGate -> output_gate_c.Open;
+			open_igate_conn: port input_gate_c.OpenGate -> IGateOpen;
+			open_ogate_conn: port output_gate_c.OpenGate -> OGateOpen;
+			signal_end_proc_conn: port czajnik_decision_center.Done -> ProcessDone;		
 	end PodgrzewanieWCzajniku.impl;
 	
-	process WOSysControlProcess
-		
-	end WOSysControlProcess;
+	process KeyboardControlProcess
+		features
+			KeyboardInput: in data port KeyboardInputData;
+			KeyboardOutput: out data port KeyboardInputData;
+	end KeyboardControlProcess;
 	
+	process implementation KeyboardControlProcess.impl
+		subcomponents
+			keyboard_control: thread KeyboardControl.impl;
+		connections
+			keyboard_to_thread: port KeyboardInput -> keyboard_control.PureInput;
+			thread_to_control: port keyboard_control.KeyboardInput -> KeyboardOutput;	
+	end KeyboardControlProcess.impl;
+	
+	thread WOSystemControlCenterThread
+		features
+			UserInput: in data port KeyboardInputData;
+			MieszadloTime: out data port DateTime;
+			CzajnikTime: out data port DateTime;
+			TotalTime: out data port DateTime;
+			CzajnikDesiredTemp: out data port TemperatureType;
+			CzajnikDesiredPressure: out data port PressureType;
+	end WOSystemControlCenterThread;
+	
+	thread implementation WOSystemControlCenterThread.impl
+		
+	end WOSystemControlCenterThread.impl;
+	
+	process WOSystemControlCenterProcess
+		features
+			UserInput: in data port KeyboardInputData;
+			MieszadloTime: out data port DateTime;
+			CzajnikTime: out data port DateTime;
+			TotalTime: out data port DateTime;
+			CzajnikDesiredTemp: out data port TemperatureType;
+			CzajnikDesiredPressure: out data port PressureType;
+	end WOSystemControlCenterProcess;
+			
+	process implementation WOSystemControlCenterProcess.impl
+		subcomponents
+			process_thread: thread WOSystemControlCenterThread.impl;
+		connections
+			conn1: port UserInput -> process_thread.UserInput;
+			conn2: port process_thread.MieszadloTime -> MieszadloTime;
+			conn3: port process_thread.CzajnikTime -> CzajnikTime;
+			conn4: port process_thread.TotalTime -> TotalTime;
+			conn5: port process_thread.CzajnikDesiredTemp -> CzajnikDesiredTemp;
+			conn6: port process_thread.CzajnikDesiredPressure -> CzajnikDesiredPressure;
+	end WOSystemControlCenterProcess.impl;
 	
 	system WstepnaObrobka
-		
+		features
+			start: in data port SwitchTrigger;
+			process_done: out data port SwitchTrigger;
 	end WstepnaObrobka;
+	
+	
+	system implementation WstepnaObrobka.impl
+		subcomponents
+			start_button: device StartButtonWithRemoteControl.impl;
+			klawiatura: device Klawiatura.impl;
+			temp_sensor: device TempSensor.impl;
+			heater: device Heater.impl;
+			kadz: device Kadz.impl;
+			mieszadlo: device Mieszadlo.impl;
+			czajnik: device CzajnikDoZacieru.impl;
+			timer: device Czasomierz.impl;
+			keyboard_cont_process: process KeyboardControlProcess.impl;
+			input_processing_process: process WOSystemControlCenterProcess.impl;
+			mieszanie_proc : process Mieszanie.impl;
+			czajnik_proc: process PodgrzewanieWCzajniku.impl;
+			heater_control_proc: process HeaterControlProcess.impl;
+			timer_control_proc: process TimerControlProcess.impl;
+			sys_memory: memory RAM.Standard;
+			Mag_bus: bus Marine.Standard;
+			cpu: processor corei5;
+		connections
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
+			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
+			input_to_proc1: port input_processing_process.MieszadloTime -> mieszanie_proc.MieszadloTime;
+			input_to_proc2: port input_processing_process.CzajnikTime -> czajnik_proc.CzajnikTime;
+			input_to_proc3: port input_processing_process.CzajnikDesiredTemp -> heater_control_proc.input_data;
+			proc_to_kadz1: port mieszanie_proc.IGateOpen -> kadz.OpenInputGate;
+			proc_to_kadz2: port mieszanie_proc.OGateOpen -> kadz.OpenOutputGate;
+			proc_to_mieszadlo: port mieszanie_proc.TurnOn -> mieszadlo.On;
+			proc_to_czajnik1: port czajnik_proc.IGateOpen -> czajnik.OpenInputGate;
+			proc_to_czajnik2: port czajnik_proc.OGateOpen -> czajnik.OpenOutputGate;
+			sensor_to_heater_process: port temp_sensor.Temp -> heater_control_proc.sensor_data;
+			process_to_heater: port heater_control_proc.heater_control -> heater.On;
+			start_system: port start -> start_button.RemoteStart;
+			start_mieszanie: port start_button.Start -> mieszanie_proc.Start;
+			start_czajnik: port mieszanie_proc.MieszadloProcessDone -> czajnik_proc.Start;
+			start_heater: port mieszanie_proc.MieszadloProcessDone -> heater_control_proc.Start;
+			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime;
+			timer_to_mieszanie: port timer_control_proc.CurrTime -> mieszanie_proc.CurrTime;
+			timer_to_czajnik: port timer_control_proc.CurrTime -> czajnik_proc.CurrTime;
+			stop_heater: port czajnik_proc.ProcessDone -> heater_control_proc.stop;
+			all_processes_done: port czajnik_proc.ProcessDone -> process_done;
+			eth1: bus access Mag_bus -> cpu.eth;
+	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
+		properties
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc1;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc3;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_kadz1;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_kadz2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_mieszadlo;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_czajnik1;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_czajnik2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sensor_to_heater_process;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to process_to_heater;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_system;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_mieszanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_czajnik;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_heater;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_proc;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_mieszanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_czajnik;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_heater;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to all_processes_done;
+	
+			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to mieszanie_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to czajnik_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to heater_control_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to timer_control_proc;
+	
+			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to mieszanie_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to czajnik_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to heater_control_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;
+	end WstepnaObrobka.impl;
 	
 	
 	
