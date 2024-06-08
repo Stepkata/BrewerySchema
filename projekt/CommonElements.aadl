@@ -142,6 +142,7 @@ public
 		features 
 			start_thread: out data port DataTypes::SwitchTrigger;
 			start: in data port DataTypes::SwitchTrigger;
+			stop: in data port DataTypes::SwitchTrigger;
 			sensor_data: in data port DataTypes::PressureType;
 			input_data: in data port DataTypes::PressureType;
 			pressure_control: out data port DataTypes::SwitchTrigger;
@@ -154,6 +155,7 @@ public
 			pressure_ctrl: thread PressureControl.impl;
 		connections
 			start_thread_conn: port start -> control.start;
+			top_thread_conn: port stop -> control.stop_thread;
 			sensor_data_conn: port sensor_data -> read_pressure.sensor_data;
 			control_sensor_conn: port read_pressure.read_data -> control.pressure_data;
 			control_input_conn: port input_data -> control.desired_pressure_data;

@@ -29,14 +29,14 @@ public
    	
    end PressureSensor.impl;
    
-   device PressureController
+   device PressureControler
    	features
    		On: in data port DataTypes::SwitchTrigger;
-   end PressureController;
+   end PressureControler;
    
-   device implementation PressureController.impl
+   device implementation PressureControler.impl
    	
-   end PressureController.impl;
+   end PressureControler.impl;
    
    device Cooler
    	features

@@ -121,11 +121,6 @@ public
 			signal_end_proc_conn: port czajnik_decision_center.Done -> ProcessDone;		
 	end PodgrzewanieWCzajniku.impl;
 	
-	process KeyboardControlProcess
-		features
-			KeyboardInput: in data port DataTypes::KeyboardInputData;
-			KeyboardOutput: out data port DataTypes::KeyboardInputData;
-	end KeyboardControlProcess;
 	
 	thread WOSystemControlCenterThread
 		features
@@ -134,7 +129,6 @@ public
 			CzajnikTime: out data port DataTypes::DateTime;
 			TotalTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
-			CzajnikDesiredPressure: out data port DataTypes::PressureType;
 	end WOSystemControlCenterThread;
 	
 	thread implementation WOSystemControlCenterThread.impl
@@ -148,7 +142,6 @@ public
 			CzajnikTime: out data port DataTypes::DateTime;
 			TotalTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
-			CzajnikDesiredPressure: out data port DataTypes::PressureType;
 		
 	end WOSystemControlCenterProcess;
 			
@@ -161,7 +154,6 @@ public
 			conn3: port process_thread.CzajnikTime -> CzajnikTime;
 			conn4: port process_thread.TotalTime -> TotalTime;
 			conn5: port process_thread.CzajnikDesiredTemp -> CzajnikDesiredTemp;
-			conn6: port process_thread.CzajnikDesiredPressure -> CzajnikDesiredPressure;
 	end WOSystemControlCenterProcess.impl;
 	
 	system WstepnaObrobka
@@ -238,6 +230,7 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_czajnik;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_heater;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to all_processes_done;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to button_to_process;
 	
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
