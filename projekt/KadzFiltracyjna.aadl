@@ -1,0 +1,239 @@
+package KadzFiltracyjna
+public
+	with Devices;
+	with DataTypes;
+	with CommonElements;
+	with Hardware;
+	
+	thread ReadWaterLevel
+		features
+	   		sensor_data: in data port DataTypes::WaterLevelType;
+	   		read_data: out data port DataTypes::WaterLevelType;
+	   	properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end ReadWaterLevel;
+	
+	thread implementation ReadWaterLevel.impl
+		
+	end ReadWaterLevel.impl;
+	
+	thread ControlWaterDispenser
+		features
+			turn_on_dec: in data port DataTypes::SwitchTrigger;
+			on: out data port DataTypes::SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;
+	end ControlWaterDispenser;
+	
+	thread implementation ControlWaterDispenser.impl
+		
+	end ControlWaterDispenser.impl;
+	
+	thread DecideToRaiseWaterLevel
+		features
+			start: in data port DataTypes::SwitchTrigger;
+			stop_thread: in data port DataTypes::SwitchTrigger;
+	   		curr_water_level: in data port DataTypes::WaterLevelType;
+	   		desired_water_level: in data port DataTypes::WaterLevelType;
+	   		get_more_water: out data port DataTypes::SwitchTrigger;
+	   	properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end DecideToRaiseWaterLevel;
+	
+	thread implementation DecideToRaiseWaterLevel.impl
+		
+	end DecideToRaiseWaterLevel.impl;
+	
+	process WaterControl
+		features
+			start: in data port DataTypes::SwitchTrigger;
+			stop_thread: in data port DataTypes::SwitchTrigger;
+			sensor_data: in data port DataTypes::WaterLevelType;
+			input_data: in data port DataTypes::WaterLevelType;
+			water_control: out data port DataTypes::SwitchTrigger;
+	end WaterControl;
+	
+	process implementation WaterControl.impl
+		subcomponents
+			sensor_thread: thread ReadWaterLevel.impl;
+			control_thread: thread ControlWaterDispenser.impl;
+			decision_thread: thread DecideToRaiseWaterLevel.impl;
+		connections
+			start_conn: port start -> decision_thread.start;
+			stop_conn: port stop_thread -> decision_thread.stop_thread;
+			setup_sensor_conn: port sensor_data -> sensor_thread.sensor_data;
+			sensor_to_dec_conn: port sensor_thread.read_data -> decision_thread.curr_water_level;
+			setup_des_conn: port input_data -> decision_thread.desired_water_level;
+			dec_to_con_conn: port decision_thread.get_more_water -> control_thread.turn_on_dec;
+			turn_on_conn: port control_thread.on -> water_control;	
+	end WaterControl.impl;
+	
+	thread KFSystemControlCenterThread
+		features
+			UserInput: in data port DataTypes::KeyboardInputData;
+			TotalTime: out data port DataTypes::DateTime;
+			DesiredWaterLevel: out data port DataTypes::WaterLevelType;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end KFSystemControlCenterThread;
+	
+	thread implementation KFSystemControlCenterThread.impl
+		
+	end KFSystemControlCenterThread.impl;
+	
+	process KFSystemControlCenterProcess
+		features
+			UserInput: in data port DataTypes::KeyboardInputData;
+			TotalTime: out data port DataTypes::DateTime;
+			DesiredWaterLevel: out data port DataTypes::WaterLevelType;
+	end KFSystemControlCenterProcess;
+			
+	process implementation KFSystemControlCenterProcess.impl
+		subcomponents
+			process_thread: thread KFSystemControlCenterThread.impl;
+		connections
+			conn1: port UserInput -> process_thread.UserInput;
+			conn4: port process_thread.TotalTime -> TotalTime;
+			conn5: port process_thread.DesiredWaterLevel -> DesiredWaterLevel;
+	end KFSystemControlCenterProcess.impl;
+	
+	thread KadzControlThread
+		features 
+			start: in data port DataTypes::SwitchTrigger;
+			curr_time: in data port DataTypes::DateTime;
+			desired_time: in data port DataTypes::DateTime;
+			open_i_gate: out data port DataTypes::SwitchTrigger;
+			open_o_gate: out data port DataTypes::SwitchTrigger;
+			done: out data port DataTypes::SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end KadzControlThread;
+	
+	thread implementation KadzControlThread.impl
+		
+	end KadzControlThread.impl;
+	
+	process KadzControlProcess
+		features
+			start: in data port DataTypes::SwitchTrigger;
+	        curr_time: in data port DataTypes::DateTime;
+	        desired_time: in data port DataTypes::DateTime;
+	        open_i_gate: out data port DataTypes::SwitchTrigger;
+	        open_o_gate: out data port DataTypes::SwitchTrigger;
+	        done: out data port DataTypes::SwitchTrigger;
+    end KadzControlProcess;
+	
+	process implementation KadzControlProcess.impl
+	    subcomponents
+	        control_thread: thread KadzControlThread.impl;
+	        input_gate_c: thread CommonElements::InputGateControl.impl;
+			output_gate_c: thread CommonElements::OutputGateControl.impl;
+		connections
+			conn0: port start -> control_thread.start;
+	        conn1: port curr_time -> control_thread.curr_time;
+	        conn2: port desired_time -> control_thread.desired_time;
+	        conn3: port control_thread.open_i_gate -> input_gate_c.Open;
+	        conn4: port control_thread.open_o_gate -> output_gate_c.Open;
+	        conn5: port input_gate_c.OpenGate -> open_i_gate;
+	        conn6: port output_gate_c.OpenGate -> open_o_gate;
+	        conn7: port control_thread.done -> done;
+    end KadzControlProcess.impl;
+	
+	system KadzFiltracyjna
+		features
+			start: in data port DataTypes::SwitchTrigger;
+			process_done: out data port DataTypes::SwitchTrigger;
+	end KadzFiltracyjna;
+	
+	system implementation KadzFiltracyjna.impl
+		subcomponents
+			start_button: device Devices::StartButtonWithRemoteControl.impl;
+			klawiatura: device Devices::Klawiatura.impl;
+			timer: device Devices::Czasomierz.impl;
+			water_dispenser: device Devices::PodajnikWody.impl;
+			water_lvl_sensor: device Devices::CzujnikPoziomuWody.impl;
+			kadz: device Devices::KadzFiltracyjna.impl;
+			keyboard_cont_process: process CommonElements::KeyboardControlProcess.impl;
+			input_processing_process: process KFSystemControlCenterProcess.impl;
+			kadz_control_process: process KadzControlProcess.impl;
+			water_control_process: process WaterControl.impl;
+			button_control: process CommonElements::ButtonControlProcess.impl;
+			timer_control_proc: process CommonElements::TimerControlProcess.impl;
+			sys_memory: memory Hardware::RAM.Standard;
+			Mag_bus: bus Hardware::Marine.Standard;
+			cpu: processor Hardware::corei5;
+		connections
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
+			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
+			input_to_proc1: port input_processing_process.TotalTime -> kadz_control_process.desired_time;
+			input_to_proc2: port input_processing_process.DesiredWaterLevel -> water_control_process.input_data;
+			start_system: port start -> start_button.RemoteStart;
+			button_to_process: port start_button.Start -> button_control.switch_on;
+			start_kadz: port button_control.on -> kadz_control_process.start;
+			start_woda: port button_control.on -> water_control_process.start;
+			proc_to_kadz1: port kadz_control_process.open_i_gate -> kadz.OpenInputGate;
+			proc_to_kadz2: port kadz_control_process.open_o_gate -> kadz.OpenOutputGate;
+			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime;
+			timer_to_control: port timer_control_proc.CurrTime -> kadz_control_process.curr_time;
+			sensor_to_proc: port water_lvl_sensor.WaterLevel -> water_control_process.sensor_data;
+			proc_to_wd: port water_control_process.water_control -> water_dispenser.On;
+			stop_water: port kadz_control_process.done -> water_control_process.stop_thread;
+			process_done_conn: port kadz_control_process.done -> process_done;
+		properties
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc1;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_system;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_kadz1;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_kadz2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to button_to_process;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_kadz;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_woda;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sensor_to_proc;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_wd;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_water;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to process_done_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_proc;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_control;
+	
+			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to kadz_control_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to water_control_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to timer_control_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to button_control;
+	
+			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to kadz_control_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to water_control_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;	
+			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
+		
+			
+	end KadzFiltracyjna.impl;
+	
+	
+	
+end KadzFiltracyjna;

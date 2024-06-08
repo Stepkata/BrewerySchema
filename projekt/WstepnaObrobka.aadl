@@ -20,52 +20,7 @@ public
 	thread implementation MieszadloControl.impl
 		
 	end MieszadloControl.impl;
-	
-	thread KeyboardControl
-		features
-			PureInput: in data port DataTypes::KeyboardInputData;
-			KeyboardInput: out data port DataTypes::KeyboardInputData;
-		properties
-		    Dispatch_Protocol => Periodic;
-		    Dispatch_Offset => 	2ms;
-		    Deadline => 15ms;	
-		    Period => 20ms;
-		    Compute_Execution_Time => 0ms..2ms;		
-	end KeyboardControl;
-	
-	thread implementation KeyboardControl.impl
-		
-	end KeyboardControl.impl;
-	
-	thread TimerControl
-		features
-			ReadTime: in data port DataTypes::DateTime;
-			CurrTime: out data port DataTypes::DateTime;
-		properties
-		    Dispatch_Protocol => Periodic;
-		    Dispatch_Offset => 	2ms;
-		    Deadline => 15ms;	
-		    Period => 20ms;
-		    Compute_Execution_Time => 0ms..2ms;		
-	end TimerControl;
-	
-	thread implementation TimerControl.impl
-		
-	end TimerControl.impl;
-	
-	process TimerControlProcess
-		features
-			ReadTime: in data port DataTypes::DateTime;
-			CurrTime: out data port DataTypes::DateTime;
-	end TimerControlProcess;
-	
-	process implementation TimerControlProcess.impl
-		subcomponents
-			timer_thread: thread TimerControl.impl;
-		connections
-			conn1: port ReadTime -> timer_thread.ReadTime;
-			conn2: port timer_thread.CurrTime -> CurrTime;
-	end TimerControlProcess.impl;
+
 	
 	thread MieszadloDecisionCenter
 		features
@@ -172,14 +127,6 @@ public
 			KeyboardOutput: out data port DataTypes::KeyboardInputData;
 	end KeyboardControlProcess;
 	
-	process implementation KeyboardControlProcess.impl
-		subcomponents
-			keyboard_control: thread KeyboardControl.impl;
-		connections
-			keyboard_to_thread: port KeyboardInput -> keyboard_control.PureInput;
-			thread_to_control: port keyboard_control.KeyboardInput -> KeyboardOutput;	
-	end KeyboardControlProcess.impl;
-	
 	thread WOSystemControlCenterThread
 		features
 			UserInput: in data port DataTypes::KeyboardInputData;
@@ -202,6 +149,7 @@ public
 			TotalTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
 			CzajnikDesiredPressure: out data port DataTypes::PressureType;
+		
 	end WOSystemControlCenterProcess;
 			
 	process implementation WOSystemControlCenterProcess.impl
@@ -233,12 +181,13 @@ public
 			mieszadlo: device Devices::Mieszadlo.impl;
 			czajnik: device Devices::CzajnikDoZacieru.impl;
 			timer: device Devices::Czasomierz.impl;
-			keyboard_cont_process: process KeyboardControlProcess.impl;
+			keyboard_cont_process: process CommonElements::KeyboardControlProcess.impl;
 			input_processing_process: process WOSystemControlCenterProcess.impl;
 			mieszanie_proc : process Mieszanie.impl;
 			czajnik_proc: process PodgrzewanieWCzajniku.impl;
 			heater_control_proc: process CommonElements::HeaterControlProcess.impl;
-			timer_control_proc: process TimerControlProcess.impl;
+			timer_control_proc: process CommonElements::TimerControlProcess.impl;
+			button_control: process CommonElements::ButtonControlProcess.impl;
 			sys_memory: memory Hardware::RAM.Standard;
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
@@ -256,7 +205,8 @@ public
 			sensor_to_heater_process: port temp_sensor.Temp -> heater_control_proc.sensor_data;
 			process_to_heater: port heater_control_proc.heater_control -> heater.On;
 			start_system: port start -> start_button.RemoteStart;
-			start_mieszanie: port start_button.Start -> mieszanie_proc.Start;
+			button_to_process: port start_button.Start -> button_control.switch_on;
+			start_mieszanie: port button_control.on -> mieszanie_proc.Start;
 			start_czajnik: port mieszanie_proc.MieszadloProcessDone -> czajnik_proc.Start;
 			start_heater: port mieszanie_proc.MieszadloProcessDone -> heater_control_proc.Start;
 			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime;
@@ -295,6 +245,7 @@ public
 			Actual_Memory_Binding => (reference(sys_memory)) applies to czajnik_proc;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to heater_control_proc;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to timer_control_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to button_control;
 	
 			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
@@ -302,6 +253,8 @@ public
 			Actual_Processor_Binding => (reference(cpu)) applies to czajnik_proc;
 			Actual_Processor_Binding => (reference(cpu)) applies to heater_control_proc;
 			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
+			
 	end WstepnaObrobka.impl;
 	
 end WstepnaObrobka;

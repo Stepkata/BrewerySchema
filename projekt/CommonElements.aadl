@@ -45,7 +45,6 @@ public
 	thread HeaterControl
 		features
 			turn_on: in data port DataTypes::SwitchTrigger;
-			stop_thread: in data port DataTypes::SwitchTrigger;
 			control_heater: out data port DataTypes::SwitchTrigger;
 		properties
 		    Dispatch_Protocol => Periodic;
@@ -78,7 +77,6 @@ public
 		connections
 			start_thread_conn: port start -> control.start;
 			stop_thread_conn: port stop -> control.stop_thread;
-			stop_heater_conn: port stop -> heater_ctrl.stop_thread;
 		    sensor_data_conn: port sensor_data -> read_temp.sensor_data;
 		    control_sensor_conn: port read_temp.read_data -> control.temp_data;
 		    control_input_conn: port input_data -> control.desired_temp_data;
@@ -127,8 +125,7 @@ public
 	thread PressureControl
 		features
 			turn_on: in data port DataTypes::SwitchTrigger;
-			control_pressure: out data port DataTypes::SwitchTrigger;
-			
+			control_pressure: out data port DataTypes::SwitchTrigger;	
 		properties
 			Dispatch_Protocol => Periodic;
 			Dispatch_Offset => 2ms;
@@ -261,6 +258,38 @@ public
 			conn1: port ReadTime -> timer_thread.ReadTime;
 			conn2: port timer_thread.CurrTime -> CurrTime;
 	end TimerControlProcess.impl;
+	
+	--- Start Button ---
+	
+	thread ButtonControl
+		features
+			switch_on: in data port DataTypes::SwitchTrigger;
+			on: out data port DataTypes::SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;		
+	end ButtonControl;
+	
+	thread implementation ButtonControl.impl
+		
+	end ButtonControl.impl;
+	
+	process ButtonControlProcess
+		features
+			switch_on: in data port DataTypes::SwitchTrigger;
+			on: out data port DataTypes::SwitchTrigger;
+	end ButtonControlProcess;
+	
+	process implementation ButtonControlProcess.impl
+	    subcomponents
+	        button_control_thread: thread ButtonControl.impl;
+	    connections
+	        conn1: port switch_on -> button_control_thread.switch_on;
+	        conn2: port button_control_thread.on -> on;
+    end ButtonControlProcess.impl;
 	
 	
 end CommonElements;
