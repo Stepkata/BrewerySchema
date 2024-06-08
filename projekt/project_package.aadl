@@ -2,7 +2,6 @@ package project_package
 public
 	with Base_Types;
 	with Data_Model;
-	
 	--- Hardware --- 
 	bus Marine
 	end Marine;
