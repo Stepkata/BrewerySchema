@@ -1,0 +1,231 @@
+package Devices
+public
+	with DataTypes;
+	
+	
+	device TempSensor
+      features
+		Temp: out data port DataTypes::TemperatureType;
+   end Tempsensor;
+ 
+   device implementation TempSensor.impl
+   end TempSensor.impl;
+   
+   device Heater
+   	features
+   		On: in data port DataTypes::SwitchTrigger;
+   end Heater;
+	
+	device implementation Heater.impl
+   	
+   end Heater.impl;
+   
+   device PressureSensor
+   	features
+   		Pressure: out data port DataTypes::PressureType; 
+   end PressureSensor;
+   
+   device implementation PressureSensor.impl
+   	
+   end PressureSensor.impl;
+   
+   device PressureController
+   	features
+   		On: in data port DataTypes::SwitchTrigger;
+   end PressureController;
+   
+   device implementation PressureController.impl
+   	
+   end PressureController.impl;
+   
+   device Cooler
+   	features
+   		On: in data port DataTypes::SwitchTrigger;
+   end Cooler;
+   
+   device implementation Cooler.impl
+   	
+   end Cooler.impl;
+   
+   device Czasomierz
+		features
+			CurrTime: out data port DataTypes::DateTime;
+	end Czasomierz;
+	
+	device implementation Czasomierz.impl
+		
+	end Czasomierz.impl;
+	
+	device Klawiatura
+		features 
+			KeyInput: out data port DataTypes::KeyboardInputData;
+	end Klawiatura;
+	
+	device implementation Klawiatura.impl
+		
+	end Klawiatura.impl;
+	
+	device StartButtonWithRemoteControl
+		features
+			RemoteStart: in data port DataTypes::SwitchTrigger;
+			Start: out data port DataTypes::SwitchTrigger;
+	end StartButtonWithRemoteControl;
+	
+	device implementation StartButtonWithRemoteControl.impl
+		
+	end StartButtonWithRemoteControl.impl;
+		-- wstepna obrobka --
+	
+	device Kadz
+		features
+   			OpenInputGate: in data port DataTypes::SwitchTrigger;
+   			OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end Kadz;
+	
+	device implementation Kadz.impl
+		
+	end Kadz.impl;
+	
+	device Mieszadlo 
+		features
+   			On: in data port DataTypes::SwitchTrigger;
+	end Mieszadlo;
+	
+	device implementation Mieszadlo.impl
+		
+	end Mieszadlo.impl;
+	
+	device CzajnikDoZacieru
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end CzajnikDoZacieru;
+	
+	device implementation CzajnikDoZacieru.impl
+		
+	end CzajnikDoZacieru.impl;
+	
+		-- filtracja --
+		
+	device KadzFiltracyjna
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end KadzFiltracyjna;
+	
+	device implementation KadzFiltracyjna.impl
+		
+	end KadzFiltracyjna.impl;
+	
+	device CzujnikPoziomuWody
+		features
+			WaterLevel: out data port DataTypes::WaterLevelType;
+	end CzujnikPoziomuWody;
+	
+	device implementation CzujnikPoziomuWody.impl
+		
+	end CzujnikPoziomuWody.impl;
+		
+	device PodajnikWody
+		features
+   			On: in data port DataTypes::SwitchTrigger;
+	end PodajnikWody;
+	
+	device implementation PodajnikWody.impl
+		
+	end PodajnikWody.impl;
+	
+		-- warzenie --
+	
+	device KadzWarzelna
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end KadzWarzelna;
+	
+	device implementation KadzWarzelna.impl
+		
+	end KadzWarzelna.impl;
+	
+	-- parowanie --
+	
+	device Parownik
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end Parownik;
+	
+	device implementation Parownik.impl
+		
+	end Parownik.impl;
+	
+	device CzujnikWilgoci
+		features
+			MoistureLevel: out data port DataTypes::MoistureLevelType;
+	end CzujnikWilgoci;
+	
+	device implementation CzujnikWilgoci.impl
+		
+	end CzujnikWilgoci.impl;
+	
+		-- wirowanie --
+		
+	device Wirownik
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end Wirownik;
+	
+	device implementation Wirownik.impl
+		
+	end Wirownik.impl;
+	
+	device Wir
+		features 
+			On: in data port DataTypes::SwitchTrigger;
+	end Wir;
+	
+	device implementation Wir.impl
+		
+	end Wir.impl;
+	
+		-- chłodzenie --
+		
+	device Chlodziarka
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end Chlodziarka;
+	
+	device implementation Chlodziarka.impl
+		
+	end Chlodziarka.impl;
+	
+		-- fermentacja --
+		
+	device ZbiornikDoFermentacji
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end ZbiornikDoFermentacji;
+	
+	device implementation ZbiornikDoFermentacji.impl
+		
+	end ZbiornikDoFermentacji.impl;
+	
+	
+		-- lezakowanie --
+		
+	device ZbiornikDoLezakowania
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	end ZbiornikDoLezakowania;
+	
+	device implementation ZbiornikDoLezakowania.impl
+		
+	end ZbiornikDoLezakowania.impl;
+	
+		-- rozlewnia --
+		
+end Devices;

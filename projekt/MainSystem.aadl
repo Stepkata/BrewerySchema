@@ -1,0 +1,8 @@
+package MainSystem
+public
+	with DataTypes;
+	with Hardware;
+	with Devices;
+	with CommonElements;
+	with WstepnaObrobka;
+end MainSystem;

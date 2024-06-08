@@ -1,0 +1,43 @@
+package DataTypes
+public
+	with Data_Model;
+	
+	data TemperatureType
+     	properties
+       		Data_Model::Data_Representation => Integer;
+       		Data_Size => 8 Bytes;
+  	end TemperatureType;
+  	
+  	data SwitchTrigger 
+  		properties
+  			Data_Model::Data_Representation => Boolean;
+  	end SwitchTrigger;
+  	
+  	data PressureType
+  		properties
+       		Data_Model::Data_Representation => Integer;
+       		Data_Size => 16 Bytes;
+  	end PressureType;
+  	
+  	data WaterLevelType
+  		properties
+       		Data_Model::Data_Representation => Integer;
+       		Data_Size => 4 Bytes;
+  	end WaterLevelType;
+  	
+  	data MoistureLevelType
+  		properties
+       		Data_Model::Data_Representation => Integer;
+       		Data_Size => 4 Bytes;
+  	end MoistureLevelType;
+  	
+  	data DateTime --@TODO--
+  		properties
+       		Data_Model::Data_Representation => Integer;
+       		Data_Size => 4 Bytes;
+  	end DateTime;
+  	
+  	data KeyboardInputData
+  		
+  	end KeyboardInputData;
+end DataTypes;

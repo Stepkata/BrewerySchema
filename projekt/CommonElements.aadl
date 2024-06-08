@@ -1,0 +1,266 @@
+package CommonElements
+public
+	with DataTypes;
+	
+	--- Heat Control ---
+	
+	thread ReadTemp
+   	features
+   		sensor_data: in data port DataTypes::TemperatureType;
+   		read_data: out data port DataTypes::TemperatureType;
+   	properties
+	    Dispatch_Protocol => Periodic;
+	    Dispatch_Offset => 	2ms;
+	    Deadline => 15ms;	
+	    Period => 20ms;
+	    Compute_Execution_Time => 0ms..2ms;		
+   	
+   end ReadTemp;
+   
+   thread implementation ReadTemp.impl
+   	
+   end ReadTemp.impl;
+   
+   thread DecideToTurnHeatOn
+   	features
+   		start: in data port DataTypes::SwitchTrigger;
+   		stop_thread: in data port DataTypes::SwitchTrigger;
+   		temp_data: in data port DataTypes::TemperatureType;
+   		desired_temp_data: in data port DataTypes::TemperatureType;
+   		decision_heater: out data port DataTypes::SwitchTrigger;
+   		decision_cooler: out data port DataTypes::SwitchTrigger;
+   	properties
+	    Dispatch_Protocol => Periodic;
+	    Dispatch_Offset => 	2ms;
+	    Deadline => 15ms;	
+	    Period => 20ms;
+	    Compute_Execution_Time => 0ms..2ms;	
+   	
+   end DecideToTurnHeatOn;
+   
+   thread implementation DecideToTurnHeatOn.impl
+   	
+   end DecideToTurnHeatOn.impl;
+	
+	thread HeaterControl
+		features
+			turn_on: in data port DataTypes::SwitchTrigger;
+			stop_thread: in data port DataTypes::SwitchTrigger;
+			control_heater: out data port DataTypes::SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+		
+	end HeaterControl;
+	
+	thread implementation HeaterControl.impl
+		
+	end HeaterControl.impl;
+	
+	process HeaterControlProcess
+		features 
+			start: in data port DataTypes::SwitchTrigger;
+			stop: in data port DataTypes::SwitchTrigger;
+			stop_thread: in data port DataTypes::SwitchTrigger;
+			sensor_data: in data port DataTypes::TemperatureType;
+			input_data: in data port DataTypes::TemperatureType;
+			heater_control: out data port DataTypes::SwitchTrigger;
+	end HeaterControlProcess;
+	
+	process implementation HeaterControlProcess.impl
+		subcomponents
+		    read_temp: thread ReadTemp.impl;
+		    control: thread DecideToTurnHeatOn.impl;
+		    heater_ctrl: thread HeaterControl.impl;
+		connections
+			start_thread_conn: port start -> control.start;
+			stop_thread_conn: port stop -> control.stop_thread;
+			stop_heater_conn: port stop -> heater_ctrl.stop_thread;
+		    sensor_data_conn: port sensor_data -> read_temp.sensor_data;
+		    control_sensor_conn: port read_temp.read_data -> control.temp_data;
+		    control_input_conn: port input_data -> control.desired_temp_data;
+		    heater_conn: port control.decision_heater -> heater_ctrl.turn_on;
+		    heater_final_conn: port heater_ctrl.control_heater -> heater_control;
+	  end HeaterControlProcess.impl;
+	
+	--- Pressure Control ---
+	
+	thread ReadPressure
+		features
+			sensor_data: in data port DataTypes::PressureType;
+			read_data: out data port DataTypes::PressureType;
+		properties
+			Dispatch_Protocol => Periodic;
+			Dispatch_Offset => 2ms;
+			Deadline => 15ms;	
+			Period => 20ms;
+			Compute_Execution_Time => 0ms..2ms;		
+	end ReadPressure;
+	
+	thread implementation ReadPressure.impl
+		
+	end ReadPressure.impl;
+	
+	thread DecideToTurnPressureOn
+		features
+			start: in data port DataTypes::SwitchTrigger;
+			stop_thread: in data port DataTypes::SwitchTrigger;
+			pressure_data: in data port DataTypes::PressureType;
+			desired_pressure_data: in data port DataTypes::PressureType;
+			decision_pressure_on: out data port DataTypes::SwitchTrigger;
+			decision_pressure_off: out data port DataTypes::SwitchTrigger;
+		properties
+			Dispatch_Protocol => Periodic;
+			Dispatch_Offset => 2ms;
+			Deadline => 15ms;	
+			Period => 20ms;
+			Compute_Execution_Time => 0ms..2ms;	
+	end DecideToTurnPressureOn;
+	
+	thread implementation DecideToTurnPressureOn.impl
+		
+	end DecideToTurnPressureOn.impl;
+	
+	thread PressureControl
+		features
+			turn_on: in data port DataTypes::SwitchTrigger;
+			control_pressure: out data port DataTypes::SwitchTrigger;
+			
+		properties
+			Dispatch_Protocol => Periodic;
+			Dispatch_Offset => 2ms;
+			Deadline => 15ms;	
+			Period => 20ms;
+			Compute_Execution_Time => 0ms..2ms;	
+	end PressureControl;
+	
+	thread implementation PressureControl.impl
+		
+	end PressureControl.impl;
+	  
+	process PressureControlProcess
+		features 
+			start_thread: out data port DataTypes::SwitchTrigger;
+			start: in data port DataTypes::SwitchTrigger;
+			sensor_data: in data port DataTypes::PressureType;
+			input_data: in data port DataTypes::PressureType;
+			pressure_control: out data port DataTypes::SwitchTrigger;
+	end PressureControlProcess;
+	
+	process implementation PressureControlProcess.impl
+		subcomponents
+			read_pressure: thread ReadPressure.impl;
+			control: thread DecideToTurnPressureOn.impl;
+			pressure_ctrl: thread PressureControl.impl;
+		connections
+			start_thread_conn: port start -> control.start;
+			sensor_data_conn: port sensor_data -> read_pressure.sensor_data;
+			control_sensor_conn: port read_pressure.read_data -> control.pressure_data;
+			control_input_conn: port input_data -> control.desired_pressure_data;
+			pressure_conn: port control.decision_pressure_on -> pressure_ctrl.turn_on;
+			pressure_final_conn: port pressure_ctrl.control_pressure -> pressure_control;
+	end PressureControlProcess.impl;
+	
+	--- Gates Control ---
+	
+	thread InputGateControl
+		features
+			Open: in data port DataTypes::SwitchTrigger;
+			OpenGate: out data port DataTypes::SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end InputGateControl;
+	
+	thread implementation InputGateControl.impl
+		
+	end InputGateControl.impl;
+	
+	thread OutputGateControl
+		features
+			Open: in data port DataTypes::SwitchTrigger;
+			OpenGate: out data port DataTypes::SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end OutputGateControl;
+	
+	thread implementation OutputGateControl.impl
+		
+	end OutputGateControl.impl;
+	
+	--- Keyboard Control ---
+	
+	thread KeyboardControl
+		features
+			PureInput: in data port DataTypes::KeyboardInputData;
+			KeyboardInput: out data port DataTypes::KeyboardInputData;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;		
+	end KeyboardControl;
+	
+	thread implementation KeyboardControl.impl
+		
+	end KeyboardControl.impl;
+	
+	process KeyboardControlProcess
+		features
+			KeyboardInput: in data port DataTypes::KeyboardInputData;
+			KeyboardOutput: out data port DataTypes::KeyboardInputData;
+	end KeyboardControlProcess;
+	
+	process implementation KeyboardControlProcess.impl
+		subcomponents
+			keyboard_control: thread KeyboardControl.impl;
+		connections
+			keyboard_to_thread: port KeyboardInput -> keyboard_control.PureInput;
+			thread_to_control: port keyboard_control.KeyboardInput -> KeyboardOutput;	
+	end KeyboardControlProcess.impl;
+	
+	--- Timer Control ---
+	
+	thread TimerControl
+		features
+			ReadTime: in data port DataTypes::DateTime;
+			CurrTime: out data port DataTypes::DateTime;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;		
+	end TimerControl;
+	
+	thread implementation TimerControl.impl
+		
+	end TimerControl.impl;
+	
+	process TimerControlProcess
+		features
+			ReadTime: in data port DataTypes::DateTime;
+			CurrTime: out data port DataTypes::DateTime;
+	end TimerControlProcess;
+	
+	process implementation TimerControlProcess.impl
+		subcomponents
+			timer_thread: thread TimerControl.impl;
+		connections
+			conn1: port ReadTime -> timer_thread.ReadTime;
+			conn2: port timer_thread.CurrTime -> CurrTime;
+	end TimerControlProcess.impl;
+	
+	
+end CommonElements;
