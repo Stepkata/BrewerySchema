@@ -2,6 +2,28 @@ package project_package
 public
 	with Base_Types;
 	with Data_Model;
+	--- Hardware --- 
+	bus Marine
+	end Marine;
+	
+	bus implementation Marine.Standard
+	end Marine.Standard;
+	
+	processor corei5
+	  features
+	    eth: requires bus access Marine.Standard;
+	  properties
+	   Scheduling_Protocol => (Round_Robin_Protocol);
+	   Clock_Period => 1 ms;	
+	end corei5;
+	
+	memory RAM
+	  features
+	    BA1: requires bus access Marine.Standard;
+	end RAM;
+	
+	memory implementation RAM.Standard
+	end RAM.Standard;
 	
 	--- Data Types ---
 	
