@@ -1,6 +1,7 @@
 package CommonElements
 public
 	with DataTypes;
+	with SEI;
 	
 	--- Heat Control ---
 	
@@ -67,6 +68,8 @@ public
 			sensor_data: in data port DataTypes::TemperatureType;
 			input_data: in data port DataTypes::TemperatureType;
 			heater_control: out data port DataTypes::SwitchTrigger;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end HeaterControlProcess;
 	
 	process implementation HeaterControlProcess.impl
@@ -82,6 +85,7 @@ public
 		    control_input_conn: port input_data -> control.desired_temp_data;
 		    heater_conn: port control.decision_heater -> heater_ctrl.turn_on;
 		    heater_final_conn: port heater_ctrl.control_heater -> heater_control;
+		   
 	  end HeaterControlProcess.impl;
 	
 	--- Pressure Control ---
@@ -146,6 +150,8 @@ public
 			sensor_data: in data port DataTypes::PressureType;
 			input_data: in data port DataTypes::PressureType;
 			pressure_control: out data port DataTypes::SwitchTrigger;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end PressureControlProcess;
 	
 	process implementation PressureControlProcess.impl
@@ -219,6 +225,8 @@ public
 		features
 			KeyboardInput: in data port DataTypes::KeyboardInputData;
 			KeyboardOutput: out data port DataTypes::KeyboardInputData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end KeyboardControlProcess;
 	
 	process implementation KeyboardControlProcess.impl
@@ -251,6 +259,8 @@ public
 		features
 			ReadTime: in data port DataTypes::DateTime;
 			CurrTime: out data port DataTypes::DateTime;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end TimerControlProcess;
 	
 	process implementation TimerControlProcess.impl
@@ -283,6 +293,8 @@ public
 		features
 			switch_on: in data port DataTypes::SwitchTrigger;
 			on: out data port DataTypes::SwitchTrigger;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end ButtonControlProcess;
 	
 	process implementation ButtonControlProcess.impl
@@ -315,6 +327,8 @@ public
 		features
 			SystemInput: in data port DataTypes::SystemAppData;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end MonitorControlProcess;
 	
 	process implementation MonitorControlProcess.impl

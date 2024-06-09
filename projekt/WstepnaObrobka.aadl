@@ -53,7 +53,9 @@ public
 			IGateOpen: out data port DataTypes::SwitchTrigger;
 			OGateOpen: out data port DataTypes::SwitchTrigger;
 			TurnOn: out data port DataTypes::SwitchTrigger;
-			MieszadloProcessDone: out data port DataTypes::SwitchTrigger;		
+			MieszadloProcessDone: out data port DataTypes::SwitchTrigger;	
+		properties
+			SEI::MIPSBudget => 0.8 mips;		
 	end Mieszanie;
 	
 	process implementation Mieszanie.impl
@@ -104,6 +106,8 @@ public
 			IGateOpen: out data port DataTypes::SwitchTrigger;
 			OGateOpen: out data port DataTypes::SwitchTrigger;
 			ProcessDone: out data port DataTypes::SwitchTrigger;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end PodgrzewanieWCzajniku;
 	
 	process implementation PodgrzewanieWCzajniku.impl
@@ -147,6 +151,8 @@ public
 			TotalTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end WOSystemControlCenterProcess;
 			
 	process implementation WOSystemControlCenterProcess.impl
@@ -169,6 +175,8 @@ public
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
        		SEI::GrossWeight => 0.9kg;
+			SEI::MIPSBudget => 0.8 mips;
+			SEI::MIPSCapacity => 2.4 mips;	
 	end WstepnaObrobka;
 	
 	

@@ -69,6 +69,8 @@ public
 			open_i_gate: out data port DataTypes::SwitchTrigger;
 			open_o_gate: out data port DataTypes::SwitchTrigger;
 			done: out data port DataTypes::SwitchTrigger;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end ParownikControlProcess;
 	
 	process implementation ParownikControlProcess.impl
@@ -116,6 +118,8 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			DesiredMoistureLevel: out data port DataTypes::MoistureLevelType;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end PSystemControlCenterProcess;
 			
 	process implementation PSystemControlCenterProcess.impl
@@ -135,6 +139,8 @@ public
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
        		SEI::GrossWeight => 0.9kg;
+			SEI::MIPSBudget => 0.8 mips;
+			SEI::MIPSCapacity => 2.4 mips;	
 	end ParowanieSys;
 	
 	system implementation ParowanieSys.impl

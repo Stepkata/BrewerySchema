@@ -9,6 +9,8 @@ public
 			Temp: out data port DataTypes::TemperatureType;
 		properties
 	  		SEI::GrossWeight => 0.18kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
 	end Tempsensor;
  
    device implementation TempSensor.impl
@@ -29,7 +31,9 @@ public
    	features
    		Pressure: out data port DataTypes::PressureType; 
    	properties
-	  SEI::GrossWeight => 0.18kg;
+	  	SEI::GrossWeight => 0.18kg;
+	  	Dispatch_Protocol => Periodic;
+		Period => 20ms;	
    end PressureSensor;
    
    device implementation PressureSensor.impl
@@ -63,6 +67,8 @@ public
 			CurrTime: out data port DataTypes::DateTime;
 		properties
 	  		SEI::GrossWeight => 0.30kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 2ms;	
 	end Czasomierz;
 	
 	device implementation Czasomierz.impl
@@ -158,6 +164,8 @@ public
 			WaterLevel: out data port DataTypes::WaterLevelType;
 		properties
 	  		SEI::GrossWeight => 0.30kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
 	end CzujnikPoziomuWody;
 	
 	device implementation CzujnikPoziomuWody.impl
@@ -209,6 +217,8 @@ public
 			MoistureLevel: out data port DataTypes::MoistureLevelType;
 		properties
 	  		SEI::GrossWeight => 0.15kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
 	end CzujnikWilgoci;
 	
 	device implementation CzujnikWilgoci.impl

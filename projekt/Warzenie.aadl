@@ -35,6 +35,8 @@ public
 			IGateOpen: out data port DataTypes::SwitchTrigger;
 			OGateOpen: out data port DataTypes::SwitchTrigger;
 			ProcessDone: out data port DataTypes::SwitchTrigger;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end PodgrzewanieWKadzWarzelna;
 	
 	process implementation PodgrzewanieWKadzWarzelna.impl
@@ -77,6 +79,8 @@ public
 			KadzWarzelnaDesiredTemp: out data port DataTypes::TemperatureType;
 			KadzWarzelnaDesiredPressure: out data port DataTypes::PressureType;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end KWSystemControlCenterProcess;
 			
 	process implementation KWSystemControlCenterProcess.impl
@@ -99,6 +103,8 @@ public
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
        		SEI::GrossWeight => 0.9kg;
+			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSCapacity => 2.4 mips;
 	end WarzenieSys;
 		
 	system implementation WarzenieSys.impl

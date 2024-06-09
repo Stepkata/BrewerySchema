@@ -70,6 +70,8 @@ public
 			FermentacjaDone: in data port DataTypes::SwitchTrigger;
 			
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end MainSystemSoftwareProcess;
 			
 	process implementation MainSystemSoftwareProcess.impl
@@ -109,6 +111,8 @@ public
 	system WarzeniePiwa
 		properties
        		SEI::GrossWeight => 0.9kg;
+       		SEI::MIPSBudget => 0.8 mips;
+       		SEI::MIPSCapacity => 2.4 mips;
 	end WarzeniePiwa;
 	
 	system implementation WarzeniePiwa.impl

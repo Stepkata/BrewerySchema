@@ -5,6 +5,10 @@ public
 	bus Marine
 		properties
 			SEI::GrossWeight => 0.01kg;
+	    	Transmission_Time => [Fixed => 1ns..2ns; PerByte => 5ns ..6ns;];
+	    	Period => 1 ms;
+	    	SEI::BandWidthCapacity => 2.0 MBytesps;
+	    	SEI::BandWidthBudget => 200.0 KBytesps;
 	end Marine;
 	
 	bus implementation Marine.Standard
@@ -16,7 +20,9 @@ public
 	  properties
 		Scheduling_Protocol => (Round_Robin_Protocol);
 	  	Clock_Period => 1 ms;	
-	   SEI::GrossWeight => 0.05kg;
+	   	SEI::GrossWeight => 0.05kg;
+	   	Timing_Properties::Processor_Capacity => 1.0 MIPS;
+        SEI::MIPSCapacity => 1.2 mips;
 	end corei5;
 	
 	memory RAM

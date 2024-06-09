@@ -64,6 +64,8 @@ public
 			sensor_data: in data port DataTypes::WaterLevelType;
 			input_data: in data port DataTypes::WaterLevelType;
 			water_control: out data port DataTypes::SwitchTrigger;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end WaterControl;
 	
 	process implementation WaterControl.impl
@@ -107,6 +109,8 @@ public
 			TotalTime: out data port DataTypes::DateTime;
 			DesiredWaterLevel: out data port DataTypes::WaterLevelType;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end KFSystemControlCenterProcess;
 			
 	process implementation KFSystemControlCenterProcess.impl
@@ -148,6 +152,8 @@ public
 	        open_i_gate: out data port DataTypes::SwitchTrigger;
 	        open_o_gate: out data port DataTypes::SwitchTrigger;
 	        done: out data port DataTypes::SwitchTrigger;
+	    properties
+			SEI::MIPSBudget => 0.8 mips;	
     end KadzControlProcess;
 	
 	process implementation KadzControlProcess.impl
@@ -173,6 +179,8 @@ public
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
        		SEI::GrossWeight => 0.9kg;
+			SEI::MIPSBudget => 0.8 mips;
+			SEI::MIPSCapacity => 2.4 mips;	
 	end KadzFiltracyjna;
 	
 	system implementation KadzFiltracyjna.impl

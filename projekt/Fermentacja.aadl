@@ -34,7 +34,9 @@ public
 			IGateOpen: out data port DataTypes::SwitchTrigger;
 			OGateOpen: out data port DataTypes::SwitchTrigger;
 			TurnOn: out data port DataTypes::SwitchTrigger;
-			ProcessDone: out data port DataTypes::SwitchTrigger;		
+			ProcessDone: out data port DataTypes::SwitchTrigger;	
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end FermentacjaProcess;
 	
 	process implementation FermentacjaProcess.impl
@@ -71,6 +73,8 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			TotalTime: out data port DataTypes::DateTime;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;	
 	end FSystemControlCenterProcess;
 			
 	process implementation FSystemControlCenterProcess.impl
@@ -90,6 +94,8 @@ public
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
        		SEI::GrossWeight => 0.9kg;
+			SEI::MIPSBudget => 0.8 mips;
+			SEI::MIPSCapacity => 2.4 mips;	
 	end FermentacjaSystem;
 	
 	system implementation FermentacjaSystem.impl
