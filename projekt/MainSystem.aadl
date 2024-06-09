@@ -8,6 +8,7 @@ public
 	with KadzFiltracyjna;
 	with Warzenie;
 	with Parowanie;
+	with Wirowanie;
 	with Fermentacja;
 	
 	system WarzeniePiwa
@@ -20,6 +21,7 @@ public
 			kadz_filtracyjna_sys: system KadzFiltracyjna::KadzFiltracyjna.impl;
 			warzenie_sys: system Warzenie::WarzenieSys.impl;
 			parowanie_sys: system Parowanie::ParowanieSys.impl;
+			wirowanie_sys: system Wirowanie::WirowanieSys.impl;
 			fermentacja_sys: system Fermentacja::FermentacjaSystem.impl;
 	end WarzeniePiwa.impl;
 end MainSystem;
