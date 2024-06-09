@@ -10,9 +10,105 @@ public
 	with Parowanie;
 	with Wirowanie;
 	with Fermentacja;
+	with SEI;
+	
+	thread MainSystemSoftwareThread
+		features
+			UserInput: in data port DataTypes::KeyboardInputData;
+			
+			WstepnaObrobkaUserInput: out data port DataTypes::KeyboardInputData;
+			KadzFiltracyjnaUserInput: out data port DataTypes::KeyboardInputData;
+			WarzenieUserInput: out data port DataTypes::KeyboardInputData;
+			ParowanieUserInput: out data port DataTypes::KeyboardInputData;
+			WirowanieUserInput: out data port DataTypes::KeyboardInputData;
+			FermentacjaUserInput: out data port DataTypes::KeyboardInputData;
+			
+			WstepnaObrobkaStart: out data port DataTypes::SwitchTrigger;
+			KadzFiltracyjnaStart: out data port DataTypes::SwitchTrigger;
+			WarzenieStart: out data port DataTypes::SwitchTrigger;
+			ParowanieStart: out data port DataTypes::SwitchTrigger;
+			WirowanieStart: out data port DataTypes::SwitchTrigger;
+			FermentacjaStart: out data port DataTypes::SwitchTrigger;
+			
+			WstepnaObrobkaDone: in data port DataTypes::SwitchTrigger;
+			KadzFiltracyjnaDone: in data port DataTypes::SwitchTrigger;
+			WarzenieDone: in data port DataTypes::SwitchTrigger;
+			ParowanieDone: in data port DataTypes::SwitchTrigger;
+			WirowanieDone: in data port DataTypes::SwitchTrigger;
+			FermentacjaDone: in data port DataTypes::SwitchTrigger;
+			
+			DisplayData: out data port DataTypes::SystemAppData;
+	end MainSystemSoftwareThread;
+	
+	thread implementation MainSystemSoftwareThread.impl
+		
+	end MainSystemSoftwareThread.impl;
+	
+	process MainSystemSoftwareProcess
+		features
+			UserInput: in data port DataTypes::KeyboardInputData;
+			
+			WstepnaObrobkaUserInput: out data port DataTypes::KeyboardInputData;
+			KadzFiltracyjnaUserInput: out data port DataTypes::KeyboardInputData;
+			WarzenieUserInput: out data port DataTypes::KeyboardInputData;
+			ParowanieUserInput: out data port DataTypes::KeyboardInputData;
+			WirowanieUserInput: out data port DataTypes::KeyboardInputData;
+			FermentacjaUserInput: out data port DataTypes::KeyboardInputData;
+			
+			WstepnaObrobkaStart: out data port DataTypes::SwitchTrigger;
+			KadzFiltracyjnaStart: out data port DataTypes::SwitchTrigger;
+			WarzenieStart: out data port DataTypes::SwitchTrigger;
+			ParowanieStart: out data port DataTypes::SwitchTrigger;
+			WirowanieStart: out data port DataTypes::SwitchTrigger;
+			FermentacjaStart: out data port DataTypes::SwitchTrigger;
+			
+			WstepnaObrobkaDone: in data port DataTypes::SwitchTrigger;
+			KadzFiltracyjnaDone: in data port DataTypes::SwitchTrigger;
+			WarzenieDone: in data port DataTypes::SwitchTrigger;
+			ParowanieDone: in data port DataTypes::SwitchTrigger;
+			WirowanieDone: in data port DataTypes::SwitchTrigger;
+			FermentacjaDone: in data port DataTypes::SwitchTrigger;
+			
+			DisplayData: out data port DataTypes::SystemAppData;
+	end MainSystemSoftwareProcess;
+			
+	process implementation MainSystemSoftwareProcess.impl
+		subcomponents
+        	main_thread: thread MainSystemSoftwareThread.impl;
+	    connections
+	        input_conn: port UserInput -> main_thread.UserInput;
+	        wstepna_conn: port main_thread.WstepnaObrobkaUserInput -> WstepnaObrobkaUserInput;
+	        kadz_conn: port main_thread.KadzFiltracyjnaUserInput -> KadzFiltracyjnaUserInput;
+	        warzenie_conn: port main_thread.WarzenieUserInput -> WarzenieUserInput;
+	        parowanie_conn: port main_thread.ParowanieUserInput -> ParowanieUserInput;
+	        wirowanie_conn: port main_thread.WirowanieUserInput -> WirowanieUserInput;
+	        fermentacja_conn: port main_thread.FermentacjaUserInput -> FermentacjaUserInput;
+	        wstepna_conn_s: port main_thread.WstepnaObrobkaUserInput -> WstepnaObrobkaUserInput;
+	        kadz_conn_s: port main_thread.KadzFiltracyjnaUserInput -> KadzFiltracyjnaUserInput;
+	        warzenie_conn_s: port main_thread.WarzenieUserInput -> WarzenieUserInput;
+	        parowanie_conn_s: port main_thread.ParowanieUserInput -> ParowanieUserInput;
+	        wirowanie_conn_s: port main_thread.WirowanieUserInput -> WirowanieUserInput;
+	        fermentacja_conn_s: port main_thread.FermentacjaUserInput -> FermentacjaUserInput;
+	        display_conn_s: port main_thread.DisplayData -> DisplayData;
+	        wstepna_start_conn: port main_thread.WstepnaObrobkaStart -> WstepnaObrobkaStart;
+	        kadz_start_conn: port main_thread.KadzFiltracyjnaStart -> KadzFiltracyjnaStart;
+	        warzenie_start_conn: port main_thread.WarzenieStart -> WarzenieStart;
+	        parowanie_start_conn: port main_thread.ParowanieStart -> ParowanieStart;
+	        wirowanie_start_conn: port main_thread.WirowanieStart -> WirowanieStart;
+	        fermentacja_start_conn: port main_thread.FermentacjaStart -> FermentacjaStart;
+	        wstepna_done_conn: port WstepnaObrobkaDone -> main_thread.WstepnaObrobkaDone;
+	        kadz_done_conn: port KadzFiltracyjnaDone -> main_thread.KadzFiltracyjnaDone;
+	        warzenie_done_conn: port WarzenieDone -> main_thread.WarzenieDone;
+	        parowanie_done_conn: port ParowanieDone -> main_thread.ParowanieDone;
+	        wirowanie_done_conn: port WirowanieDone -> main_thread.WirowanieDone;
+	        fermentacja_done_conn: port FermentacjaDone -> main_thread.FermentacjaDone;
+	        display_conn: port main_thread.DisplayData -> DisplayData;
+	        
+	end MainSystemSoftwareProcess.impl;
 	
 	system WarzeniePiwa
-		
+		properties
+       		SEI::GrossWeight => 0.9kg;
 	end WarzeniePiwa;
 	
 	system implementation WarzeniePiwa.impl
@@ -23,5 +119,78 @@ public
 			parowanie_sys: system Parowanie::ParowanieSys.impl;
 			wirowanie_sys: system Wirowanie::WirowanieSys.impl;
 			fermentacja_sys: system Fermentacja::FermentacjaSystem.impl;
+			monitor: device Devices::Monitor.impl;
+			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
+			klawiatura: device Devices::Klawiatura.impl;
+			keyboard_cont_process: process CommonElements::KeyboardControlProcess.impl;
+			main_sys: process MainSystemSoftwareProcess.impl;
+			sys_memory: memory Hardware::RAM.Standard;
+			Mag_bus: bus Hardware::Marine.Standard;
+			cpu: processor Hardware::corei5;
+		connections
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
+			keyboard_to_sys: port keyboard_cont_process.KeyboardOutput -> main_sys.UserInput;
+			
+			setup_wstepna: port main_sys.WstepnaObrobkaUserInput -> wstepna_obrobka_sys.RemoteUserInput;
+			start_wstepna: port main_sys.WstepnaObrobkaStart -> wstepna_obrobka_sys.start;
+			done_wstepna: port wstepna_obrobka_sys.process_done -> main_sys.WstepnaObrobkaDone;
+			
+			setup_kf: port main_sys.KadzFiltracyjnaUserInput -> kadz_filtracyjna_sys.RemoteUserInput;
+			start_kf: port main_sys.KadzFiltracyjnaStart -> kadz_filtracyjna_sys.start;
+			done_kf: port kadz_filtracyjna_sys.process_done -> main_sys.KadzFiltracyjnaDone;
+			
+			setup_warzenie: port main_sys.WarzenieUserInput -> warzenie_sys.RemoteUserInput;
+			start_warzenie: port main_sys.WarzenieStart -> warzenie_sys.start;
+			done_warzenie: port warzenie_sys.process_done -> main_sys.WarzenieDone;
+			
+			setup_parowanie: port main_sys.ParowanieUserInput -> parowanie_sys.RemoteUserInput;
+			start_parowanie: port main_sys.ParowanieStart -> parowanie_sys.start;
+			done_parowanie: port parowanie_sys.process_done -> main_sys.ParowanieDone;
+			
+			setup_wirowanie: port main_sys.WirowanieUserInput -> wirowanie_sys.RemoteUserInput;
+			start_wirowanie: port main_sys.WirowanieStart -> wirowanie_sys.start;
+			done_wirowanie: port wirowanie_sys.process_done -> main_sys.WirowanieDone;
+			
+			setup_fermentacja: port main_sys.FermentacjaUserInput -> fermentacja_sys.RemoteUserInput;
+			start_fermentacja: port main_sys.FermentacjaStart -> fermentacja_sys.start;
+			done_fermentacja: port fermentacja_sys.process_done -> main_sys.FermentacjaDone;
+			
+			main_sys_to_monitor: port main_sys.DisplayData -> monitor_ctrl.SystemInput;
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			
+			eth1: bus access Mag_bus -> cpu.eth;
+	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
+		properties
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_sys;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_wstepna;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_wstepna;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_wstepna;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_kf;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_kf;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_kf;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_warzenie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_warzenie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_warzenie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_parowanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_parowanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_parowanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_wirowanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_wirowanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_wirowanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_fermentacja;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_fermentacja;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_fermentacja;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to main_sys_to_monitor;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
+			
+			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to main_sys;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
+	
+			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to main_sys;
+			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;	
+			
 	end WarzeniePiwa.impl;
 end MainSystem;

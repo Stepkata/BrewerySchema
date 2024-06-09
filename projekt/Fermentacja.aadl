@@ -4,6 +4,7 @@ public
 	with Devices;
 	with Hardware;
 	with CommonElements;
+	with SEI;
 	
 	thread FermentacjaDecisionCenter
 		features
@@ -87,6 +88,8 @@ public
 			start: in data port DataTypes::SwitchTrigger;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
+		properties
+       		SEI::GrossWeight => 0.9kg;
 	end FermentacjaSystem;
 	
 	system implementation FermentacjaSystem.impl

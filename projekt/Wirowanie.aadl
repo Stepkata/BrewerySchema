@@ -4,6 +4,7 @@ public
 	with DataTypes;
 	with CommonElements;
 	with Hardware;
+	with SEI;
 	
 	thread ControlWirDevice
 		features
@@ -114,6 +115,8 @@ public
 			start: in data port DataTypes::SwitchTrigger;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
+		properties
+       		SEI::GrossWeight => 0.9kg;
 	end WirowanieSys;
 	
 	system implementation WirowanieSys.impl

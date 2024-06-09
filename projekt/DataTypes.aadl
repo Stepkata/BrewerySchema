@@ -1,7 +1,6 @@
 package DataTypes
 public
 	with Data_Model;
-	with Base_Types;
 	
 	data TemperatureType
      	properties
