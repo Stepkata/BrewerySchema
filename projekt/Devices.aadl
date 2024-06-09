@@ -1,12 +1,15 @@
 package Devices
 public
 	with DataTypes;
+	with SEI;
 	
 	
 	device TempSensor
-      features
-		Temp: out data port DataTypes::TemperatureType;
-   end Tempsensor;
+      	features
+			Temp: out data port DataTypes::TemperatureType;
+		properties
+	  		SEI::GrossWeight => 0.18kg;
+	end Tempsensor;
  
    device implementation TempSensor.impl
    end TempSensor.impl;
@@ -14,6 +17,8 @@ public
    device Heater
    	features
    		On: in data port DataTypes::SwitchTrigger;
+   	properties
+	  SEI::GrossWeight => 0.75kg;
    end Heater;
 	
 	device implementation Heater.impl
@@ -23,6 +28,8 @@ public
    device PressureSensor
    	features
    		Pressure: out data port DataTypes::PressureType; 
+   	properties
+	  SEI::GrossWeight => 0.18kg;
    end PressureSensor;
    
    device implementation PressureSensor.impl
@@ -32,6 +39,8 @@ public
    device PressureControler
    	features
    		On: in data port DataTypes::SwitchTrigger;
+   	properties
+	  SEI::GrossWeight => 3.40kg;
    end PressureControler;
    
    device implementation PressureControler.impl
@@ -41,6 +50,8 @@ public
    device Cooler
    	features
    		On: in data port DataTypes::SwitchTrigger;
+   	properties
+	  SEI::GrossWeight => 54.2kg;
    end Cooler;
    
    device implementation Cooler.impl
@@ -50,6 +61,8 @@ public
    device Czasomierz
 		features
 			CurrTime: out data port DataTypes::DateTime;
+		properties
+	  		SEI::GrossWeight => 0.30kg;
 	end Czasomierz;
 	
 	device implementation Czasomierz.impl
@@ -59,6 +72,8 @@ public
 	device Klawiatura
 		features 
 			KeyInput: out data port DataTypes::KeyboardInputData;
+		properties
+	  		SEI::GrossWeight => 0.65kg;
 	end Klawiatura;
 	
 	device implementation Klawiatura.impl
@@ -69,6 +84,8 @@ public
 		features
 			RemoteStart: in data port DataTypes::SwitchTrigger;
 			Start: out data port DataTypes::SwitchTrigger;
+		properties
+	  		SEI::GrossWeight => 0.18kg;
 	end StartButtonWithRemoteControl;
 	
 	device implementation StartButtonWithRemoteControl.impl
@@ -80,6 +97,8 @@ public
 		features
    			OpenInputGate: in data port DataTypes::SwitchTrigger;
    			OpenOutputGate: in data port DataTypes::SwitchTrigger;
+   		properties
+	  		SEI::GrossWeight => 2450.0kg;
 	end Kadz;
 	
 	device implementation Kadz.impl
@@ -89,6 +108,8 @@ public
 	device Mieszadlo 
 		features
    			On: in data port DataTypes::SwitchTrigger;
+   		properties
+	  		SEI::GrossWeight => 18.0kg;
 	end Mieszadlo;
 	
 	device implementation Mieszadlo.impl
@@ -99,6 +120,8 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 2450.0kg;
 	end CzajnikDoZacieru;
 	
 	device implementation CzajnikDoZacieru.impl
@@ -111,6 +134,8 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 2450.0kg;
 	end KadzFiltracyjna;
 	
 	device implementation KadzFiltracyjna.impl
@@ -120,6 +145,8 @@ public
 	device CzujnikPoziomuWody
 		features
 			WaterLevel: out data port DataTypes::WaterLevelType;
+		properties
+	  		SEI::GrossWeight => 0.30kg;
 	end CzujnikPoziomuWody;
 	
 	device implementation CzujnikPoziomuWody.impl
@@ -129,6 +156,8 @@ public
 	device PodajnikWody
 		features
    			On: in data port DataTypes::SwitchTrigger;
+   		properties
+	  		SEI::GrossWeight => 2.0kg;
 	end PodajnikWody;
 	
 	device implementation PodajnikWody.impl
@@ -141,6 +170,8 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 2450.0kg;
 	end KadzWarzelna;
 	
 	device implementation KadzWarzelna.impl
@@ -154,6 +185,8 @@ public
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
 	   		On: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 2450.0kg;
 	end Parownik;
 	
 	device implementation Parownik.impl
@@ -163,6 +196,8 @@ public
 	device CzujnikWilgoci
 		features
 			MoistureLevel: out data port DataTypes::MoistureLevelType;
+		properties
+	  		SEI::GrossWeight => 0.15kg;
 	end CzujnikWilgoci;
 	
 	device implementation CzujnikWilgoci.impl
@@ -175,6 +210,8 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 2450.0kg;
 	end Wirownik;
 	
 	device implementation Wirownik.impl
@@ -184,6 +221,8 @@ public
 	device Wir
 		features 
 			On: in data port DataTypes::SwitchTrigger;
+		properties
+	  		SEI::GrossWeight => 24.0kg;
 	end Wir;
 	
 	device implementation Wir.impl
@@ -196,6 +235,8 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 2450.0kg;
 	end Chlodziarka;
 	
 	device implementation Chlodziarka.impl
@@ -208,6 +249,8 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 1470.0kg;
 	end ZbiornikDoFermentacji;
 	
 	device implementation ZbiornikDoFermentacji.impl
@@ -221,6 +264,8 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 670.0kg;
 	end ZbiornikDoLezakowania;
 	
 	device implementation ZbiornikDoLezakowania.impl
