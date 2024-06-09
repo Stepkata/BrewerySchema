@@ -60,6 +60,7 @@ public
 			TotalTime: out data port DataTypes::DateTime;
 			KadzWarzelnaDesiredTemp: out data port DataTypes::TemperatureType;
 			KadzWarzelnaDesiredPressure: out data port DataTypes::PressureType;
+			DisplayData: out data port DataTypes::SystemAppData;
 	end KWSystemControlCenterThread;
 	
 	thread implementation KWSystemControlCenterThread.impl
@@ -74,7 +75,7 @@ public
 			TotalTime: out data port DataTypes::DateTime;
 			KadzWarzelnaDesiredTemp: out data port DataTypes::TemperatureType;
 			KadzWarzelnaDesiredPressure: out data port DataTypes::PressureType;
-		
+			DisplayData: out data port DataTypes::SystemAppData;
 	end KWSystemControlCenterProcess;
 			
 	process implementation KWSystemControlCenterProcess.impl
@@ -87,6 +88,7 @@ public
 			conn4: port process_thread.TotalTime -> TotalTime;
 			conn5: port process_thread.KadzWarzelnaDesiredTemp -> KadzWarzelnaDesiredTemp;
 			conn6: port process_thread.KadzWarzelnaDesiredPressure -> KadzWarzelnaDesiredPressure;
+			conn7: port process_thread.DisplayData -> DisplayData;
 	end KWSystemControlCenterProcess.impl;
 	
 	system WarzenieSys
@@ -113,6 +115,8 @@ public
 			pressure_control_proc: process CommonElements::PressureControlProcess.impl;
 			timer_control_proc: process CommonElements::TimerControlProcess.impl;
 			button_control: process CommonElements::ButtonControlProcess.impl;
+			monitor: device Devices::Monitor.impl;
+			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
 			sys_memory: memory Hardware::RAM.Standard;
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
@@ -136,6 +140,8 @@ public
 			stop_heater: port KadzWarzelna_proc.ProcessDone -> heater_control_proc.stop;
 			stop_pressure: port KadzWarzelna_proc.ProcessDone -> pressure_control_proc.stop;
 			all_processes_done: port KadzWarzelna_proc.ProcessDone -> process_done;
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
 			eth1: bus access Mag_bus -> cpu.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
@@ -158,6 +164,8 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to process_to_pressure_controller;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_pressure;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to button_to_process;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
 			
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
@@ -166,6 +174,7 @@ public
 			Actual_Memory_Binding => (reference(sys_memory)) applies to timer_control_proc;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to button_control;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to pressure_control_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
 	
 			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
@@ -174,6 +183,7 @@ public
 			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;
 			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
 			Actual_Processor_Binding => (reference(cpu)) applies to pressure_control_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;
 	end WarzenieSys.impl;
 		
 		

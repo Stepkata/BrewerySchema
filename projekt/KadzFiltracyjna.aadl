@@ -86,6 +86,7 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			TotalTime: out data port DataTypes::DateTime;
 			DesiredWaterLevel: out data port DataTypes::WaterLevelType;
+			DisplayData: out data port DataTypes::SystemAppData;
 		properties
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
@@ -104,6 +105,7 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			TotalTime: out data port DataTypes::DateTime;
 			DesiredWaterLevel: out data port DataTypes::WaterLevelType;
+			DisplayData: out data port DataTypes::SystemAppData;
 	end KFSystemControlCenterProcess;
 			
 	process implementation KFSystemControlCenterProcess.impl
@@ -114,6 +116,7 @@ public
 			conn2: port RemoteUserInput -> process_thread.RemoteUserInput;
 			conn4: port process_thread.TotalTime -> TotalTime;
 			conn5: port process_thread.DesiredWaterLevel -> DesiredWaterLevel;
+			conn7: port process_thread.DisplayData -> DisplayData;
 	end KFSystemControlCenterProcess.impl;
 	
 	thread KadzControlThread
@@ -183,6 +186,8 @@ public
 			water_control_process: process WaterControl.impl;
 			button_control: process CommonElements::ButtonControlProcess.impl;
 			timer_control_proc: process CommonElements::TimerControlProcess.impl;
+			monitor: device Devices::Monitor.impl;
+			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
 			sys_memory: memory Hardware::RAM.Standard;
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
@@ -204,6 +209,10 @@ public
 			proc_to_wd: port water_control_process.water_control -> water_dispenser.On;
 			stop_water: port kadz_control_process.done -> water_control_process.stop_thread;
 			process_done_conn: port kadz_control_process.done -> process_done;
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			eth1: bus access Mag_bus -> cpu.eth;
+	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
@@ -221,6 +230,8 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to process_done_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_proc;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_control;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
 	
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
@@ -228,6 +239,7 @@ public
 			Actual_Memory_Binding => (reference(sys_memory)) applies to water_control_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to timer_control_proc;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to button_control;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
 	
 			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
@@ -235,6 +247,7 @@ public
 			Actual_Processor_Binding => (reference(cpu)) applies to water_control_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;	
 			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
+			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;
 		
 			
 	end KadzFiltracyjna.impl;

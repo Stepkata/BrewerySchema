@@ -96,6 +96,7 @@ public
 			UserInput: in data port DataTypes::KeyboardInputData;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			DesiredMoistureLevel: out data port DataTypes::MoistureLevelType;
+			DisplayData: out data port DataTypes::SystemAppData;
 		properties
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
@@ -113,6 +114,7 @@ public
 			UserInput: in data port DataTypes::KeyboardInputData;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			DesiredMoistureLevel: out data port DataTypes::MoistureLevelType;
+			DisplayData: out data port DataTypes::SystemAppData;
 	end PSystemControlCenterProcess;
 			
 	process implementation PSystemControlCenterProcess.impl
@@ -122,6 +124,7 @@ public
 			conn1: port UserInput -> process_thread.UserInput;
 			conn2: port RemoteUserInput -> process_thread.RemoteUserInput;
 			conn5: port process_thread.DesiredMoistureLevel -> DesiredMoistureLevel;
+			conn7: port process_thread.DisplayData -> DisplayData;
 	end PSystemControlCenterProcess.impl;
 	
 	system ParowanieSys
@@ -141,6 +144,8 @@ public
 			input_processing_process: process PSystemControlCenterProcess.impl;
 			moisture_control_process: process ParownikControlProcess.impl;
 			button_control: process CommonElements::ButtonControlProcess.impl;
+			monitor: device Devices::Monitor.impl;
+			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
 			sys_memory: memory Hardware::RAM.Standard;
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
@@ -157,6 +162,10 @@ public
 			sensor_to_proc: port moisture_lvl_sensor.MoistureLevel -> moisture_control_process.sensor_data;
 			proc_to_wd: port moisture_control_process.parownik_control -> parownik.On;
 			process_done_conn: port moisture_control_process.done -> process_done;
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			eth1: bus access Mag_bus -> cpu.eth;
+	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
@@ -170,16 +179,20 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to sensor_to_proc;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_wd;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to process_done_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
 	
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to moisture_control_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to button_control;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
 	
 			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to moisture_control_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
+			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;
 		
 			
 	end ParowanieSys.impl;

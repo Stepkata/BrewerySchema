@@ -130,6 +130,7 @@ public
 			CzajnikTime: out data port DataTypes::DateTime;
 			TotalTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
+			DisplayData: out data port DataTypes::SystemAppData;
 	end WOSystemControlCenterThread;
 	
 	thread implementation WOSystemControlCenterThread.impl
@@ -144,7 +145,7 @@ public
 			CzajnikTime: out data port DataTypes::DateTime;
 			TotalTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
-		
+			DisplayData: out data port DataTypes::SystemAppData;
 	end WOSystemControlCenterProcess;
 			
 	process implementation WOSystemControlCenterProcess.impl
@@ -157,6 +158,7 @@ public
 			conn3: port process_thread.CzajnikTime -> CzajnikTime;
 			conn4: port process_thread.TotalTime -> TotalTime;
 			conn5: port process_thread.CzajnikDesiredTemp -> CzajnikDesiredTemp;
+			conn7: port process_thread.DisplayData -> DisplayData;
 	end WOSystemControlCenterProcess.impl;
 	
 	system WstepnaObrobka
@@ -184,6 +186,8 @@ public
 			heater_control_proc: process CommonElements::HeaterControlProcess.impl;
 			timer_control_proc: process CommonElements::TimerControlProcess.impl;
 			button_control: process CommonElements::ButtonControlProcess.impl;
+			monitor: device Devices::Monitor.impl;
+			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
 			sys_memory: memory Hardware::RAM.Standard;
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
@@ -211,6 +215,8 @@ public
 			timer_to_czajnik: port timer_control_proc.CurrTime -> czajnik_proc.CurrTime;
 			stop_heater: port czajnik_proc.ProcessDone -> heater_control_proc.stop;
 			all_processes_done: port czajnik_proc.ProcessDone -> process_done;
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
 			eth1: bus access Mag_bus -> cpu.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
@@ -237,7 +243,10 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_heater;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to all_processes_done;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to button_to_process;
-	
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
+			
+			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to mieszanie_proc;
@@ -253,6 +262,7 @@ public
 			Actual_Processor_Binding => (reference(cpu)) applies to heater_control_proc;
 			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;
 			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
+			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;
 			
 	end WstepnaObrobka.impl;
 	

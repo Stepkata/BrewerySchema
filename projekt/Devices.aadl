@@ -73,12 +73,23 @@ public
 		features 
 			KeyInput: out data port DataTypes::KeyboardInputData;
 		properties
-	  		SEI::GrossWeight => 0.65kg;
+	  		SEI::GrossWeight => 0.35kg;
 	end Klawiatura;
 	
 	device implementation Klawiatura.impl
 		
 	end Klawiatura.impl;
+	
+	device Monitor
+		features
+			DisplayData: in data port DataTypes::SystemAppData;
+		properties
+	  		SEI::GrossWeight => 0.65kg;
+	end Monitor;
+	
+	device implementation Monitor.impl
+		
+	end Monitor.impl;
 	
 	device StartButtonWithRemoteControl
 		features

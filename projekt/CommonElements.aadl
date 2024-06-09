@@ -292,6 +292,37 @@ public
 	        conn1: port switch_on -> button_control_thread.switch_on;
 	        conn2: port button_control_thread.on -> on;
     end ButtonControlProcess.impl;
+    
+    --- monitor control ---
+    
+	thread MonitorControl
+		features
+			SystemInput: in data port DataTypes::SystemAppData;
+			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;		
+	end MonitorControl;
 	
+	thread implementation MonitorControl.impl
+		
+	end MonitorControl.impl;
+	
+	process MonitorControlProcess
+		features
+			SystemInput: in data port DataTypes::SystemAppData;
+			DisplayData: out data port DataTypes::SystemAppData;
+	end MonitorControlProcess;
+	
+	process implementation MonitorControlProcess.impl
+		subcomponents
+			control: thread MonitorControl.impl;
+		connections
+			keyboard_to_thread: port SystemInput -> control.SystemInput;
+			thread_to_control: port control.DisplayData -> DisplayData;	
+	end MonitorControlProcess.impl;
 	
 end CommonElements;

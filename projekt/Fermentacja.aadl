@@ -57,6 +57,7 @@ public
 			UserInput: in data port DataTypes::KeyboardInputData;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			TotalTime: out data port DataTypes::DateTime;
+			DisplayData: out data port DataTypes::SystemAppData;
 	end FSystemControlCenterThread;
 	
 	thread implementation FSystemControlCenterThread.impl
@@ -68,6 +69,7 @@ public
 			UserInput: in data port DataTypes::KeyboardInputData;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			TotalTime: out data port DataTypes::DateTime;
+			DisplayData: out data port DataTypes::SystemAppData;
 	end FSystemControlCenterProcess;
 			
 	process implementation FSystemControlCenterProcess.impl
@@ -77,6 +79,7 @@ public
 			conn1: port UserInput -> process_thread.UserInput;
 			conn0: port RemoteUserInput -> process_thread.RemoteUserInput;
 			conn4: port process_thread.TotalTime -> TotalTime;
+			conn7: port process_thread.DisplayData -> DisplayData;
 	end FSystemControlCenterProcess.impl;
 	
 	system FermentacjaSystem
@@ -97,6 +100,8 @@ public
 			button_control: process CommonElements::ButtonControlProcess.impl;
 			zbiornik: device Devices::ZbiornikDoFermentacji.impl;
 			fermentacja_control: process FermentacjaProcess.impl;
+			monitor: device Devices::Monitor.impl;
+			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
 			sys_memory: memory Hardware::RAM.Standard;
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
@@ -111,6 +116,8 @@ public
 			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime;
 			timer_to_fermentacja: port timer_control_proc.CurrTime -> fermentacja_control.CurrTime;
 			all_processes_done: port fermentacja_control.ProcessDone -> process_done;
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
 			eth1: bus access Mag_bus -> cpu.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
@@ -124,18 +131,23 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_proc;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_fermentacja;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to all_processes_done;
-	
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
+			
+			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to fermentacja_control;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to timer_control_proc;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to button_control;
+			
 	
 			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to fermentacja_control;
 			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;
 			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
+			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;
 	end FermentacjaSystem.impl;
 	
 end Fermentacja;
