@@ -8,5 +8,4 @@ System ma na celu zamodelować przebieg typowej linii produkcyjnej służącej d
   - Fermentowanie;
   - Leżakowanie;
   - Filtracja i stabilizacja;
-  - Dolewanie spirytusu(dla piw najtańszych i najmocniejszych);
   - Butelkowanie i pakowanie
