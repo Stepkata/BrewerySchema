@@ -83,6 +83,7 @@ public
 	thread KFSystemControlCenterThread
 		features
 			UserInput: in data port DataTypes::KeyboardInputData;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			TotalTime: out data port DataTypes::DateTime;
 			DesiredWaterLevel: out data port DataTypes::WaterLevelType;
 		properties
@@ -100,6 +101,7 @@ public
 	process KFSystemControlCenterProcess
 		features
 			UserInput: in data port DataTypes::KeyboardInputData;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			TotalTime: out data port DataTypes::DateTime;
 			DesiredWaterLevel: out data port DataTypes::WaterLevelType;
 	end KFSystemControlCenterProcess;
@@ -109,6 +111,7 @@ public
 			process_thread: thread KFSystemControlCenterThread.impl;
 		connections
 			conn1: port UserInput -> process_thread.UserInput;
+			conn2: port RemoteUserInput -> process_thread.RemoteUserInput;
 			conn4: port process_thread.TotalTime -> TotalTime;
 			conn5: port process_thread.DesiredWaterLevel -> DesiredWaterLevel;
 	end KFSystemControlCenterProcess.impl;
@@ -162,6 +165,7 @@ public
 	system KadzFiltracyjna
 		features
 			start: in data port DataTypes::SwitchTrigger;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
 	end KadzFiltracyjna;
 	
@@ -185,6 +189,7 @@ public
 		connections
 			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
 			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
+			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput;
 			input_to_proc1: port input_processing_process.TotalTime -> kadz_control_process.desired_time;
 			input_to_proc2: port input_processing_process.DesiredWaterLevel -> water_control_process.input_data;
 			start_system: port start -> start_button.RemoteStart;

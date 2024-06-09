@@ -1,0 +1,189 @@
+package Parowanie
+public
+	with Devices;
+	with DataTypes;
+	with CommonElements;
+	with Hardware;
+	
+	thread ReadMoistureLevel
+		features
+	   		sensor_data: in data port DataTypes::MoistureLevelType;
+	   		read_data: out data port DataTypes::MoistureLevelType;
+	   	properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end ReadMoistureLevel;
+	
+	thread implementation ReadMoistureLevel.impl
+		
+	end ReadMoistureLevel.impl;
+	
+	
+	thread ControlParownikDevice
+		features
+			turn_on_dec: in data port DataTypes::SwitchTrigger;
+			on: out data port DataTypes::SwitchTrigger;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;
+	end ControlParownikDevice;
+	
+	thread implementation ControlParownikDevice.impl
+		
+	end ControlParownikDevice.impl;
+	
+	thread ParownikControlThread
+		features
+			start: in data port DataTypes::SwitchTrigger;
+	   		curr_moisture_level: in data port DataTypes::MoistureLevelType;
+	   		desired_moisture_level: in data port DataTypes::MoistureLevelType;
+	   		parownik_on: out data port DataTypes::SwitchTrigger;
+	   		open_i_gate: out data port DataTypes::SwitchTrigger;
+			open_o_gate: out data port DataTypes::SwitchTrigger;
+			done: out data port DataTypes::SwitchTrigger;
+	   	properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end ParownikControlThread;
+	
+	thread implementation ParownikControlThread.impl
+		
+	end ParownikControlThread.impl;
+	
+	process ParownikControlProcess
+		features
+			start: in data port DataTypes::SwitchTrigger;
+			sensor_data: in data port DataTypes::MoistureLevelType;
+			input_data: in data port DataTypes::MoistureLevelType;
+			parownik_control: out data port DataTypes::SwitchTrigger;
+			open_i_gate: out data port DataTypes::SwitchTrigger;
+			open_o_gate: out data port DataTypes::SwitchTrigger;
+			done: out data port DataTypes::SwitchTrigger;
+	end ParownikControlProcess;
+	
+	process implementation ParownikControlProcess.impl
+		subcomponents
+			sensor_thread: thread ReadMoistureLevel.impl;
+			control_thread: thread ControlParownikDevice.impl;
+			decision_thread: thread ParownikControlThread.impl;
+			input_gate_c: thread CommonElements::InputGateControl.impl;
+			output_gate_c: thread CommonElements::OutputGateControl.impl;
+		connections
+			start_conn: port start -> decision_thread.start;
+			setup_sensor_conn: port sensor_data -> sensor_thread.sensor_data;
+			sensor_to_dec_conn: port sensor_thread.read_data -> decision_thread.curr_moisture_level;
+			setup_des_conn: port input_data -> decision_thread.desired_moisture_level;
+			dec_to_con_conn: port decision_thread.parownik_on -> control_thread.turn_on_dec;
+			turn_on_conn: port control_thread.on -> parownik_control;
+			conn3: port decision_thread.open_i_gate -> input_gate_c.Open;
+	        conn4: port decision_thread.open_o_gate -> output_gate_c.Open;
+			conn5: port input_gate_c.OpenGate -> open_i_gate;
+	        conn6: port output_gate_c.OpenGate -> open_o_gate;	
+	        proc_done: port decision_thread.done -> done;
+	end ParownikControlProcess.impl;
+	
+	thread PSystemControlCenterThread
+		features
+			UserInput: in data port DataTypes::KeyboardInputData;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
+			DesiredMoistureLevel: out data port DataTypes::MoistureLevelType;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end PSystemControlCenterThread;
+	
+	thread implementation PSystemControlCenterThread.impl
+		
+	end PSystemControlCenterThread.impl;
+	
+	process PSystemControlCenterProcess
+		features
+			UserInput: in data port DataTypes::KeyboardInputData;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
+			DesiredMoistureLevel: out data port DataTypes::MoistureLevelType;
+	end PSystemControlCenterProcess;
+			
+	process implementation PSystemControlCenterProcess.impl
+		subcomponents
+			process_thread: thread PSystemControlCenterThread.impl;
+		connections
+			conn1: port UserInput -> process_thread.UserInput;
+			conn2: port RemoteUserInput -> process_thread.RemoteUserInput;
+			conn5: port process_thread.DesiredMoistureLevel -> DesiredMoistureLevel;
+	end PSystemControlCenterProcess.impl;
+	
+	system ParowanieSys
+		features
+			start: in data port DataTypes::SwitchTrigger;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
+			process_done: out data port DataTypes::SwitchTrigger;
+	end ParowanieSys;
+	
+	system implementation ParowanieSys.impl
+		subcomponents
+			start_button: device Devices::StartButtonWithRemoteControl.impl;
+			klawiatura: device Devices::Klawiatura.impl;
+			parownik: device Devices::Parownik.impl;
+			moisture_lvl_sensor: device Devices::CzujnikWilgoci.impl;
+			keyboard_cont_process: process CommonElements::KeyboardControlProcess.impl;
+			input_processing_process: process PSystemControlCenterProcess.impl;
+			moisture_control_process: process ParownikControlProcess.impl;
+			button_control: process CommonElements::ButtonControlProcess.impl;
+			timer_control_proc: process CommonElements::TimerControlProcess.impl;
+			sys_memory: memory Hardware::RAM.Standard;
+			Mag_bus: bus Hardware::Marine.Standard;
+			cpu: processor Hardware::corei5;
+		connections
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
+			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
+			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput;
+			input_to_proc2: port input_processing_process.DesiredMoistureLevel -> moisture_control_process.input_data;
+			start_system: port start -> start_button.RemoteStart;
+			button_to_process: port start_button.Start -> button_control.switch_on;
+			start_m_proc: port button_control.on -> moisture_control_process.start;
+			proc_to_kadz1: port moisture_control_process.open_i_gate -> parownik.OpenInputGate;
+			proc_to_kadz2: port moisture_control_process.open_o_gate -> parownik.OpenOutputGate;
+			sensor_to_proc: port moisture_lvl_sensor.MoistureLevel -> moisture_control_process.sensor_data;
+			proc_to_wd: port moisture_control_process.parownik_control -> parownik.On;
+			process_done_conn: port moisture_control_process.done -> process_done;
+		properties
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to remote_input_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_system;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_kadz1;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_kadz2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to button_to_process;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_m_proc;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sensor_to_proc;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_wd;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to process_done_conn;
+	
+			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to moisture_control_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to timer_control_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to button_control;
+	
+			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to moisture_control_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;	
+			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
+		
+			
+	end ParowanieSys.impl;
+end Parowanie;

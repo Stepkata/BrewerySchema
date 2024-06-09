@@ -55,6 +55,7 @@ public
 	thread KWSystemControlCenterThread
 		features
 			UserInput: in data port DataTypes::KeyboardInputData;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			WarzelniaTime: out data port DataTypes::DateTime;
 			TotalTime: out data port DataTypes::DateTime;
 			KadzWarzelnaDesiredTemp: out data port DataTypes::TemperatureType;
@@ -68,6 +69,7 @@ public
 	process KWSystemControlCenterProcess
 		features
 			UserInput: in data port DataTypes::KeyboardInputData;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			KadzWarzelnaTime: out data port DataTypes::DateTime;
 			TotalTime: out data port DataTypes::DateTime;
 			KadzWarzelnaDesiredTemp: out data port DataTypes::TemperatureType;
@@ -80,6 +82,7 @@ public
 			process_thread: thread KWSystemControlCenterThread.impl;
 		connections
 			conn1: port UserInput -> process_thread.UserInput;
+			conn2: port RemoteUserInput -> process_thread.RemoteUserInput;
 			conn3: port process_thread.WarzelniaTime -> KadzWarzelnaTime;
 			conn4: port process_thread.TotalTime -> TotalTime;
 			conn5: port process_thread.KadzWarzelnaDesiredTemp -> KadzWarzelnaDesiredTemp;
@@ -89,6 +92,7 @@ public
 	system WarzenieSys
 		features
 			start: in data port DataTypes::SwitchTrigger;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
 	end WarzenieSys;
 		
@@ -114,6 +118,7 @@ public
 			cpu: processor Hardware::corei5;
 		connections
 			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
+			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput;
 			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
 			input_to_proc2: port input_processing_process.KadzWarzelnaTime -> KadzWarzelna_proc.KadzWarzelnaTime;
 			input_to_proc3: port input_processing_process.KadzWarzelnaDesiredTemp -> heater_control_proc.input_data;
@@ -136,6 +141,7 @@ public
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to remote_input_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc2;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc3;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_KadzWarzelna1;

@@ -5,4 +5,19 @@ public
 	with Devices;
 	with CommonElements;
 	with WstepnaObrobka;
+	with KadzFiltracyjna;
+	with Warzenie;
+	with Parowanie;
+	
+	system WarzeniePiwa
+		
+	end WarzeniePiwa;
+	
+	system implementation WarzeniePiwa.impl
+		subcomponents
+			wstepna_obrobka_sys: system WstepnaObrobka::WstepnaObrobka.impl;
+			kadz_filtracyjna_sys: system KadzFiltracyjna::KadzFiltracyjna.impl;
+			warzenie_sys: system Warzenie::WarzenieSys.impl;
+			parowanie_sys: system Parowanie::ParowanieSys.impl;
+	end WarzeniePiwa.impl;
 end MainSystem;

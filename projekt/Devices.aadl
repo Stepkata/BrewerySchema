@@ -153,6 +153,7 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		On: in data port DataTypes::SwitchTrigger;
 	end Parownik;
 	
 	device implementation Parownik.impl
