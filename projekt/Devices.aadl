@@ -295,4 +295,17 @@ public
 	
 		-- rozlewnia --
 		
+	device Rozlewnik
+		features
+			OpenInputGate: in data port DataTypes::SwitchTrigger;
+	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   	properties
+	  		SEI::GrossWeight => 670.0kg;
+	end Rozlewnik;
+	
+	device implementation Rozlewnik.impl
+		
+	end Rozlewnik.impl;
+	
+		
 end Devices;

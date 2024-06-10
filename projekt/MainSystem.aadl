@@ -87,13 +87,6 @@ public
 	        parowanie_conn: port main_thread.ParowanieUserInput -> ParowanieUserInput;
 	        wirowanie_conn: port main_thread.WirowanieUserInput -> WirowanieUserInput;
 	        fermentacja_conn: port main_thread.FermentacjaUserInput -> FermentacjaUserInput;
-	        wstepna_conn_s: port main_thread.WstepnaObrobkaUserInput -> WstepnaObrobkaUserInput;
-	        kadz_conn_s: port main_thread.KadzFiltracyjnaUserInput -> KadzFiltracyjnaUserInput;
-	        warzenie_conn_s: port main_thread.WarzenieUserInput -> WarzenieUserInput;
-	        parowanie_conn_s: port main_thread.ParowanieUserInput -> ParowanieUserInput;
-	        wirowanie_conn_s: port main_thread.WirowanieUserInput -> WirowanieUserInput;
-	        fermentacja_conn_s: port main_thread.FermentacjaUserInput -> FermentacjaUserInput;
-	        display_conn_s: port main_thread.DisplayData -> DisplayData;
 	        wstepna_start_conn: port main_thread.WstepnaObrobkaStart -> WstepnaObrobkaStart;
 	        kadz_start_conn: port main_thread.KadzFiltracyjnaStart -> KadzFiltracyjnaStart;
 	        warzenie_start_conn: port main_thread.WarzenieStart -> WarzenieStart;
