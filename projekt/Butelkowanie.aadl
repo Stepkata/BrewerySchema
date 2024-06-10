@@ -1,0 +1,187 @@
+package Butelkowanie
+public
+	with DataTypes;
+	with Devices;
+	with Hardware;
+	with CommonElements;
+	
+	thread ButelkowanieDecisionCenter
+		features
+			Start: in data port DataTypes::SwitchTrigger;
+			CurrTime: in data port DataTypes::DateTime;
+			DesiredTime: in data port DataTypes::DateTime;
+			OpenInputGate: out data port DataTypes::SwitchTrigger;
+			OpenOutputGate: out data port DataTypes::SwitchTrigger;
+			Done: out data port DataTypes::SwitchTrigger;		
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+	end ButelkowanieDecisionCenter;
+	
+	thread implementation ButelkowanieDecisionCenter.impl
+		
+	end ButelkowanieDecisionCenter.impl;
+	
+	process ButelkowanieProcess
+		features
+			Start: in data port DataTypes::SwitchTrigger;
+			ButelkowanieTime: in data port DataTypes::DateTime;
+			CurrTime: in data port DataTypes::DateTime;
+			IGateOpen: out data port DataTypes::SwitchTrigger;
+			OGateOpen: out data port DataTypes::SwitchTrigger;
+			ProcessDone: out data port DataTypes::SwitchTrigger;
+	end ButelkowanieProcess;
+	
+	process implementation ButelkowanieProcess.impl
+		subcomponents
+			input_gate_c: thread CommonElements::InputGateControl.impl;
+			output_gate_c: thread CommonElements::OutputGateControl.impl;
+			butelkowanie_decision_center: thread ButelkowanieDecisionCenter.impl;
+		connections
+			start_conn: port Start -> butelkowanie_decision_center.Start;
+			desired_time_conn: port ButelkowanieTime -> butelkowanie_decision_center.DesiredTime;
+			curr_time_conn: port CurrTime -> butelkowanie_decision_center.CurrTime;
+			open_igate_dec_conn: port butelkowanie_decision_center.OpenInputGate -> input_gate_c.Open;
+			open_ogate_dec_conn: port butelkowanie_decision_center.OpenOutputGate -> output_gate_c.Open;
+			open_igate_conn: port input_gate_c.OpenGate -> IGateOpen;
+			open_ogate_conn: port output_gate_c.OpenGate -> OGateOpen;
+			signal_end_proc_conn: port butelkowanie_decision_center.Done -> ProcessDone;		
+	end ButelkowanieProcess.impl;
+	
+	thread SystemControlCenterThread
+		features
+			UserInput: in data port DataTypes::KeyboardInputData;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
+			ButelkowanieTime: out data port DataTypes::DateTime;
+			TotalTime: out data port DataTypes::DateTime;
+			DesiredTemp: out data port DataTypes::TemperatureType;
+			DesiredPressure: out data port DataTypes::PressureType;
+			DisplayData: out data port DataTypes::SystemAppData;
+	end SystemControlCenterThread;
+	
+	thread implementation SystemControlCenterThread.impl
+		
+	end SystemControlCenterThread.impl;
+	
+	process SystemControlCenterProcess
+		features
+			UserInput: in data port DataTypes::KeyboardInputData;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
+			ButelkowanieTime: out data port DataTypes::DateTime;
+			TotalTime: out data port DataTypes::DateTime;
+			DesiredTemp: out data port DataTypes::TemperatureType;
+			DesiredPressure: out data port DataTypes::PressureType;
+			DisplayData: out data port DataTypes::SystemAppData;
+	end SystemControlCenterProcess;
+			
+	process implementation SystemControlCenterProcess.impl
+		subcomponents
+			process_thread: thread SystemControlCenterThread.impl;
+		connections
+			conn1: port UserInput -> process_thread.UserInput;
+			conn2: port RemoteUserInput -> process_thread.RemoteUserInput;
+			conn3: port process_thread.ButelkowanieTime -> ButelkowanieTime;
+			conn4: port process_thread.TotalTime -> TotalTime;
+			conn5: port process_thread.DesiredTemp -> DesiredTemp;
+			conn6: port process_thread.DesiredPressure -> DesiredPressure;
+			conn7: port process_thread.DisplayData -> DisplayData;
+	end SystemControlCenterProcess.impl;
+	
+	system ButelkowanieSys
+		features
+			start: in data port DataTypes::SwitchTrigger;
+			RemoteUserInput: in data port DataTypes::KeyboardInputData;
+			process_done: out data port DataTypes::SwitchTrigger;
+	end ButelkowanieSys;
+		
+	system implementation ButelkowanieSys.impl
+		subcomponents
+			start_button: device Devices::StartButtonWithRemoteControl.impl;
+			klawiatura: device Devices::Klawiatura.impl;
+			temp_sensor: device Devices::TempSensor.impl;
+			pressure_sensor: device Devices::PressureSensor.impl;
+			heater: device Devices::Heater.impl;
+			pressure_controler: device Devices::PressureControler.impl;
+			butelki: device Devices::Rozlewnik.impl;
+			timer: device Devices::Czasomierz.impl;
+			keyboard_cont_process: process CommonElements::KeyboardControlProcess.impl;
+			input_processing_process: process SystemControlCenterProcess.impl;
+			butelkowanie_proc: process ButelkowanieProcess.impl;
+			heater_control_proc: process CommonElements::HeaterControlProcess.impl;
+			pressure_control_proc: process CommonElements::PressureControlProcess.impl;
+			timer_control_proc: process CommonElements::TimerControlProcess.impl;
+			button_control: process CommonElements::ButtonControlProcess.impl;
+			monitor: device Devices::Monitor.impl;
+			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
+			sys_memory: memory Hardware::RAM.Standard;
+			Mag_bus: bus Hardware::Marine.Standard;
+			cpu: processor Hardware::corei5;
+		connections
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
+			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput;
+			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
+			input_to_proc2: port input_processing_process.ButelkowanieTime -> butelkowanie_proc.ButelkowanieTime;
+			input_to_proc3: port input_processing_process.DesiredTemp -> heater_control_proc.input_data;
+			proc_to_butelki1: port butelkowanie_proc.IGateOpen -> butelki.OpenInputGate;
+			proc_to_butelki2: port butelkowanie_proc.OGateOpen -> butelki.OpenOutputGate;
+			sensor_to_heater_process: port temp_sensor.Temp -> heater_control_proc.sensor_data;
+			sensor_to_pressure_c_process: port pressure_sensor.Pressure -> pressure_control_proc.sensor_data;
+			process_to_heater: port heater_control_proc.heater_control -> heater.On;
+			process_to_pressure_controller: port pressure_control_proc.pressure_control -> pressure_controler.On;
+			start_system: port start -> start_button.RemoteStart;
+			button_to_process: port start_button.Start -> button_control.switch_on;
+			start_butelkowanie: port button_control.on -> butelkowanie_proc.Start;
+			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime;
+			timer_to_butelkowanie: port timer_control_proc.CurrTime -> butelkowanie_proc.CurrTime;
+			stop_heater: port butelkowanie_proc.ProcessDone -> heater_control_proc.stop;
+			stop_pressure: port butelkowanie_proc.ProcessDone -> pressure_control_proc.stop;
+			all_processes_done: port butelkowanie_proc.ProcessDone -> process_done;
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			eth1: bus access Mag_bus -> cpu.eth;
+	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
+		properties
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to remote_input_conn;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc3;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_butelki1;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_butelki2;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sensor_to_heater_process;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to process_to_heater;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_system;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_butelkowanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_proc;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_butelkowanie;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_heater;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to all_processes_done;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sensor_to_pressure_c_process;
+				Actual_Connection_Binding => (reference(Mag_bus)) applies to process_to_pressure_controller;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_pressure;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to button_to_process;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
+			
+			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to butelkowanie_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to heater_control_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to timer_control_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to button_control;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to pressure_control_proc;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
+	
+			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to input_processing_process;
+			Actual_Processor_Binding => (reference(cpu)) applies to butelkowanie_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to heater_control_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to timer_control_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to button_control;
+			Actual_Processor_Binding => (reference(cpu)) applies to pressure_control_proc;
+			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;
+	end ButelkowanieSys.impl;
+end Butelkowanie;
