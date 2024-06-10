@@ -10,6 +10,8 @@ public
 	with Parowanie;
 	with Wirowanie;
 	with Fermentacja;
+	with Butelkowanie;
+
 	with SEI;
 	
 	thread MainSystemSoftwareThread
@@ -108,6 +110,7 @@ public
 	        
 	end MainSystemSoftwareProcess.impl;
 	
+
 	system WarzeniePiwa
 		properties
        		SEI::GrossWeight => 0.9kg;
@@ -123,6 +126,8 @@ public
 			parowanie_sys: system Parowanie::ParowanieSys.impl;
 			wirowanie_sys: system Wirowanie::WirowanieSys.impl;
 			fermentacja_sys: system Fermentacja::FermentacjaSystem.impl;
+			butelkowanie_sys: system Butelkowanie::ButelkowanieSys.impl;
+
 			monitor: device Devices::Monitor.impl;
 			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
 			klawiatura: device Devices::Klawiatura.impl;
