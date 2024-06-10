@@ -140,7 +140,8 @@ public
 		properties
        		SEI::GrossWeight => 0.9kg;
 			SEI::MIPSBudget => 0.8 mips;
-			SEI::MIPSCapacity => 2.4 mips;	
+			SEI::MIPSCapacity => 2.4 mips;
+			SEI::WeightLimit => 20000.0kg;	
 	end ParowanieSys;
 	
 	system implementation ParowanieSys.impl

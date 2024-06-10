@@ -175,6 +175,7 @@ public
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
        		SEI::GrossWeight => 0.9kg;
+       		SEI::WeightLimit => 20000.0kg;
 			SEI::MIPSBudget => 0.8 mips;
 			SEI::MIPSCapacity => 2.4 mips;	
 	end WstepnaObrobka;
