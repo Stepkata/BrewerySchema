@@ -244,6 +244,7 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to timer_to_control;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to remote_input_conn;
 	
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to input_processing_process;

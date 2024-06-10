@@ -1,0 +1,554 @@
+Bus load analysis of WarzeniePiwa_impl_Instance
+
+
+"Physical Bus","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"Mag_bus","2000.0","200.0","0.0","6.4"
+"Mag_bus","2000.0","200.0","0.0","9.2"
+"Mag_bus","2000.0","200.0","0.0","12.399999999999999"
+"Mag_bus","2000.0","200.0","0.0","9.8"
+"Mag_bus","2000.0","200.0","0.0","10.0"
+"Mag_bus","2000.0","200.0","0.0","9.8"
+"Mag_bus","2000.0","200.0","0.0","8.600000000000001"
+"Mag_bus","2000.0","200.0","0.0","9.8"
+
+"Bus Mag_bus has data overhead of 0 bytes"
+"Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","0.0","","0.0"
+"monitor_ctrl.control.DisplayData -> monitor.DisplayData","","0.0","","3.2"
+"keyboard_cont_process.keyboard_control.KeyboardInput -> main_sys.main_thread.UserInput","","0.0","","3.2"
+"main_sys.main_thread.DisplayData -> monitor_ctrl.control.SystemInput","","0.0","","0.0"
+
+"Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput bound to Mag_bus"
+"WARNING: Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput has no bandwidth budget"
+
+"Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData bound to Mag_bus"
+"WARNING: Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData has no bandwidth budget"
+
+"Connection keyboard_cont_process.keyboard_control.KeyboardInput -> main_sys.main_thread.UserInput bound to Mag_bus"
+"WARNING: Connection keyboard_cont_process.keyboard_control.KeyboardInput -> main_sys.main_thread.UserInput has no bandwidth budget"
+
+"Connection main_sys.main_thread.DisplayData -> monitor_ctrl.control.SystemInput bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.DisplayData -> monitor_ctrl.control.SystemInput has no bandwidth budget"
+
+"Bus Mag_bus has data overhead of 0 bytes"
+"Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"start_button.Start -> button_control.button_control_thread.switch_on","","0.0","","0.0"
+"klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","0.0","","0.0"
+"temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data","","0.0","","0.4"
+"timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","0.0","","2.0"
+"keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput","","0.0","","3.2"
+"input_processing_process.process_thread.MieszadloTime -> mieszanie_proc.mieszadlo_decision_center.DesiredTime","","0.0","","0.0"
+"input_processing_process.process_thread.CzajnikTime -> czajnik_proc.czajnik_decision_center.DesiredTime","","0.0","","0.0"
+"input_processing_process.process_thread.CzajnikDesiredTemp -> heater_control_proc.control.desired_temp_data","","0.0","","0.0"
+"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","0.0","","0.0"
+"mieszanie_proc.input_gate_c.OpenGate -> kadz.OpenInputGate","","0.0","","0.0"
+"mieszanie_proc.output_gate_c.OpenGate -> kadz.OpenOutputGate","","0.0","","0.0"
+"mieszanie_proc.mieszadlo_control.TurnOn -> mieszadlo.On","","0.0","","0.0"
+"mieszanie_proc.mieszadlo_decision_center.Done -> czajnik_proc.czajnik_decision_center.Start","","0.0","","0.0"
+"mieszanie_proc.mieszadlo_decision_center.Done -> heater_control_proc.control.start","","0.0","","0.0"
+"czajnik_proc.input_gate_c.OpenGate -> czajnik.OpenInputGate","","0.0","","0.0"
+"czajnik_proc.output_gate_c.OpenGate -> czajnik.OpenOutputGate","","0.0","","0.0"
+"czajnik_proc.czajnik_decision_center.Done -> heater_control_proc.control.stop_thread","","0.0","","0.0"
+"heater_control_proc.heater_ctrl.control_heater -> heater.On","","0.0","","0.0"
+"timer_control_proc.timer_thread.CurrTime -> mieszanie_proc.mieszadlo_decision_center.CurrTime","","0.0","","0.2"
+"timer_control_proc.timer_thread.CurrTime -> czajnik_proc.czajnik_decision_center.CurrTime","","0.0","","0.2"
+"button_control.button_control_thread.on -> mieszanie_proc.mieszadlo_decision_center.Start","","0.0","","0.0"
+"monitor_ctrl.control.DisplayData -> monitor.DisplayData","","0.0","","3.2"
+"main_sys.main_thread.WstepnaObrobkaUserInput -> wstepna_obrobka_sys.input_processing_process.process_thread.RemoteUserInput","","0.0","","0.0"
+"main_sys.main_thread.WstepnaObrobkaStart -> wstepna_obrobka_sys.start_button.RemoteStart","","0.0","","0.0"
+"wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center.Done -> main_sys.main_thread.WstepnaObrobkaDone","","0.0","","0.0"
+
+"Connection start_button.Start -> button_control.button_control_thread.switch_on bound to Mag_bus"
+"WARNING: Connection start_button.Start -> button_control.button_control_thread.switch_on has no bandwidth budget"
+
+"Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput bound to Mag_bus"
+"WARNING: Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput has no bandwidth budget"
+
+"Connection temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data bound to Mag_bus"
+"WARNING: Connection temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data has no bandwidth budget"
+
+"Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime bound to Mag_bus"
+"WARNING: Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime has no bandwidth budget"
+
+"Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput bound to Mag_bus"
+"WARNING: Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.MieszadloTime -> mieszanie_proc.mieszadlo_decision_center.DesiredTime bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.MieszadloTime -> mieszanie_proc.mieszadlo_decision_center.DesiredTime has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.CzajnikTime -> czajnik_proc.czajnik_decision_center.DesiredTime bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.CzajnikTime -> czajnik_proc.czajnik_decision_center.DesiredTime has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.CzajnikDesiredTemp -> heater_control_proc.control.desired_temp_data bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.CzajnikDesiredTemp -> heater_control_proc.control.desired_temp_data has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput has no bandwidth budget"
+
+"Connection mieszanie_proc.input_gate_c.OpenGate -> kadz.OpenInputGate bound to Mag_bus"
+"WARNING: Connection mieszanie_proc.input_gate_c.OpenGate -> kadz.OpenInputGate has no bandwidth budget"
+
+"Connection mieszanie_proc.output_gate_c.OpenGate -> kadz.OpenOutputGate bound to Mag_bus"
+"WARNING: Connection mieszanie_proc.output_gate_c.OpenGate -> kadz.OpenOutputGate has no bandwidth budget"
+
+"Connection mieszanie_proc.mieszadlo_control.TurnOn -> mieszadlo.On bound to Mag_bus"
+"WARNING: Connection mieszanie_proc.mieszadlo_control.TurnOn -> mieszadlo.On has no bandwidth budget"
+
+"Connection mieszanie_proc.mieszadlo_decision_center.Done -> czajnik_proc.czajnik_decision_center.Start bound to Mag_bus"
+"WARNING: Connection mieszanie_proc.mieszadlo_decision_center.Done -> czajnik_proc.czajnik_decision_center.Start has no bandwidth budget"
+
+"Connection mieszanie_proc.mieszadlo_decision_center.Done -> heater_control_proc.control.start bound to Mag_bus"
+"WARNING: Connection mieszanie_proc.mieszadlo_decision_center.Done -> heater_control_proc.control.start has no bandwidth budget"
+
+"Connection czajnik_proc.input_gate_c.OpenGate -> czajnik.OpenInputGate bound to Mag_bus"
+"WARNING: Connection czajnik_proc.input_gate_c.OpenGate -> czajnik.OpenInputGate has no bandwidth budget"
+
+"Connection czajnik_proc.output_gate_c.OpenGate -> czajnik.OpenOutputGate bound to Mag_bus"
+"WARNING: Connection czajnik_proc.output_gate_c.OpenGate -> czajnik.OpenOutputGate has no bandwidth budget"
+
+"Connection czajnik_proc.czajnik_decision_center.Done -> heater_control_proc.control.stop_thread bound to Mag_bus"
+"WARNING: Connection czajnik_proc.czajnik_decision_center.Done -> heater_control_proc.control.stop_thread has no bandwidth budget"
+
+"Connection heater_control_proc.heater_ctrl.control_heater -> heater.On bound to Mag_bus"
+"WARNING: Connection heater_control_proc.heater_ctrl.control_heater -> heater.On has no bandwidth budget"
+
+"Connection timer_control_proc.timer_thread.CurrTime -> mieszanie_proc.mieszadlo_decision_center.CurrTime bound to Mag_bus"
+"WARNING: Connection timer_control_proc.timer_thread.CurrTime -> mieszanie_proc.mieszadlo_decision_center.CurrTime has no bandwidth budget"
+
+"Connection timer_control_proc.timer_thread.CurrTime -> czajnik_proc.czajnik_decision_center.CurrTime bound to Mag_bus"
+"WARNING: Connection timer_control_proc.timer_thread.CurrTime -> czajnik_proc.czajnik_decision_center.CurrTime has no bandwidth budget"
+
+"Connection button_control.button_control_thread.on -> mieszanie_proc.mieszadlo_decision_center.Start bound to Mag_bus"
+"WARNING: Connection button_control.button_control_thread.on -> mieszanie_proc.mieszadlo_decision_center.Start has no bandwidth budget"
+
+"Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData bound to Mag_bus"
+"WARNING: Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData has no bandwidth budget"
+
+"Connection main_sys.main_thread.WstepnaObrobkaUserInput -> wstepna_obrobka_sys.input_processing_process.process_thread.RemoteUserInput bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.WstepnaObrobkaUserInput -> wstepna_obrobka_sys.input_processing_process.process_thread.RemoteUserInput has no bandwidth budget"
+
+"Connection main_sys.main_thread.WstepnaObrobkaStart -> wstepna_obrobka_sys.start_button.RemoteStart bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.WstepnaObrobkaStart -> wstepna_obrobka_sys.start_button.RemoteStart has no bandwidth budget"
+
+"Connection wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center.Done -> main_sys.main_thread.WstepnaObrobkaDone bound to Mag_bus"
+"WARNING: Connection wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center.Done -> main_sys.main_thread.WstepnaObrobkaDone has no bandwidth budget"
+
+"Bus Mag_bus has data overhead of 0 bytes"
+"Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"start_button.Start -> button_control.button_control_thread.switch_on","","0.0","","0.0"
+"klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","0.0","","0.0"
+"timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","0.0","","2.0"
+"water_lvl_sensor.WaterLevel -> water_control_process.sensor_thread.sensor_data","","0.0","","0.2"
+"keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput","","0.0","","3.2"
+"input_processing_process.process_thread.TotalTime -> kadz_control_process.control_thread.desired_time","","0.0","","0.2"
+"input_processing_process.process_thread.DesiredWaterLevel -> water_control_process.decision_thread.desired_water_level","","0.0","","0.2"
+"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","0.0","","3.2"
+"kadz_control_process.control_thread.done -> water_control_process.decision_thread.stop_thread","","0.0","","0.0"
+"kadz_control_process.input_gate_c.OpenGate -> kadz.OpenInputGate","","0.0","","0.0"
+"kadz_control_process.output_gate_c.OpenGate -> kadz.OpenOutputGate","","0.0","","0.0"
+"water_control_process.control_thread.on -> water_dispenser.On","","0.0","","0.0"
+"button_control.button_control_thread.on -> kadz_control_process.control_thread.start","","0.0","","0.0"
+"button_control.button_control_thread.on -> water_control_process.decision_thread.start","","0.0","","0.0"
+"timer_control_proc.timer_thread.CurrTime -> kadz_control_process.control_thread.curr_time","","0.0","","0.2"
+"monitor_ctrl.control.DisplayData -> monitor.DisplayData","","0.0","","3.2"
+"main_sys.main_thread.KadzFiltracyjnaUserInput -> kadz_filtracyjna_sys.input_processing_process.process_thread.RemoteUserInput","","0.0","","0.0"
+"main_sys.main_thread.KadzFiltracyjnaStart -> kadz_filtracyjna_sys.start_button.RemoteStart","","0.0","","0.0"
+"kadz_filtracyjna_sys.kadz_control_process.control_thread.done -> main_sys.main_thread.KadzFiltracyjnaDone","","0.0","","0.0"
+
+"Connection start_button.Start -> button_control.button_control_thread.switch_on bound to Mag_bus"
+"WARNING: Connection start_button.Start -> button_control.button_control_thread.switch_on has no bandwidth budget"
+
+"Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput bound to Mag_bus"
+"WARNING: Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput has no bandwidth budget"
+
+"Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime bound to Mag_bus"
+"WARNING: Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime has no bandwidth budget"
+
+"Connection water_lvl_sensor.WaterLevel -> water_control_process.sensor_thread.sensor_data bound to Mag_bus"
+"WARNING: Connection water_lvl_sensor.WaterLevel -> water_control_process.sensor_thread.sensor_data has no bandwidth budget"
+
+"Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput bound to Mag_bus"
+"WARNING: Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.TotalTime -> kadz_control_process.control_thread.desired_time bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.TotalTime -> kadz_control_process.control_thread.desired_time has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DesiredWaterLevel -> water_control_process.decision_thread.desired_water_level bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DesiredWaterLevel -> water_control_process.decision_thread.desired_water_level has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput has no bandwidth budget"
+
+"Connection kadz_control_process.control_thread.done -> water_control_process.decision_thread.stop_thread bound to Mag_bus"
+"WARNING: Connection kadz_control_process.control_thread.done -> water_control_process.decision_thread.stop_thread has no bandwidth budget"
+
+"Connection kadz_control_process.input_gate_c.OpenGate -> kadz.OpenInputGate bound to Mag_bus"
+"WARNING: Connection kadz_control_process.input_gate_c.OpenGate -> kadz.OpenInputGate has no bandwidth budget"
+
+"Connection kadz_control_process.output_gate_c.OpenGate -> kadz.OpenOutputGate bound to Mag_bus"
+"WARNING: Connection kadz_control_process.output_gate_c.OpenGate -> kadz.OpenOutputGate has no bandwidth budget"
+
+"Connection water_control_process.control_thread.on -> water_dispenser.On bound to Mag_bus"
+"WARNING: Connection water_control_process.control_thread.on -> water_dispenser.On has no bandwidth budget"
+
+"Connection button_control.button_control_thread.on -> kadz_control_process.control_thread.start bound to Mag_bus"
+"WARNING: Connection button_control.button_control_thread.on -> kadz_control_process.control_thread.start has no bandwidth budget"
+
+"Connection button_control.button_control_thread.on -> water_control_process.decision_thread.start bound to Mag_bus"
+"WARNING: Connection button_control.button_control_thread.on -> water_control_process.decision_thread.start has no bandwidth budget"
+
+"Connection timer_control_proc.timer_thread.CurrTime -> kadz_control_process.control_thread.curr_time bound to Mag_bus"
+"WARNING: Connection timer_control_proc.timer_thread.CurrTime -> kadz_control_process.control_thread.curr_time has no bandwidth budget"
+
+"Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData bound to Mag_bus"
+"WARNING: Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData has no bandwidth budget"
+
+"Connection main_sys.main_thread.KadzFiltracyjnaUserInput -> kadz_filtracyjna_sys.input_processing_process.process_thread.RemoteUserInput bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.KadzFiltracyjnaUserInput -> kadz_filtracyjna_sys.input_processing_process.process_thread.RemoteUserInput has no bandwidth budget"
+
+"Connection main_sys.main_thread.KadzFiltracyjnaStart -> kadz_filtracyjna_sys.start_button.RemoteStart bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.KadzFiltracyjnaStart -> kadz_filtracyjna_sys.start_button.RemoteStart has no bandwidth budget"
+
+"Connection kadz_filtracyjna_sys.kadz_control_process.control_thread.done -> main_sys.main_thread.KadzFiltracyjnaDone bound to Mag_bus"
+"WARNING: Connection kadz_filtracyjna_sys.kadz_control_process.control_thread.done -> main_sys.main_thread.KadzFiltracyjnaDone has no bandwidth budget"
+
+"Bus Mag_bus has data overhead of 0 bytes"
+"Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"start_button.Start -> button_control.button_control_thread.switch_on","","0.0","","0.0"
+"klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","0.0","","0.0"
+"temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data","","0.0","","0.4"
+"pressure_sensor.Pressure -> pressure_control_proc.read_pressure.sensor_data","","0.0","","0.8"
+"timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","0.0","","2.0"
+"keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput","","0.0","","3.2"
+"input_processing_process.process_thread.WarzelniaTime -> KadzWarzelna_proc.KadzWarzelna_decision_center.DesiredTime","","0.0","","0.0"
+"input_processing_process.process_thread.KadzWarzelnaDesiredTemp -> heater_control_proc.control.desired_temp_data","","0.0","","0.0"
+"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","0.0","","0.0"
+"KadzWarzelna_proc.input_gate_c.OpenGate -> KadzWarzelna.OpenInputGate","","0.0","","0.0"
+"KadzWarzelna_proc.output_gate_c.OpenGate -> KadzWarzelna.OpenOutputGate","","0.0","","0.0"
+"KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> heater_control_proc.control.stop_thread","","0.0","","0.0"
+"KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> pressure_control_proc.control.stop_thread","","0.0","","0.0"
+"heater_control_proc.heater_ctrl.control_heater -> heater.On","","0.0","","0.0"
+"pressure_control_proc.pressure_ctrl.control_pressure -> pressure_controler.On","","0.0","","0.0"
+"timer_control_proc.timer_thread.CurrTime -> KadzWarzelna_proc.KadzWarzelna_decision_center.CurrTime","","0.0","","0.2"
+"button_control.button_control_thread.on -> KadzWarzelna_proc.KadzWarzelna_decision_center.Start","","0.0","","0.0"
+"monitor_ctrl.control.DisplayData -> monitor.DisplayData","","0.0","","3.2"
+"main_sys.main_thread.WarzenieUserInput -> warzenie_sys.input_processing_process.process_thread.RemoteUserInput","","0.0","","0.0"
+"main_sys.main_thread.WarzenieStart -> warzenie_sys.start_button.RemoteStart","","0.0","","0.0"
+"warzenie_sys.KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> main_sys.main_thread.WarzenieDone","","0.0","","0.0"
+
+"Connection start_button.Start -> button_control.button_control_thread.switch_on bound to Mag_bus"
+"WARNING: Connection start_button.Start -> button_control.button_control_thread.switch_on has no bandwidth budget"
+
+"Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput bound to Mag_bus"
+"WARNING: Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput has no bandwidth budget"
+
+"Connection temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data bound to Mag_bus"
+"WARNING: Connection temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data has no bandwidth budget"
+
+"Connection pressure_sensor.Pressure -> pressure_control_proc.read_pressure.sensor_data bound to Mag_bus"
+"WARNING: Connection pressure_sensor.Pressure -> pressure_control_proc.read_pressure.sensor_data has no bandwidth budget"
+
+"Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime bound to Mag_bus"
+"WARNING: Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime has no bandwidth budget"
+
+"Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput bound to Mag_bus"
+"WARNING: Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.WarzelniaTime -> KadzWarzelna_proc.KadzWarzelna_decision_center.DesiredTime bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.WarzelniaTime -> KadzWarzelna_proc.KadzWarzelna_decision_center.DesiredTime has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.KadzWarzelnaDesiredTemp -> heater_control_proc.control.desired_temp_data bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.KadzWarzelnaDesiredTemp -> heater_control_proc.control.desired_temp_data has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput has no bandwidth budget"
+
+"Connection KadzWarzelna_proc.input_gate_c.OpenGate -> KadzWarzelna.OpenInputGate bound to Mag_bus"
+"WARNING: Connection KadzWarzelna_proc.input_gate_c.OpenGate -> KadzWarzelna.OpenInputGate has no bandwidth budget"
+
+"Connection KadzWarzelna_proc.output_gate_c.OpenGate -> KadzWarzelna.OpenOutputGate bound to Mag_bus"
+"WARNING: Connection KadzWarzelna_proc.output_gate_c.OpenGate -> KadzWarzelna.OpenOutputGate has no bandwidth budget"
+
+"Connection KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> heater_control_proc.control.stop_thread bound to Mag_bus"
+"WARNING: Connection KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> heater_control_proc.control.stop_thread has no bandwidth budget"
+
+"Connection KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> pressure_control_proc.control.stop_thread bound to Mag_bus"
+"WARNING: Connection KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> pressure_control_proc.control.stop_thread has no bandwidth budget"
+
+"Connection heater_control_proc.heater_ctrl.control_heater -> heater.On bound to Mag_bus"
+"WARNING: Connection heater_control_proc.heater_ctrl.control_heater -> heater.On has no bandwidth budget"
+
+"Connection pressure_control_proc.pressure_ctrl.control_pressure -> pressure_controler.On bound to Mag_bus"
+"WARNING: Connection pressure_control_proc.pressure_ctrl.control_pressure -> pressure_controler.On has no bandwidth budget"
+
+"Connection timer_control_proc.timer_thread.CurrTime -> KadzWarzelna_proc.KadzWarzelna_decision_center.CurrTime bound to Mag_bus"
+"WARNING: Connection timer_control_proc.timer_thread.CurrTime -> KadzWarzelna_proc.KadzWarzelna_decision_center.CurrTime has no bandwidth budget"
+
+"Connection button_control.button_control_thread.on -> KadzWarzelna_proc.KadzWarzelna_decision_center.Start bound to Mag_bus"
+"WARNING: Connection button_control.button_control_thread.on -> KadzWarzelna_proc.KadzWarzelna_decision_center.Start has no bandwidth budget"
+
+"Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData bound to Mag_bus"
+"WARNING: Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData has no bandwidth budget"
+
+"Connection main_sys.main_thread.WarzenieUserInput -> warzenie_sys.input_processing_process.process_thread.RemoteUserInput bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.WarzenieUserInput -> warzenie_sys.input_processing_process.process_thread.RemoteUserInput has no bandwidth budget"
+
+"Connection main_sys.main_thread.WarzenieStart -> warzenie_sys.start_button.RemoteStart bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.WarzenieStart -> warzenie_sys.start_button.RemoteStart has no bandwidth budget"
+
+"Connection warzenie_sys.KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> main_sys.main_thread.WarzenieDone bound to Mag_bus"
+"WARNING: Connection warzenie_sys.KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> main_sys.main_thread.WarzenieDone has no bandwidth budget"
+
+"Bus Mag_bus has data overhead of 0 bytes"
+"Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"start_button.Start -> button_control.button_control_thread.switch_on","","0.0","","0.0"
+"klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","0.0","","0.0"
+"moisture_lvl_sensor.MoistureLevel -> moisture_control_process.sensor_thread.sensor_data","","0.0","","0.2"
+"keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput","","0.0","","3.2"
+"input_processing_process.process_thread.DesiredMoistureLevel -> moisture_control_process.decision_thread.desired_moisture_level","","0.0","","0.2"
+"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","0.0","","3.2"
+"moisture_control_process.control_thread.on -> parownik.On","","0.0","","0.0"
+"moisture_control_process.input_gate_c.OpenGate -> parownik.OpenInputGate","","0.0","","0.0"
+"moisture_control_process.output_gate_c.OpenGate -> parownik.OpenOutputGate","","0.0","","0.0"
+"button_control.button_control_thread.on -> moisture_control_process.decision_thread.start","","0.0","","0.0"
+"monitor_ctrl.control.DisplayData -> monitor.DisplayData","","0.0","","3.2"
+"main_sys.main_thread.ParowanieUserInput -> parowanie_sys.input_processing_process.process_thread.RemoteUserInput","","0.0","","0.0"
+"main_sys.main_thread.ParowanieStart -> parowanie_sys.start_button.RemoteStart","","0.0","","0.0"
+"parowanie_sys.moisture_control_process.decision_thread.done -> main_sys.main_thread.ParowanieDone","","0.0","","0.0"
+
+"Connection start_button.Start -> button_control.button_control_thread.switch_on bound to Mag_bus"
+"WARNING: Connection start_button.Start -> button_control.button_control_thread.switch_on has no bandwidth budget"
+
+"Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput bound to Mag_bus"
+"WARNING: Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput has no bandwidth budget"
+
+"Connection moisture_lvl_sensor.MoistureLevel -> moisture_control_process.sensor_thread.sensor_data bound to Mag_bus"
+"WARNING: Connection moisture_lvl_sensor.MoistureLevel -> moisture_control_process.sensor_thread.sensor_data has no bandwidth budget"
+
+"Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput bound to Mag_bus"
+"WARNING: Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DesiredMoistureLevel -> moisture_control_process.decision_thread.desired_moisture_level bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DesiredMoistureLevel -> moisture_control_process.decision_thread.desired_moisture_level has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput has no bandwidth budget"
+
+"Connection moisture_control_process.control_thread.on -> parownik.On bound to Mag_bus"
+"WARNING: Connection moisture_control_process.control_thread.on -> parownik.On has no bandwidth budget"
+
+"Connection moisture_control_process.input_gate_c.OpenGate -> parownik.OpenInputGate bound to Mag_bus"
+"WARNING: Connection moisture_control_process.input_gate_c.OpenGate -> parownik.OpenInputGate has no bandwidth budget"
+
+"Connection moisture_control_process.output_gate_c.OpenGate -> parownik.OpenOutputGate bound to Mag_bus"
+"WARNING: Connection moisture_control_process.output_gate_c.OpenGate -> parownik.OpenOutputGate has no bandwidth budget"
+
+"Connection button_control.button_control_thread.on -> moisture_control_process.decision_thread.start bound to Mag_bus"
+"WARNING: Connection button_control.button_control_thread.on -> moisture_control_process.decision_thread.start has no bandwidth budget"
+
+"Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData bound to Mag_bus"
+"WARNING: Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData has no bandwidth budget"
+
+"Connection main_sys.main_thread.ParowanieUserInput -> parowanie_sys.input_processing_process.process_thread.RemoteUserInput bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.ParowanieUserInput -> parowanie_sys.input_processing_process.process_thread.RemoteUserInput has no bandwidth budget"
+
+"Connection main_sys.main_thread.ParowanieStart -> parowanie_sys.start_button.RemoteStart bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.ParowanieStart -> parowanie_sys.start_button.RemoteStart has no bandwidth budget"
+
+"Connection parowanie_sys.moisture_control_process.decision_thread.done -> main_sys.main_thread.ParowanieDone bound to Mag_bus"
+"WARNING: Connection parowanie_sys.moisture_control_process.decision_thread.done -> main_sys.main_thread.ParowanieDone has no bandwidth budget"
+
+"Bus Mag_bus has data overhead of 0 bytes"
+"Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"start_button.Start -> button_control.button_control_thread.switch_on","","0.0","","0.0"
+"klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","0.0","","0.0"
+"keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput","","0.0","","3.2"
+"input_processing_process.process_thread.TotalTime -> wirownike_control_process.decision_thread.total_time","","0.0","","0.2"
+"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","0.0","","3.2"
+"wirownike_control_process.control_thread.on -> wir.On","","0.0","","0.0"
+"wirownike_control_process.input_gate_c.OpenGate -> wirownik.OpenInputGate","","0.0","","0.0"
+"wirownike_control_process.output_gate_c.OpenGate -> wirownik.OpenOutputGate","","0.0","","0.0"
+"button_control.button_control_thread.on -> wirownike_control_process.decision_thread.start","","0.0","","0.0"
+"monitor_ctrl.control.DisplayData -> monitor.DisplayData","","0.0","","3.2"
+"main_sys.main_thread.WirowanieUserInput -> wirowanie_sys.input_processing_process.process_thread.RemoteUserInput","","0.0","","0.0"
+"main_sys.main_thread.WirowanieStart -> wirowanie_sys.start_button.RemoteStart","","0.0","","0.0"
+"wirowanie_sys.wirownike_control_process.decision_thread.done -> main_sys.main_thread.WirowanieDone","","0.0","","0.0"
+
+"Connection start_button.Start -> button_control.button_control_thread.switch_on bound to Mag_bus"
+"WARNING: Connection start_button.Start -> button_control.button_control_thread.switch_on has no bandwidth budget"
+
+"Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput bound to Mag_bus"
+"WARNING: Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput has no bandwidth budget"
+
+"Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput bound to Mag_bus"
+"WARNING: Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.TotalTime -> wirownike_control_process.decision_thread.total_time bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.TotalTime -> wirownike_control_process.decision_thread.total_time has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput has no bandwidth budget"
+
+"Connection wirownike_control_process.control_thread.on -> wir.On bound to Mag_bus"
+"WARNING: Connection wirownike_control_process.control_thread.on -> wir.On has no bandwidth budget"
+
+"Connection wirownike_control_process.input_gate_c.OpenGate -> wirownik.OpenInputGate bound to Mag_bus"
+"WARNING: Connection wirownike_control_process.input_gate_c.OpenGate -> wirownik.OpenInputGate has no bandwidth budget"
+
+"Connection wirownike_control_process.output_gate_c.OpenGate -> wirownik.OpenOutputGate bound to Mag_bus"
+"WARNING: Connection wirownike_control_process.output_gate_c.OpenGate -> wirownik.OpenOutputGate has no bandwidth budget"
+
+"Connection button_control.button_control_thread.on -> wirownike_control_process.decision_thread.start bound to Mag_bus"
+"WARNING: Connection button_control.button_control_thread.on -> wirownike_control_process.decision_thread.start has no bandwidth budget"
+
+"Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData bound to Mag_bus"
+"WARNING: Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData has no bandwidth budget"
+
+"Connection main_sys.main_thread.WirowanieUserInput -> wirowanie_sys.input_processing_process.process_thread.RemoteUserInput bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.WirowanieUserInput -> wirowanie_sys.input_processing_process.process_thread.RemoteUserInput has no bandwidth budget"
+
+"Connection main_sys.main_thread.WirowanieStart -> wirowanie_sys.start_button.RemoteStart bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.WirowanieStart -> wirowanie_sys.start_button.RemoteStart has no bandwidth budget"
+
+"Connection wirowanie_sys.wirownike_control_process.decision_thread.done -> main_sys.main_thread.WirowanieDone bound to Mag_bus"
+"WARNING: Connection wirowanie_sys.wirownike_control_process.decision_thread.done -> main_sys.main_thread.WirowanieDone has no bandwidth budget"
+
+"Bus Mag_bus has data overhead of 0 bytes"
+"Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"start_button.Start -> button_control.button_control_thread.switch_on","","0.0","","0.0"
+"klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","0.0","","0.0"
+"timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","0.0","","2.0"
+"keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput","","0.0","","3.2"
+"input_processing_process.process_thread.TotalTime -> fermentacja_control.fermentacja_decision_center.DesiredTime","","0.0","","0.0"
+"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","0.0","","0.0"
+"timer_control_proc.timer_thread.CurrTime -> fermentacja_control.fermentacja_decision_center.CurrTime","","0.0","","0.2"
+"button_control.button_control_thread.on -> fermentacja_control.fermentacja_decision_center.Start","","0.0","","0.0"
+"monitor_ctrl.control.DisplayData -> monitor.DisplayData","","0.0","","3.2"
+"main_sys.main_thread.FermentacjaUserInput -> fermentacja_sys.input_processing_process.process_thread.RemoteUserInput","","0.0","","0.0"
+"main_sys.main_thread.FermentacjaStart -> fermentacja_sys.start_button.RemoteStart","","0.0","","0.0"
+"fermentacja_sys.fermentacja_control.fermentacja_decision_center.Done -> main_sys.main_thread.FermentacjaDone","","0.0","","0.0"
+
+"Connection start_button.Start -> button_control.button_control_thread.switch_on bound to Mag_bus"
+"WARNING: Connection start_button.Start -> button_control.button_control_thread.switch_on has no bandwidth budget"
+
+"Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput bound to Mag_bus"
+"WARNING: Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput has no bandwidth budget"
+
+"Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime bound to Mag_bus"
+"WARNING: Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime has no bandwidth budget"
+
+"Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput bound to Mag_bus"
+"WARNING: Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.TotalTime -> fermentacja_control.fermentacja_decision_center.DesiredTime bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.TotalTime -> fermentacja_control.fermentacja_decision_center.DesiredTime has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput has no bandwidth budget"
+
+"Connection timer_control_proc.timer_thread.CurrTime -> fermentacja_control.fermentacja_decision_center.CurrTime bound to Mag_bus"
+"WARNING: Connection timer_control_proc.timer_thread.CurrTime -> fermentacja_control.fermentacja_decision_center.CurrTime has no bandwidth budget"
+
+"Connection button_control.button_control_thread.on -> fermentacja_control.fermentacja_decision_center.Start bound to Mag_bus"
+"WARNING: Connection button_control.button_control_thread.on -> fermentacja_control.fermentacja_decision_center.Start has no bandwidth budget"
+
+"Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData bound to Mag_bus"
+"WARNING: Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData has no bandwidth budget"
+
+"Connection main_sys.main_thread.FermentacjaUserInput -> fermentacja_sys.input_processing_process.process_thread.RemoteUserInput bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.FermentacjaUserInput -> fermentacja_sys.input_processing_process.process_thread.RemoteUserInput has no bandwidth budget"
+
+"Connection main_sys.main_thread.FermentacjaStart -> fermentacja_sys.start_button.RemoteStart bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.FermentacjaStart -> fermentacja_sys.start_button.RemoteStart has no bandwidth budget"
+
+"Connection fermentacja_sys.fermentacja_control.fermentacja_decision_center.Done -> main_sys.main_thread.FermentacjaDone bound to Mag_bus"
+"WARNING: Connection fermentacja_sys.fermentacja_control.fermentacja_decision_center.Done -> main_sys.main_thread.FermentacjaDone has no bandwidth budget"
+
+"Bus Mag_bus has data overhead of 0 bytes"
+"Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"start_button.Start -> button_control.button_control_thread.switch_on","","0.0","","0.0"
+"klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","0.0","","0.0"
+"temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data","","0.0","","0.4"
+"pressure_sensor.Pressure -> pressure_control_proc.read_pressure.sensor_data","","0.0","","0.8"
+"timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","0.0","","2.0"
+"keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput","","0.0","","3.2"
+"input_processing_process.process_thread.ButelkowanieTime -> butelkowanie_proc.butelkowanie_decision_center.DesiredTime","","0.0","","0.0"
+"input_processing_process.process_thread.DesiredTemp -> heater_control_proc.control.desired_temp_data","","0.0","","0.0"
+"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","0.0","","0.0"
+"butelkowanie_proc.input_gate_c.OpenGate -> butelki.OpenInputGate","","0.0","","0.0"
+"butelkowanie_proc.output_gate_c.OpenGate -> butelki.OpenOutputGate","","0.0","","0.0"
+"butelkowanie_proc.butelkowanie_decision_center.Done -> heater_control_proc.control.stop_thread","","0.0","","0.0"
+"butelkowanie_proc.butelkowanie_decision_center.Done -> pressure_control_proc.control.stop_thread","","0.0","","0.0"
+"heater_control_proc.heater_ctrl.control_heater -> heater.On","","0.0","","0.0"
+"pressure_control_proc.pressure_ctrl.control_pressure -> pressure_controler.On","","0.0","","0.0"
+"timer_control_proc.timer_thread.CurrTime -> butelkowanie_proc.butelkowanie_decision_center.CurrTime","","0.0","","0.2"
+"button_control.button_control_thread.on -> butelkowanie_proc.butelkowanie_decision_center.Start","","0.0","","0.0"
+"monitor_ctrl.control.DisplayData -> monitor.DisplayData","","0.0","","3.2"
+"main_sys.main_thread.ButelkowanieUserInput -> butelkowanie_sys.input_processing_process.process_thread.RemoteUserInput","","0.0","","0.0"
+"main_sys.main_thread.ButelkowanieStart -> butelkowanie_sys.start_button.RemoteStart","","0.0","","0.0"
+"butelkowanie_sys.butelkowanie_proc.butelkowanie_decision_center.Done -> main_sys.main_thread.ButelkowanieDone","","0.0","","0.0"
+
+"Connection start_button.Start -> button_control.button_control_thread.switch_on bound to Mag_bus"
+"WARNING: Connection start_button.Start -> button_control.button_control_thread.switch_on has no bandwidth budget"
+
+"Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput bound to Mag_bus"
+"WARNING: Connection klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput has no bandwidth budget"
+
+"Connection temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data bound to Mag_bus"
+"WARNING: Connection temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data has no bandwidth budget"
+
+"Connection pressure_sensor.Pressure -> pressure_control_proc.read_pressure.sensor_data bound to Mag_bus"
+"WARNING: Connection pressure_sensor.Pressure -> pressure_control_proc.read_pressure.sensor_data has no bandwidth budget"
+
+"Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime bound to Mag_bus"
+"WARNING: Connection timer.CurrTime -> timer_control_proc.timer_thread.ReadTime has no bandwidth budget"
+
+"Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput bound to Mag_bus"
+"WARNING: Connection keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.ButelkowanieTime -> butelkowanie_proc.butelkowanie_decision_center.DesiredTime bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.ButelkowanieTime -> butelkowanie_proc.butelkowanie_decision_center.DesiredTime has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DesiredTemp -> heater_control_proc.control.desired_temp_data bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DesiredTemp -> heater_control_proc.control.desired_temp_data has no bandwidth budget"
+
+"Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput bound to Mag_bus"
+"WARNING: Connection input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput has no bandwidth budget"
+
+"Connection butelkowanie_proc.input_gate_c.OpenGate -> butelki.OpenInputGate bound to Mag_bus"
+"WARNING: Connection butelkowanie_proc.input_gate_c.OpenGate -> butelki.OpenInputGate has no bandwidth budget"
+
+"Connection butelkowanie_proc.output_gate_c.OpenGate -> butelki.OpenOutputGate bound to Mag_bus"
+"WARNING: Connection butelkowanie_proc.output_gate_c.OpenGate -> butelki.OpenOutputGate has no bandwidth budget"
+
+"Connection butelkowanie_proc.butelkowanie_decision_center.Done -> heater_control_proc.control.stop_thread bound to Mag_bus"
+"WARNING: Connection butelkowanie_proc.butelkowanie_decision_center.Done -> heater_control_proc.control.stop_thread has no bandwidth budget"
+
+"Connection butelkowanie_proc.butelkowanie_decision_center.Done -> pressure_control_proc.control.stop_thread bound to Mag_bus"
+"WARNING: Connection butelkowanie_proc.butelkowanie_decision_center.Done -> pressure_control_proc.control.stop_thread has no bandwidth budget"
+
+"Connection heater_control_proc.heater_ctrl.control_heater -> heater.On bound to Mag_bus"
+"WARNING: Connection heater_control_proc.heater_ctrl.control_heater -> heater.On has no bandwidth budget"
+
+"Connection pressure_control_proc.pressure_ctrl.control_pressure -> pressure_controler.On bound to Mag_bus"
+"WARNING: Connection pressure_control_proc.pressure_ctrl.control_pressure -> pressure_controler.On has no bandwidth budget"
+
+"Connection timer_control_proc.timer_thread.CurrTime -> butelkowanie_proc.butelkowanie_decision_center.CurrTime bound to Mag_bus"
+"WARNING: Connection timer_control_proc.timer_thread.CurrTime -> butelkowanie_proc.butelkowanie_decision_center.CurrTime has no bandwidth budget"
+
+"Connection button_control.button_control_thread.on -> butelkowanie_proc.butelkowanie_decision_center.Start bound to Mag_bus"
+"WARNING: Connection button_control.button_control_thread.on -> butelkowanie_proc.butelkowanie_decision_center.Start has no bandwidth budget"
+
+"Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData bound to Mag_bus"
+"WARNING: Connection monitor_ctrl.control.DisplayData -> monitor.DisplayData has no bandwidth budget"
+
+"Connection main_sys.main_thread.ButelkowanieUserInput -> butelkowanie_sys.input_processing_process.process_thread.RemoteUserInput bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.ButelkowanieUserInput -> butelkowanie_sys.input_processing_process.process_thread.RemoteUserInput has no bandwidth budget"
+
+"Connection main_sys.main_thread.ButelkowanieStart -> butelkowanie_sys.start_button.RemoteStart bound to Mag_bus"
+"WARNING: Connection main_sys.main_thread.ButelkowanieStart -> butelkowanie_sys.start_button.RemoteStart has no bandwidth budget"
+
+"Connection butelkowanie_sys.butelkowanie_proc.butelkowanie_decision_center.Done -> main_sys.main_thread.ButelkowanieDone bound to Mag_bus"
+"WARNING: Connection butelkowanie_sys.butelkowanie_proc.butelkowanie_decision_center.Done -> main_sys.main_thread.ButelkowanieDone has no bandwidth budget"
+
+

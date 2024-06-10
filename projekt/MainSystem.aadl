@@ -24,6 +24,7 @@ public
 			ParowanieUserInput: out data port DataTypes::KeyboardInputData;
 			WirowanieUserInput: out data port DataTypes::KeyboardInputData;
 			FermentacjaUserInput: out data port DataTypes::KeyboardInputData;
+			ButelkowanieUserInput: out data port DataTypes::KeyboardInputData;
 			
 			WstepnaObrobkaStart: out data port DataTypes::SwitchTrigger;
 			KadzFiltracyjnaStart: out data port DataTypes::SwitchTrigger;
@@ -31,6 +32,7 @@ public
 			ParowanieStart: out data port DataTypes::SwitchTrigger;
 			WirowanieStart: out data port DataTypes::SwitchTrigger;
 			FermentacjaStart: out data port DataTypes::SwitchTrigger;
+			ButelkowanieStart: out data port DataTypes::SwitchTrigger;
 			
 			WstepnaObrobkaDone: in data port DataTypes::SwitchTrigger;
 			KadzFiltracyjnaDone: in data port DataTypes::SwitchTrigger;
@@ -38,6 +40,7 @@ public
 			ParowanieDone: in data port DataTypes::SwitchTrigger;
 			WirowanieDone: in data port DataTypes::SwitchTrigger;
 			FermentacjaDone: in data port DataTypes::SwitchTrigger;
+			ButelkowanieDone: in data port DataTypes::SwitchTrigger;
 			
 			DisplayData: out data port DataTypes::SystemAppData;
 	end MainSystemSoftwareThread;
@@ -56,6 +59,7 @@ public
 			ParowanieUserInput: out data port DataTypes::KeyboardInputData;
 			WirowanieUserInput: out data port DataTypes::KeyboardInputData;
 			FermentacjaUserInput: out data port DataTypes::KeyboardInputData;
+			ButelkowanieUserInput: out data port DataTypes::KeyboardInputData;
 			
 			WstepnaObrobkaStart: out data port DataTypes::SwitchTrigger;
 			KadzFiltracyjnaStart: out data port DataTypes::SwitchTrigger;
@@ -63,6 +67,7 @@ public
 			ParowanieStart: out data port DataTypes::SwitchTrigger;
 			WirowanieStart: out data port DataTypes::SwitchTrigger;
 			FermentacjaStart: out data port DataTypes::SwitchTrigger;
+			ButelkowanieStart: out data port DataTypes::SwitchTrigger;
 			
 			WstepnaObrobkaDone: in data port DataTypes::SwitchTrigger;
 			KadzFiltracyjnaDone: in data port DataTypes::SwitchTrigger;
@@ -70,10 +75,12 @@ public
 			ParowanieDone: in data port DataTypes::SwitchTrigger;
 			WirowanieDone: in data port DataTypes::SwitchTrigger;
 			FermentacjaDone: in data port DataTypes::SwitchTrigger;
+			ButelkowanieDone: in data port DataTypes::SwitchTrigger;
 			
 			DisplayData: out data port DataTypes::SystemAppData;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 0.8 mips;
+				
 	end MainSystemSoftwareProcess;
 			
 	process implementation MainSystemSoftwareProcess.impl
@@ -87,18 +94,21 @@ public
 	        parowanie_conn: port main_thread.ParowanieUserInput -> ParowanieUserInput;
 	        wirowanie_conn: port main_thread.WirowanieUserInput -> WirowanieUserInput;
 	        fermentacja_conn: port main_thread.FermentacjaUserInput -> FermentacjaUserInput;
+	        butelkowanie_conn: port main_thread.ButelkowanieUserInput -> ButelkowanieUserInput;
 	        wstepna_start_conn: port main_thread.WstepnaObrobkaStart -> WstepnaObrobkaStart;
 	        kadz_start_conn: port main_thread.KadzFiltracyjnaStart -> KadzFiltracyjnaStart;
 	        warzenie_start_conn: port main_thread.WarzenieStart -> WarzenieStart;
 	        parowanie_start_conn: port main_thread.ParowanieStart -> ParowanieStart;
 	        wirowanie_start_conn: port main_thread.WirowanieStart -> WirowanieStart;
 	        fermentacja_start_conn: port main_thread.FermentacjaStart -> FermentacjaStart;
+	        butelkowanie_start_conn: port main_thread.ButelkowanieStart -> ButelkowanieStart;
 	        wstepna_done_conn: port WstepnaObrobkaDone -> main_thread.WstepnaObrobkaDone;
 	        kadz_done_conn: port KadzFiltracyjnaDone -> main_thread.KadzFiltracyjnaDone;
 	        warzenie_done_conn: port WarzenieDone -> main_thread.WarzenieDone;
 	        parowanie_done_conn: port ParowanieDone -> main_thread.ParowanieDone;
 	        wirowanie_done_conn: port WirowanieDone -> main_thread.WirowanieDone;
 	        fermentacja_done_conn: port FermentacjaDone -> main_thread.FermentacjaDone;
+	        butelkowanie_done_conn: port ButelkowanieDone -> main_thread.ButelkowanieDone;
 	        display_conn: port main_thread.DisplayData -> DisplayData;
 	        
 	end MainSystemSoftwareProcess.impl;
@@ -158,6 +168,10 @@ public
 			start_fermentacja: port main_sys.FermentacjaStart -> fermentacja_sys.start;
 			done_fermentacja: port fermentacja_sys.process_done -> main_sys.FermentacjaDone;
 			
+			setup_butelkowanie: port main_sys.ButelkowanieUserInput -> butelkowanie_sys.RemoteUserInput;
+			start_butelkowanie: port main_sys.ButelkowanieStart -> butelkowanie_sys.start;
+			done_butelkowanie: port butelkowanie_sys.process_done -> main_sys.ButelkowanieDone;
+			
 			main_sys_to_monitor: port main_sys.DisplayData -> monitor_ctrl.SystemInput;
 			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
 			
@@ -166,34 +180,51 @@ public
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_sys;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_wstepna;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_wstepna;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_wstepna;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_kf;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_kf;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_kf;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_warzenie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_warzenie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_warzenie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_parowanie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_parowanie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_parowanie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_wirowanie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_wirowanie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_wirowanie;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to setup_fermentacja;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to start_fermentacja;
-			Actual_Connection_Binding => (reference(Mag_bus)) applies to done_fermentacja;
+			Actual_Connection_Binding => (reference(wstepna_obrobka_sys.Mag_bus)) applies to setup_wstepna;
+			Actual_Connection_Binding => (reference(wstepna_obrobka_sys.Mag_bus)) applies to start_wstepna;
+			Actual_Connection_Binding => (reference(wstepna_obrobka_sys.Mag_bus)) applies to done_wstepna;
+			Actual_Connection_Binding => (reference(kadz_filtracyjna_sys.Mag_bus)) applies to setup_kf;
+			Actual_Connection_Binding => (reference(kadz_filtracyjna_sys.Mag_bus)) applies to start_kf;
+			Actual_Connection_Binding => (reference(kadz_filtracyjna_sys.Mag_bus)) applies to done_kf;
+			Actual_Connection_Binding => (reference(warzenie_sys.Mag_bus)) applies to setup_warzenie;
+			Actual_Connection_Binding => (reference(warzenie_sys.Mag_bus)) applies to start_warzenie;
+			Actual_Connection_Binding => (reference(warzenie_sys.Mag_bus)) applies to done_warzenie;
+			Actual_Connection_Binding => (reference(parowanie_sys.Mag_bus)) applies to setup_parowanie;
+			Actual_Connection_Binding => (reference(parowanie_sys.Mag_bus)) applies to start_parowanie;
+			Actual_Connection_Binding => (reference(parowanie_sys.Mag_bus)) applies to done_parowanie;
+			Actual_Connection_Binding => (reference(wirowanie_sys.Mag_bus)) applies to setup_wirowanie;
+			Actual_Connection_Binding => (reference(wirowanie_sys.Mag_bus)) applies to start_wirowanie;
+			Actual_Connection_Binding => (reference(wirowanie_sys.Mag_bus)) applies to done_wirowanie;
+			Actual_Connection_Binding => (reference(fermentacja_sys.Mag_bus)) applies to setup_fermentacja;
+			Actual_Connection_Binding => (reference(fermentacja_sys.Mag_bus)) applies to start_fermentacja;
+			Actual_Connection_Binding => (reference(fermentacja_sys.Mag_bus)) applies to done_fermentacja;
+			Actual_Connection_Binding => (reference(butelkowanie_sys.Mag_bus)) applies to setup_butelkowanie;
+			Actual_Connection_Binding => (reference(butelkowanie_sys.Mag_bus)) applies to start_butelkowanie;
+			Actual_Connection_Binding => (reference(butelkowanie_sys.Mag_bus)) applies to done_butelkowanie;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to main_sys_to_monitor;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
 			
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to main_sys;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to wstepna_obrobka_sys;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to kadz_filtracyjna_sys;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to warzenie_sys;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to fermentacja_sys;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to parowanie_sys;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to wirowanie_sys;
+			Actual_Memory_Binding => (reference(sys_memory)) applies to butelkowanie_sys;
 	
 			Actual_Processor_Binding => (reference(cpu)) applies to keyboard_cont_process;
 			Actual_Processor_Binding => (reference(cpu)) applies to main_sys;
-			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;	
+			Actual_Processor_Binding => (reference(cpu)) applies to monitor_ctrl;
+			Actual_Processor_Binding => (reference(cpu)) applies to wstepna_obrobka_sys;	
+			Actual_Processor_Binding => (reference(cpu)) applies to kadz_filtracyjna_sys;	
+			Actual_Processor_Binding => (reference(cpu)) applies to warzenie_sys;	
+			Actual_Processor_Binding => (reference(cpu)) applies to fermentacja_sys;	
+			Actual_Processor_Binding => (reference(cpu)) applies to parowanie_sys;	
+			Actual_Processor_Binding => (reference(cpu)) applies to wirowanie_sys;	
+			Actual_Processor_Binding => (reference(cpu)) applies to butelkowanie_sys;		
 			
 	end WarzeniePiwa.impl;
 end MainSystem;

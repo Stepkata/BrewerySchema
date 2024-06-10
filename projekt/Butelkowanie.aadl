@@ -4,6 +4,7 @@ public
 	with Devices;
 	with Hardware;
 	with CommonElements;
+	with SEI;
 	
 	thread ButelkowanieDecisionCenter
 		features
@@ -33,6 +34,8 @@ public
 			IGateOpen: out data port DataTypes::SwitchTrigger;
 			OGateOpen: out data port DataTypes::SwitchTrigger;
 			ProcessDone: out data port DataTypes::SwitchTrigger;
+		properties
+			SEI::MIPSBudget => 0.8 mips;
 	end ButelkowanieProcess;
 	
 	process implementation ButelkowanieProcess.impl
@@ -75,6 +78,8 @@ public
 			DesiredTemp: out data port DataTypes::TemperatureType;
 			DesiredPressure: out data port DataTypes::PressureType;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.8 mips;
 	end SystemControlCenterProcess;
 			
 	process implementation SystemControlCenterProcess.impl
@@ -95,6 +100,11 @@ public
 			start: in data port DataTypes::SwitchTrigger;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
+		properties
+       		SEI::GrossWeight => 0.9kg;
+			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSCapacity => 2.4 mips;
+			SEI::WeightLimit => 20000.0kg;
 	end ButelkowanieSys;
 		
 	system implementation ButelkowanieSys.impl
@@ -160,7 +170,7 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_heater;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to all_processes_done;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to sensor_to_pressure_c_process;
-				Actual_Connection_Binding => (reference(Mag_bus)) applies to process_to_pressure_controller;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to process_to_pressure_controller;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to stop_pressure;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to button_to_process;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
