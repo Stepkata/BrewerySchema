@@ -79,7 +79,7 @@ system wstepna_obrobka_sys, 22,500 MIPS,8,000 MIPS,system WarzeniePiwa_impl_Inst
     thread kadz_filtracyjna_sys.kadz_control_process.control_thread,     0,000 MIPS,    2,340 MIPS,
     thread kadz_filtracyjna_sys.kadz_control_process.input_gate_c,     2,500 MIPS,    2,340 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process.input_gate_c total 2,340 MIPS below budget 2,500 MIPS (6,4 % slack)
     thread kadz_filtracyjna_sys.kadz_control_process.output_gate_c,     2,500 MIPS,    2,340 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process.output_gate_c total 2,340 MIPS below budget 2,500 MIPS (6,4 % slack)
-  process kadz_filtracyjna_sys.kadz_control_process,   0,800 MIPS,  7,020 MIPS,Error: subtotal/actual exceeds budget 0,800 by 6,220 MIPS
+  process kadz_filtracyjna_sys.kadz_control_process,   7,500 MIPS,  7,020 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process total 7,020 MIPS below budget 7,500 MIPS (6,4 % slack)
     thread kadz_filtracyjna_sys.water_control_process.sensor_thread,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process.sensor_thread total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
     thread kadz_filtracyjna_sys.water_control_process.control_thread,     1,500 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process.control_thread total 0,450 MIPS below budget 1,500 MIPS (70,0 % slack)
     thread kadz_filtracyjna_sys.water_control_process.decision_thread,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process.decision_thread total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
@@ -90,7 +90,7 @@ system wstepna_obrobka_sys, 22,500 MIPS,8,000 MIPS,system WarzeniePiwa_impl_Inst
   process kadz_filtracyjna_sys.timer_control_proc,   0,800 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.timer_control_proc total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
     thread kadz_filtracyjna_sys.monitor_ctrl.control,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.monitor_ctrl.control total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
   process kadz_filtracyjna_sys.monitor_ctrl,   0,800 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.monitor_ctrl total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
-system kadz_filtracyjna_sys, 10,000 MIPS,11,320 MIPS,Error: subtotal/actual exceeds budget 10,000 by 1,320 MIPS
+system kadz_filtracyjna_sys, 11,500 MIPS,11,320 MIPS,system WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys total 11,320 MIPS below budget 11,500 MIPS (1,6 % slack)
   device warzenie_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
   device warzenie_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
   device warzenie_sys.temp_sensor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.temp_sensor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
@@ -137,7 +137,7 @@ system warzenie_sys, 10,000 MIPS,7,200 MIPS,system WarzeniePiwa_impl_Instance.wa
     thread parowanie_sys.moisture_control_process.decision_thread,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.decision_thread total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
     thread parowanie_sys.moisture_control_process.input_gate_c,     2,500 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.input_gate_c total 0,450 MIPS below budget 2,500 MIPS (82,0 % slack)
     thread parowanie_sys.moisture_control_process.output_gate_c,     2,500 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.output_gate_c total 0,450 MIPS below budget 2,500 MIPS (82,0 % slack)
-  process parowanie_sys.moisture_control_process,   0,800 MIPS,  2,250 MIPS,Error: subtotal/actual exceeds budget 0,800 by 1,450 MIPS
+  process parowanie_sys.moisture_control_process,   2,500 MIPS,  2,250 MIPS,process WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process total 2,250 MIPS below budget 2,500 MIPS (10,0 % slack)
     thread parowanie_sys.button_control.button_control_thread,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.button_control.button_control_thread total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
   process parowanie_sys.button_control,   0,800 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.parowanie_sys.button_control total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
     thread parowanie_sys.monitor_ctrl.control,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.monitor_ctrl.control total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)

@@ -2025,7 +2025,7 @@
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Processor_Capacity"/>
         <ownedValue>
-          <ownedValue xsi:type="aadl2:RealLiteral" value="3.0">
+          <ownedValue xsi:type="aadl2:RealLiteral" value="30.0">
             <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.18/@ownedLiteral.1"/>
           </ownedValue>
         </ownedValue>
@@ -6659,7 +6659,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="4.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -6697,7 +6697,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Processor_Capacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="3.0">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="30.0">
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.18/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -7401,7 +7401,7 @@
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSBudget"/>
         <ownedValue>
-          <ownedValue xsi:type="aadl2:RealLiteral" value="10.0">
+          <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
             <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
           </ownedValue>
         </ownedValue>
@@ -7419,7 +7419,7 @@
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
         <ownedValue>
-          <ownedValue xsi:type="aadl2:RealLiteral" value="10.0">
+          <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
             <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
           </ownedValue>
         </ownedValue>
@@ -8986,7 +8986,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSBudget"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="0.8">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="7.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -10930,7 +10930,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="4.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -10968,7 +10968,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Processor_Capacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="3.0">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="30.0">
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.18/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -16098,7 +16098,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="4.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -16136,7 +16136,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Processor_Capacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="3.0">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="30.0">
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.18/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -18139,7 +18139,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSBudget"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="0.8">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="2.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -19600,7 +19600,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="4.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -19638,7 +19638,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Processor_Capacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="3.0">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="30.0">
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.18/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -22927,7 +22927,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="4.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -22965,7 +22965,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Processor_Capacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="3.0">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="30.0">
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.18/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -26028,7 +26028,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="4.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -26066,7 +26066,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Processor_Capacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="3.0">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="30.0">
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.18/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -31047,7 +31047,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#SEI.MIPSCapacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="11.5">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="4.5">
               <unit href="platform:/plugin/org.osate.contribution.sei/resources/properties/SEI.aadl#/0/@ownedPropertyType.4/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
@@ -31085,7 +31085,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Processor_Capacity"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:RealLiteral" value="3.0">
+            <ownedValue xsi:type="aadl2:RealLiteral" value="30.0">
               <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.18/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>

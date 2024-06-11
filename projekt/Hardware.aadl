@@ -21,7 +21,7 @@ public
 		Scheduling_Protocol => (Round_Robin_Protocol);
 	  	Clock_Period => 1 ms;	
 	   	SEI::GrossWeight => 0.05kg;
-	   	Timing_Properties::Processor_Capacity => 3.0 MIPS;
+	   	Timing_Properties::Processor_Capacity => 30.0 MIPS;
         SEI::MIPSCapacity => 4.5 mips;
 	end corei5;
 	
@@ -32,7 +32,7 @@ public
 		Scheduling_Protocol => (Round_Robin_Protocol);
 	  	Clock_Period => 1 ms;	
 	   	SEI::GrossWeight => 0.05kg;
-	   	Timing_Properties::Processor_Capacity => 3.0 MIPS;
+	   	Timing_Properties::Processor_Capacity => 30.0 MIPS;
         SEI::MIPSCapacity => 25.5 mips;
 	end corei7;
 	

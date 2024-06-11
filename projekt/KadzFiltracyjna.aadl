@@ -157,7 +157,7 @@ public
 	        open_o_gate: out data port DataTypes::SwitchTrigger;
 	        done: out data port DataTypes::SwitchTrigger;
 	    properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 7.5 mips;	
     end KadzControlProcess;
 	
 	process implementation KadzControlProcess.impl
@@ -194,8 +194,8 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
-			SEI::MIPSBudget => 10.0 mips;
-			SEI::MIPSCapacity => 10.0 mips;	
+			SEI::MIPSBudget => 11.5 mips;
+			SEI::MIPSCapacity => 11.5 mips;	
 			SEI::WeightLimit => 20000.0kg;
 	end KadzFiltracyjna;
 	

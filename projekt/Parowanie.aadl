@@ -73,7 +73,7 @@ public
 			open_o_gate: out data port DataTypes::SwitchTrigger;
 			done: out data port DataTypes::SwitchTrigger;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 2.5 mips;	
 	end ParownikControlProcess;
 	
 	process implementation ParownikControlProcess.impl
