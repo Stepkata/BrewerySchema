@@ -60,10 +60,26 @@ public
 	
 	process implementation Mieszanie.impl
 		subcomponents
-			input_gate_c: thread CommonElements::InputGateControl.impl;
-			output_gate_c: thread CommonElements::OutputGateControl.impl;
-			mieszadlo_control: thread MieszadloControl.impl;
-			mieszadlo_decision_center: thread MieszadloDecisionCenter.impl;
+			input_gate_c: thread CommonElements::InputGateControl.impl{
+		      Compute_Execution_Time => 52 ms .. 52 ms;
+		      Deadline               => 200 ms;
+		      Period                 => 100 ms;
+		    };
+			output_gate_c: thread CommonElements::OutputGateControl.impl{
+		      Compute_Execution_Time => 52 ms .. 52 ms;
+		      Deadline               => 200 ms;
+		      Period                 => 100 ms;
+		    };
+			mieszadlo_control: thread MieszadloControl.impl{
+		      Compute_Execution_Time => 52 ms .. 52 ms;
+		      Deadline               => 200 ms;
+		      Period                 => 100 ms;
+		    };
+			mieszadlo_decision_center: thread MieszadloDecisionCenter.impl{
+		      Compute_Execution_Time => 52 ms .. 52 ms;
+		      Deadline               => 200 ms;
+		      Period                 => 100 ms;
+		    };
 		connections
 			start_conn: port Start -> mieszadlo_decision_center.Start;
 			desired_time_conn: port MieszadloTime -> mieszadlo_decision_center.DesiredTime;
@@ -112,9 +128,21 @@ public
 	
 	process implementation PodgrzewanieWCzajniku.impl
 		subcomponents
-			input_gate_c: thread CommonElements::InputGateControl.impl;
-			output_gate_c: thread CommonElements::OutputGateControl.impl;
-			czajnik_decision_center: thread CzajnikDecisionCenter.impl;
+			input_gate_c: thread CommonElements::InputGateControl.impl{
+		      Compute_Execution_Time => 52 ms .. 52 ms;
+		      Deadline               => 200 ms;
+		      Period                 => 100 ms;
+		    };
+			output_gate_c: thread CommonElements::OutputGateControl.impl{
+		      Compute_Execution_Time => 52 ms .. 52 ms;
+		      Deadline               => 200 ms;
+		      Period                 => 100 ms;
+		    };
+			czajnik_decision_center: thread CzajnikDecisionCenter.impl{
+		      Compute_Execution_Time => 52 ms .. 52 ms;
+		      Deadline               => 200 ms;
+		      Period                 => 100 ms;
+		    };
 		connections
 			start_conn: port Start -> czajnik_decision_center.Start;
 			desired_time_conn: port CzajnikTime -> czajnik_decision_center.DesiredTime;
@@ -133,7 +161,6 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			MieszadloTime: out data port DataTypes::DateTime;
 			CzajnikTime: out data port DataTypes::DateTime;
-			TotalTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
 			DisplayData: out data port DataTypes::SystemAppData;
 	end WOSystemControlCenterThread;
@@ -148,7 +175,6 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			MieszadloTime: out data port DataTypes::DateTime;
 			CzajnikTime: out data port DataTypes::DateTime;
-			TotalTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
 			DisplayData: out data port DataTypes::SystemAppData;
 		properties
@@ -163,7 +189,6 @@ public
 			conn0: port RemoteUserInput -> process_thread.RemoteUserInput;
 			conn2: port process_thread.MieszadloTime -> MieszadloTime;
 			conn3: port process_thread.CzajnikTime -> CzajnikTime;
-			conn4: port process_thread.TotalTime -> TotalTime;
 			conn5: port process_thread.CzajnikDesiredTemp -> CzajnikDesiredTemp;
 			conn7: port process_thread.DisplayData -> DisplayData;
 	end WOSystemControlCenterProcess.impl;
@@ -204,32 +229,91 @@ public
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
 		connections
-			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
-			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
-			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput;
-			input_to_proc1: port input_processing_process.MieszadloTime -> mieszanie_proc.MieszadloTime;
-			input_to_proc2: port input_processing_process.CzajnikTime -> czajnik_proc.CzajnikTime;
-			input_to_proc3: port input_processing_process.CzajnikDesiredTemp -> heater_control_proc.input_data;
-			proc_to_kadz1: port mieszanie_proc.IGateOpen -> kadz.OpenInputGate;
-			proc_to_kadz2: port mieszanie_proc.OGateOpen -> kadz.OpenOutputGate;
-			proc_to_mieszadlo: port mieszanie_proc.TurnOn -> mieszadlo.On;
-			proc_to_czajnik1: port czajnik_proc.IGateOpen -> czajnik.OpenInputGate;
-			proc_to_czajnik2: port czajnik_proc.OGateOpen -> czajnik.OpenOutputGate;
-			sensor_to_heater_process: port temp_sensor.Temp -> heater_control_proc.sensor_data;
-			process_to_heater: port heater_control_proc.heater_control -> heater.On;
-			start_system: port start -> start_button.RemoteStart;
-			button_to_process: port start_button.Start -> button_control.switch_on;
-			start_mieszanie: port button_control.on -> mieszanie_proc.Start;
-			start_czajnik: port mieszanie_proc.MieszadloProcessDone -> czajnik_proc.Start;
-			start_heater: port mieszanie_proc.MieszadloProcessDone -> heater_control_proc.Start;
-			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime;
-			timer_to_mieszanie: port timer_control_proc.CurrTime -> mieszanie_proc.CurrTime;
-			timer_to_czajnik: port timer_control_proc.CurrTime -> czajnik_proc.CurrTime;
-			stop_heater: port czajnik_proc.ProcessDone -> heater_control_proc.stop;
-			all_processes_done: port czajnik_proc.ProcessDone -> process_done;
-			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
-			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			input_to_proc1: port input_processing_process.MieszadloTime -> mieszanie_proc.MieszadloTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			input_to_proc2: port input_processing_process.CzajnikTime -> czajnik_proc.CzajnikTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			input_to_proc3: port input_processing_process.CzajnikDesiredTemp -> heater_control_proc.input_data{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_kadz1: port mieszanie_proc.IGateOpen -> kadz.OpenInputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_kadz2: port mieszanie_proc.OGateOpen -> kadz.OpenOutputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_mieszadlo: port mieszanie_proc.TurnOn -> mieszadlo.On{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_czajnik1: port czajnik_proc.IGateOpen -> czajnik.OpenInputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_czajnik2: port czajnik_proc.OGateOpen -> czajnik.OpenOutputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			sensor_to_heater_process: port temp_sensor.Temp -> heater_control_proc.sensor_data{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			process_to_heater: port heater_control_proc.heater_control -> heater.On{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_system: port start -> start_button.RemoteStart{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			button_to_process: port start_button.Start -> button_control.switch_on{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_mieszanie: port button_control.on -> mieszanie_proc.Start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_czajnik: port mieszanie_proc.MieszadloProcessDone -> czajnik_proc.Start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_heater: port mieszanie_proc.MieszadloProcessDone -> heater_control_proc.Start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			timer_to_mieszanie: port timer_control_proc.CurrTime -> mieszanie_proc.CurrTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			timer_to_czajnik: port timer_control_proc.CurrTime -> czajnik_proc.CurrTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			stop_heater: port czajnik_proc.ProcessDone -> heater_control_proc.stop{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			all_processes_done: port czajnik_proc.ProcessDone -> process_done{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			eth1: bus access Mag_bus -> cpu.eth;
+			eth2: bus access Mag_bus -> temp_sensor.eth;
+			eth3: bus access Mag_bus -> start_button.eth;
+			eth4: bus access Mag_bus -> klawiatura.eth;
+			eth5: bus access Mag_bus -> heater.eth;
+			eth6: bus access Mag_bus -> kadz.eth;
+			eth7: bus access Mag_bus -> mieszadlo.eth;
+			eth8: bus access Mag_bus -> czajnik.eth;
+			eth9: bus access Mag_bus -> timer.eth;
+			eth10: bus access Mag_bus -> monitor.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;

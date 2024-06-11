@@ -19,7 +19,8 @@ public
 		    Dispatch_Offset => 	2ms;
 		    Deadline => 15ms;	
 		    Period => 20ms;
-		    Compute_Execution_Time => 0ms..2ms;	
+		    Compute_Execution_Time => 0ms..2ms;
+		    SEI::MIPSBudget => 0.3 mips;	
 	end KadzWarzelnaDecisionCenter;
 	
 	thread implementation KadzWarzelnaDecisionCenter.impl
@@ -60,10 +61,16 @@ public
 			UserInput: in data port DataTypes::KeyboardInputData;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			WarzelniaTime: out data port DataTypes::DateTime;
-			TotalTime: out data port DataTypes::DateTime;
 			KadzWarzelnaDesiredTemp: out data port DataTypes::TemperatureType;
 			KadzWarzelnaDesiredPressure: out data port DataTypes::PressureType;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;
+		    SEI::MIPSBudget => 0.3 mips;	
 	end KWSystemControlCenterThread;
 	
 	thread implementation KWSystemControlCenterThread.impl
@@ -75,7 +82,6 @@ public
 			UserInput: in data port DataTypes::KeyboardInputData;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			KadzWarzelnaTime: out data port DataTypes::DateTime;
-			TotalTime: out data port DataTypes::DateTime;
 			KadzWarzelnaDesiredTemp: out data port DataTypes::TemperatureType;
 			KadzWarzelnaDesiredPressure: out data port DataTypes::PressureType;
 			DisplayData: out data port DataTypes::SystemAppData;
@@ -90,7 +96,6 @@ public
 			conn1: port UserInput -> process_thread.UserInput;
 			conn2: port RemoteUserInput -> process_thread.RemoteUserInput;
 			conn3: port process_thread.WarzelniaTime -> KadzWarzelnaTime;
-			conn4: port process_thread.TotalTime -> TotalTime;
 			conn5: port process_thread.KadzWarzelnaDesiredTemp -> KadzWarzelnaDesiredTemp;
 			conn6: port process_thread.KadzWarzelnaDesiredPressure -> KadzWarzelnaDesiredPressure;
 			conn7: port process_thread.DisplayData -> DisplayData;
@@ -131,28 +136,83 @@ public
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
 		connections
-			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
-			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput;
-			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
-			input_to_proc2: port input_processing_process.KadzWarzelnaTime -> KadzWarzelna_proc.KadzWarzelnaTime;
-			input_to_proc3: port input_processing_process.KadzWarzelnaDesiredTemp -> heater_control_proc.input_data;
-			proc_to_KadzWarzelna1: port KadzWarzelna_proc.IGateOpen -> KadzWarzelna.OpenInputGate;
-			proc_to_KadzWarzelna2: port KadzWarzelna_proc.OGateOpen -> KadzWarzelna.OpenOutputGate;
-			sensor_to_heater_process: port temp_sensor.Temp -> heater_control_proc.sensor_data;
-			sensor_to_pressure_c_process: port pressure_sensor.Pressure -> pressure_control_proc.sensor_data;
-			process_to_heater: port heater_control_proc.heater_control -> heater.On;
-			process_to_pressure_controller: port pressure_control_proc.pressure_control -> pressure_controler.On;
-			start_system: port start -> start_button.RemoteStart;
-			button_to_process: port start_button.Start -> button_control.switch_on;
-			start_mieszanie: port button_control.on -> KadzWarzelna_proc.Start;
-			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime;
-			timer_to_KadzWarzelna: port timer_control_proc.CurrTime -> KadzWarzelna_proc.CurrTime;
-			stop_heater: port KadzWarzelna_proc.ProcessDone -> heater_control_proc.stop;
-			stop_pressure: port KadzWarzelna_proc.ProcessDone -> pressure_control_proc.stop;
-			all_processes_done: port KadzWarzelna_proc.ProcessDone -> process_done;
-			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
-			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			input_to_proc2: port input_processing_process.KadzWarzelnaTime -> KadzWarzelna_proc.KadzWarzelnaTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			input_to_proc3: port input_processing_process.KadzWarzelnaDesiredTemp -> heater_control_proc.input_data{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			input_to_proc4: port input_processing_process.KadzWarzelnaDesiredPressure -> pressure_control_proc.input_data{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			
+			proc_to_KadzWarzelna1: port KadzWarzelna_proc.IGateOpen -> KadzWarzelna.OpenInputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_KadzWarzelna2: port KadzWarzelna_proc.OGateOpen -> KadzWarzelna.OpenOutputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			sensor_to_heater_process: port temp_sensor.Temp -> heater_control_proc.sensor_data{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			sensor_to_pressure_c_process: port pressure_sensor.Pressure -> pressure_control_proc.sensor_data{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			process_to_heater: port heater_control_proc.heater_control -> heater.On{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			process_to_pressure_controller: port pressure_control_proc.pressure_control -> pressure_controler.On{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_system: port start -> start_button.RemoteStart{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			button_to_process: port start_button.Start -> button_control.switch_on{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_mieszanie: port button_control.on -> KadzWarzelna_proc.Start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			timer_to_KadzWarzelna: port timer_control_proc.CurrTime -> KadzWarzelna_proc.CurrTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			stop_heater: port KadzWarzelna_proc.ProcessDone -> heater_control_proc.stop{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			stop_pressure: port KadzWarzelna_proc.ProcessDone -> pressure_control_proc.stop{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			all_processes_done: port KadzWarzelna_proc.ProcessDone -> process_done{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			eth1: bus access Mag_bus -> cpu.eth;
+			th10: bus access Mag_bus -> monitor.eth;
+			eth4: bus access Mag_bus -> klawiatura.eth;
+			eth9: bus access Mag_bus -> timer.eth;
+			eth3: bus access Mag_bus -> start_button.eth;
+			eth11: bus access Mag_bus -> temp_sensor.eth;
+			eth5: bus access Mag_bus -> pressure_sensor.eth;
+			eth6: bus access Mag_bus -> heater.eth;
+			eth7: bus access Mag_bus -> pressure_controler.eth;
+			eth17: bus access Mag_bus -> KadzWarzelna.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
@@ -160,6 +220,7 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to remote_input_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc2;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc3;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc4;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_KadzWarzelna1;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_KadzWarzelna2;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to sensor_to_heater_process;

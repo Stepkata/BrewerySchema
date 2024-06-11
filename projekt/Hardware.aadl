@@ -8,7 +8,7 @@ public
 	    	Transmission_Time => [Fixed => 1ns..2ns; PerByte => 5ns ..6ns;];
 	    	Period => 1 ms;
 	    	SEI::BandWidthCapacity => 2.0 MBytesps;
-	    	SEI::BandWidthBudget => 200.0 KBytesps;
+	    	SEI::BandWidthBudget => 500.0 KBytesps;
 	end Marine;
 	
 	bus implementation Marine.Standard

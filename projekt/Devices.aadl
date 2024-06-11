@@ -2,15 +2,19 @@ package Devices
 public
 	with DataTypes;
 	with SEI;
+	with Hardware;
 	
 	
 	device TempSensor
       	features
 			Temp: out data port DataTypes::TemperatureType;
+			eth: requires bus access Hardware::Marine.Standard;
 		properties
 	  		SEI::GrossWeight => 0.18kg;
 	  		Dispatch_Protocol => Periodic;
 			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Tempsensor;
  
    device implementation TempSensor.impl
@@ -19,8 +23,13 @@ public
    device Heater
    	features
    		On: in data port DataTypes::SwitchTrigger;
+   		eth: requires bus access Hardware::Marine.Standard;
    	properties
 	  SEI::GrossWeight => 0.75kg;
+	  Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+		SEI::MIPSBudget => 0.1 mips;
+		SEI::RAMBudget => 1.0 KByte;
    end Heater;
 	
 	device implementation Heater.impl
@@ -30,10 +39,13 @@ public
    device PressureSensor
    	features
    		Pressure: out data port DataTypes::PressureType; 
+   		eth: requires bus access Hardware::Marine.Standard;
    	properties
 	  	SEI::GrossWeight => 0.18kg;
 	  	Dispatch_Protocol => Periodic;
 		Period => 20ms;	
+		SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
    end PressureSensor;
    
    device implementation PressureSensor.impl
@@ -43,8 +55,13 @@ public
    device PressureControler
    	features
    		On: in data port DataTypes::SwitchTrigger;
+   		eth: requires bus access Hardware::Marine.Standard;
    	properties
 	  SEI::GrossWeight => 3.40kg;
+	  Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
    end PressureControler;
    
    device implementation PressureControler.impl
@@ -54,8 +71,13 @@ public
    device Cooler
    	features
    		On: in data port DataTypes::SwitchTrigger;
+   		eth: requires bus access Hardware::Marine.Standard;
    	properties
 	  SEI::GrossWeight => 54.2kg;
+	  Dispatch_Protocol => Periodic;
+			Period => 20ms;
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;	
    end Cooler;
    
    device implementation Cooler.impl
@@ -65,10 +87,13 @@ public
    device Czasomierz
 		features
 			CurrTime: out data port DataTypes::DateTime;
+			eth: requires bus access Hardware::Marine.Standard;
 		properties
 	  		SEI::GrossWeight => 0.30kg;
 	  		Dispatch_Protocol => Periodic;
 			Period => 2ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Czasomierz;
 	
 	device implementation Czasomierz.impl
@@ -78,8 +103,13 @@ public
 	device Klawiatura
 		features 
 			KeyInput: out data port DataTypes::KeyboardInputData;
+			eth: requires bus access Hardware::Marine.Standard;
 		properties
 	  		SEI::GrossWeight => 0.35kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Klawiatura;
 	
 	device implementation Klawiatura.impl
@@ -89,8 +119,13 @@ public
 	device Monitor
 		features
 			DisplayData: in data port DataTypes::SystemAppData;
+			eth: requires bus access Hardware::Marine.Standard;
 		properties
 	  		SEI::GrossWeight => 0.65kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Monitor;
 	
 	device implementation Monitor.impl
@@ -101,8 +136,13 @@ public
 		features
 			RemoteStart: in data port DataTypes::SwitchTrigger;
 			Start: out data port DataTypes::SwitchTrigger;
+			eth: requires bus access Hardware::Marine.Standard;
 		properties
 	  		SEI::GrossWeight => 0.18kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end StartButtonWithRemoteControl;
 	
 	device implementation StartButtonWithRemoteControl.impl
@@ -114,8 +154,13 @@ public
 		features
    			OpenInputGate: in data port DataTypes::SwitchTrigger;
    			OpenOutputGate: in data port DataTypes::SwitchTrigger;
+   			eth: requires bus access Hardware::Marine.Standard;
    		properties
 	  		SEI::GrossWeight => 2450.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Kadz;
 	
 	device implementation Kadz.impl
@@ -125,8 +170,13 @@ public
 	device Mieszadlo 
 		features
    			On: in data port DataTypes::SwitchTrigger;
+   			eth: requires bus access Hardware::Marine.Standard;
    		properties
 	  		SEI::GrossWeight => 18.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;	
 	end Mieszadlo;
 	
 	device implementation Mieszadlo.impl
@@ -137,8 +187,13 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 2450.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end CzajnikDoZacieru;
 	
 	device implementation CzajnikDoZacieru.impl
@@ -151,8 +206,13 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 2450.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end KadzFiltracyjna;
 	
 	device implementation KadzFiltracyjna.impl
@@ -162,10 +222,13 @@ public
 	device CzujnikPoziomuWody
 		features
 			WaterLevel: out data port DataTypes::WaterLevelType;
+			eth: requires bus access Hardware::Marine.Standard;
 		properties
 	  		SEI::GrossWeight => 0.30kg;
 	  		Dispatch_Protocol => Periodic;
 			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end CzujnikPoziomuWody;
 	
 	device implementation CzujnikPoziomuWody.impl
@@ -175,8 +238,13 @@ public
 	device PodajnikWody
 		features
    			On: in data port DataTypes::SwitchTrigger;
+   			eth: requires bus access Hardware::Marine.Standard;
    		properties
 	  		SEI::GrossWeight => 2.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end PodajnikWody;
 	
 	device implementation PodajnikWody.impl
@@ -189,8 +257,13 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 2450.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end KadzWarzelna;
 	
 	device implementation KadzWarzelna.impl
@@ -204,8 +277,13 @@ public
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
 	   		On: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 2450.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Parownik;
 	
 	device implementation Parownik.impl
@@ -215,10 +293,14 @@ public
 	device CzujnikWilgoci
 		features
 			MoistureLevel: out data port DataTypes::MoistureLevelType;
+			eth: requires bus access Hardware::Marine.Standard;
 		properties
 	  		SEI::GrossWeight => 0.15kg;
 	  		Dispatch_Protocol => Periodic;
 			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
+			
 	end CzujnikWilgoci;
 	
 	device implementation CzujnikWilgoci.impl
@@ -231,8 +313,13 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 2450.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Wirownik;
 	
 	device implementation Wirownik.impl
@@ -242,8 +329,13 @@ public
 	device Wir
 		features 
 			On: in data port DataTypes::SwitchTrigger;
+			eth: requires bus access Hardware::Marine.Standard;
 		properties
 	  		SEI::GrossWeight => 24.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Wir;
 	
 	device implementation Wir.impl
@@ -256,8 +348,13 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 2450.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Chlodziarka;
 	
 	device implementation Chlodziarka.impl
@@ -270,8 +367,13 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 1470.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end ZbiornikDoFermentacji;
 	
 	device implementation ZbiornikDoFermentacji.impl
@@ -285,8 +387,13 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 670.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end ZbiornikDoLezakowania;
 	
 	device implementation ZbiornikDoLezakowania.impl
@@ -299,8 +406,13 @@ public
 		features
 			OpenInputGate: in data port DataTypes::SwitchTrigger;
 	   		OpenOutputGate: in data port DataTypes::SwitchTrigger;
+	   		eth: requires bus access Hardware::Marine.Standard;
 	   	properties
 	  		SEI::GrossWeight => 670.0kg;
+	  		Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+			SEI::MIPSBudget => 0.1 mips;
+			SEI::RAMBudget => 1.0 KByte;
 	end Rozlewnik;
 	
 	device implementation Rozlewnik.impl

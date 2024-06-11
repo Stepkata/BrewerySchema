@@ -43,6 +43,13 @@ public
 			ButelkowanieDone: in data port DataTypes::SwitchTrigger;
 			
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+			SEI::MIPSBudget => 0.3 mips;
+			Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
 	end MainSystemSoftwareThread;
 	
 	thread implementation MainSystemSoftwareThread.impl
@@ -120,6 +127,7 @@ public
        		SEI::WeightLimit => 20000.0kg;
        		SEI::MIPSBudget => 0.8 mips;
        		SEI::MIPSCapacity => 2.4 mips;
+       		SEI::BandWidthCapacity => 0.5 MBytesps;
 	end WarzeniePiwa;
 	
 	system implementation WarzeniePiwa.impl
@@ -141,41 +149,93 @@ public
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
 		connections
-			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
-			keyboard_to_sys: port keyboard_cont_process.KeyboardOutput -> main_sys.UserInput;
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			keyboard_to_sys: port keyboard_cont_process.KeyboardOutput -> main_sys.UserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
-			setup_wstepna: port main_sys.WstepnaObrobkaUserInput -> wstepna_obrobka_sys.RemoteUserInput;
-			start_wstepna: port main_sys.WstepnaObrobkaStart -> wstepna_obrobka_sys.start;
-			done_wstepna: port wstepna_obrobka_sys.process_done -> main_sys.WstepnaObrobkaDone;
+			setup_wstepna: port main_sys.WstepnaObrobkaUserInput -> wstepna_obrobka_sys.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_wstepna: port main_sys.WstepnaObrobkaStart -> wstepna_obrobka_sys.start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			done_wstepna: port wstepna_obrobka_sys.process_done -> main_sys.WstepnaObrobkaDone{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
-			setup_kf: port main_sys.KadzFiltracyjnaUserInput -> kadz_filtracyjna_sys.RemoteUserInput;
-			start_kf: port main_sys.KadzFiltracyjnaStart -> kadz_filtracyjna_sys.start;
-			done_kf: port kadz_filtracyjna_sys.process_done -> main_sys.KadzFiltracyjnaDone;
+			setup_kf: port main_sys.KadzFiltracyjnaUserInput -> kadz_filtracyjna_sys.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_kf: port main_sys.KadzFiltracyjnaStart -> kadz_filtracyjna_sys.start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			done_kf: port kadz_filtracyjna_sys.process_done -> main_sys.KadzFiltracyjnaDone{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
-			setup_warzenie: port main_sys.WarzenieUserInput -> warzenie_sys.RemoteUserInput;
-			start_warzenie: port main_sys.WarzenieStart -> warzenie_sys.start;
-			done_warzenie: port warzenie_sys.process_done -> main_sys.WarzenieDone;
+			setup_warzenie: port main_sys.WarzenieUserInput -> warzenie_sys.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_warzenie: port main_sys.WarzenieStart -> warzenie_sys.start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			done_warzenie: port warzenie_sys.process_done -> main_sys.WarzenieDone{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
-			setup_parowanie: port main_sys.ParowanieUserInput -> parowanie_sys.RemoteUserInput;
-			start_parowanie: port main_sys.ParowanieStart -> parowanie_sys.start;
-			done_parowanie: port parowanie_sys.process_done -> main_sys.ParowanieDone;
+			setup_parowanie: port main_sys.ParowanieUserInput -> parowanie_sys.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_parowanie: port main_sys.ParowanieStart -> parowanie_sys.start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			done_parowanie: port parowanie_sys.process_done -> main_sys.ParowanieDone{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
-			setup_wirowanie: port main_sys.WirowanieUserInput -> wirowanie_sys.RemoteUserInput;
-			start_wirowanie: port main_sys.WirowanieStart -> wirowanie_sys.start;
-			done_wirowanie: port wirowanie_sys.process_done -> main_sys.WirowanieDone;
+			setup_wirowanie: port main_sys.WirowanieUserInput -> wirowanie_sys.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_wirowanie: port main_sys.WirowanieStart -> wirowanie_sys.start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			done_wirowanie: port wirowanie_sys.process_done -> main_sys.WirowanieDone{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
-			setup_fermentacja: port main_sys.FermentacjaUserInput -> fermentacja_sys.RemoteUserInput;
-			start_fermentacja: port main_sys.FermentacjaStart -> fermentacja_sys.start;
-			done_fermentacja: port fermentacja_sys.process_done -> main_sys.FermentacjaDone;
+			setup_fermentacja: port main_sys.FermentacjaUserInput -> fermentacja_sys.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_fermentacja: port main_sys.FermentacjaStart -> fermentacja_sys.start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			done_fermentacja: port fermentacja_sys.process_done -> main_sys.FermentacjaDone{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
-			setup_butelkowanie: port main_sys.ButelkowanieUserInput -> butelkowanie_sys.RemoteUserInput;
-			start_butelkowanie: port main_sys.ButelkowanieStart -> butelkowanie_sys.start;
-			done_butelkowanie: port butelkowanie_sys.process_done -> main_sys.ButelkowanieDone;
+			setup_butelkowanie: port main_sys.ButelkowanieUserInput -> butelkowanie_sys.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_butelkowanie: port main_sys.ButelkowanieStart -> butelkowanie_sys.start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			done_butelkowanie: port butelkowanie_sys.process_done -> main_sys.ButelkowanieDone{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
-			main_sys_to_monitor: port main_sys.DisplayData -> monitor_ctrl.SystemInput;
-			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			main_sys_to_monitor: port main_sys.DisplayData -> monitor_ctrl.SystemInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			
 			eth1: bus access Mag_bus -> cpu.eth;
+			eth10: bus access Mag_bus -> monitor.eth;
+			eth4: bus access Mag_bus -> klawiatura.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;

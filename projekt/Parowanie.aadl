@@ -15,7 +15,8 @@ public
 		    Dispatch_Offset => 	2ms;
 		    Deadline => 15ms;	
 		    Period => 20ms;
-		    Compute_Execution_Time => 0ms..2ms;	
+		    Compute_Execution_Time => 0ms..2ms;
+		    SEI::MIPSBudget => 0.3 mips;	
 	end ReadMoistureLevel;
 	
 	thread implementation ReadMoistureLevel.impl
@@ -33,6 +34,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;
+		    SEI::MIPSBudget => 0.3 mips;
 	end ControlParownikDevice;
 	
 	thread implementation ControlParownikDevice.impl
@@ -54,6 +56,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
+		    SEI::MIPSBudget => 0.3 mips;
 	end ParownikControlThread;
 	
 	thread implementation ParownikControlThread.impl
@@ -105,7 +108,8 @@ public
 		    Dispatch_Offset => 	2ms;
 		    Deadline => 15ms;	
 		    Period => 20ms;
-		    Compute_Execution_Time => 0ms..2ms;	
+		    Compute_Execution_Time => 0ms..2ms;
+		    SEI::MIPSBudget => 0.3 mips;	
 	end PSystemControlCenterThread;
 	
 	thread implementation PSystemControlCenterThread.impl
@@ -160,21 +164,54 @@ public
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
 		connections
-			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
-			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
-			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput;
-			input_to_proc2: port input_processing_process.DesiredMoistureLevel -> moisture_control_process.input_data;
-			start_system: port start -> start_button.RemoteStart;
-			button_to_process: port start_button.Start -> button_control.switch_on;
-			start_m_proc: port button_control.on -> moisture_control_process.start;
-			proc_to_kadz1: port moisture_control_process.open_i_gate -> parownik.OpenInputGate;
-			proc_to_kadz2: port moisture_control_process.open_o_gate -> parownik.OpenOutputGate;
-			sensor_to_proc: port moisture_lvl_sensor.MoistureLevel -> moisture_control_process.sensor_data;
-			proc_to_wd: port moisture_control_process.parownik_control -> parownik.On;
-			process_done_conn: port moisture_control_process.done -> process_done;
-			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
-			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			input_to_proc2: port input_processing_process.DesiredMoistureLevel -> moisture_control_process.input_data{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_system: port start -> start_button.RemoteStart{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			button_to_process: port start_button.Start -> button_control.switch_on{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_m_proc: port button_control.on -> moisture_control_process.start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_kadz1: port moisture_control_process.open_i_gate -> parownik.OpenInputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_kadz2: port moisture_control_process.open_o_gate -> parownik.OpenOutputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			sensor_to_proc: port moisture_lvl_sensor.MoistureLevel -> moisture_control_process.sensor_data{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_wd: port moisture_control_process.parownik_control -> parownik.On{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			process_done_conn: port moisture_control_process.done -> process_done{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			eth1: bus access Mag_bus -> cpu.eth;
+			th10: bus access Mag_bus -> monitor.eth;
+			eth4: bus access Mag_bus -> klawiatura.eth;
+			eth3: bus access Mag_bus -> start_button.eth;
+			eth5: bus access Mag_bus -> moisture_lvl_sensor.eth;
+			eth6: bus access Mag_bus -> parownik.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;

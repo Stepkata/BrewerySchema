@@ -20,6 +20,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
+		    SEI::MIPSBudget => 0.3 mips;
 	end FermentacjaDecisionCenter;
 	
 	thread implementation FermentacjaDecisionCenter.impl
@@ -61,6 +62,13 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			TotalTime: out data port DataTypes::DateTime;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+		    SEI::MIPSBudget => 0.3 mips;
 	end FSystemControlCenterThread;
 	
 	thread implementation FSystemControlCenterThread.impl
@@ -116,19 +124,54 @@ public
 			Mag_bus: bus Hardware::Marine.Standard;
 			cpu: processor Hardware::corei5;
 		connections
-			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput;
-			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput;
-			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput;
-			input_to_proc1: port input_processing_process.TotalTime -> fermentacja_control.TotalTime;
-			start_system: port start -> start_button.RemoteStart;
-			button_to_process: port start_button.Start -> button_control.switch_on;
-			start_fermentacja: port button_control.on -> fermentacja_control.Start;
-			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime;
-			timer_to_fermentacja: port timer_control_proc.CurrTime -> fermentacja_control.CurrTime;
-			all_processes_done: port fermentacja_control.ProcessDone -> process_done;
-			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput;
-			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData;
+			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			keyboard_to_proc_conn: port keyboard_cont_process.KeyboardOutput -> input_processing_process.UserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			remote_input_conn: port RemoteUserInput -> input_processing_process.RemoteUserInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			input_to_proc1: port input_processing_process.TotalTime -> fermentacja_control.TotalTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_system: port start -> start_button.RemoteStart{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			button_to_process: port start_button.Start -> button_control.switch_on{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			start_fermentacja: port button_control.on -> fermentacja_control.Start{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			timer_to_proc: port timer.CurrTime -> timer_control_proc.ReadTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			timer_to_fermentacja: port timer_control_proc.CurrTime -> fermentacja_control.CurrTime{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			all_processes_done: port fermentacja_control.ProcessDone -> process_done{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			sys_to_mon_ctrl: port input_processing_process.DisplayData -> monitor_ctrl.SystemInput{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			ctral_to_monitor: port monitor_ctrl.DisplayData -> monitor.DisplayData{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_kadz1: port fermentacja_control.IGateOpen -> zbiornik.OpenInputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
+			proc_to_kadz2: port fermentacja_control.OGateOpen -> zbiornik.OpenOutputGate{
+				SEI::BandWidthBudget => 12.0 Kbytesps;
+				};
 			eth1: bus access Mag_bus -> cpu.eth;
+			eth10: bus access Mag_bus -> monitor.eth;
+			eth4: bus access Mag_bus -> klawiatura.eth;
+			eth9: bus access Mag_bus -> timer.eth;
+			eth3: bus access Mag_bus -> start_button.eth;
+			eth2: bus access Mag_bus -> zbiornik.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
@@ -143,6 +186,8 @@ public
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to all_processes_done;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to sys_to_mon_ctrl;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_kadz1;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to proc_to_kadz2;
 			
 			Actual_Memory_Binding => (reference(sys_memory)) applies to monitor_ctrl;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
