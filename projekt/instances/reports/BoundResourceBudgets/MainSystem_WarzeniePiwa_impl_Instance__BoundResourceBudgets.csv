@@ -1,0 +1,382 @@
+Bound Resource Budget Analysis Report
+
+
+Processor Summary Report: 
+**   Processor cpu: Total MIPS 118,790 MIPS of bound tasks exceeds MIPS capacity 25,500 MIPS
+**   Processor wstepna_obrobka_sys.cpu: Total MIPS 16,900 MIPS of bound tasks exceeds MIPS capacity 11,500 MIPS
+**   Processor kadz_filtracyjna_sys.cpu: Total MIPS 27,140 MIPS of bound tasks exceeds MIPS capacity 11,500 MIPS
+**   Processor warzenie_sys.cpu: Total MIPS 16,100 MIPS of bound tasks exceeds MIPS capacity 11,500 MIPS
+  Processor parowanie_sys.cpu: Total MIPS 10,350 MIPS of bound tasks within MIPS capacity 11,500 MIPS of parowanie_sys.cpu
+  Processor wirowanie_sys.cpu: Total MIPS 10,350 MIPS of bound tasks within MIPS capacity 11,500 MIPS of wirowanie_sys.cpu
+  Processor fermentacja_sys.cpu: Total MIPS 9,200 MIPS of bound tasks within MIPS capacity 11,500 MIPS of fermentacja_sys.cpu
+**   Processor butelkowanie_sys.cpu: Total MIPS 16,100 MIPS of bound tasks exceeds MIPS capacity 11,500 MIPS
+
+Memory Summary Report: 
+  No Memory with Memory_Size or RAMCapacity or ROMCapacity
+
+
+Detailed Workload Report:  for Processor cpu with Capacity 25,500 MIPS
+
+Component,Budget,Actual
+  thread monitor_ctrl.control,   0,800 MIPS,  2,550 MIPS,Error: subtotal/actual exceeds budget 0,800 by 1,750 MIPS
+process monitor_ctrl, 2,600 MIPS,2,550 MIPS,process WarzeniePiwa_impl_Instance.monitor_ctrl total 2,550 MIPS below budget 2,600 MIPS (1,9 % slack)
+  thread keyboard_cont_process.keyboard_control,   0,800 MIPS,  2,550 MIPS,Error: subtotal/actual exceeds budget 0,800 by 1,750 MIPS
+process keyboard_cont_process, 2,600 MIPS,2,550 MIPS,process WarzeniePiwa_impl_Instance.keyboard_cont_process total 2,550 MIPS below budget 2,600 MIPS (1,9 % slack)
+  thread main_sys.main_thread,   2,600 MIPS,  2,550 MIPS,thread WarzeniePiwa_impl_Instance.main_sys.main_thread total 2,550 MIPS below budget 2,600 MIPS (1,9 % slack)
+process main_sys, 2,600 MIPS,2,550 MIPS,process WarzeniePiwa_impl_Instance.main_sys total 2,550 MIPS below budget 2,600 MIPS (1,9 % slack)
+  device wstepna_obrobka_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wstepna_obrobka_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wstepna_obrobka_sys.temp_sensor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.temp_sensor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wstepna_obrobka_sys.heater,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wstepna_obrobka_sys.kadz,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.kadz total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wstepna_obrobka_sys.mieszadlo,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszadlo total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wstepna_obrobka_sys.czajnik,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wstepna_obrobka_sys.timer,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.timer total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wstepna_obrobka_sys.monitor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.monitor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+    thread wstepna_obrobka_sys.keyboard_cont_process.keyboard_control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wstepna_obrobka_sys.keyboard_cont_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wstepna_obrobka_sys.input_processing_process.process_thread,     0,000 MIPS,    0,000 MIPS,
+  process wstepna_obrobka_sys.input_processing_process,   0,800 MIPS,  0,000 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.input_processing_process total 0,000 MIPS below budget 0,800 MIPS (100,0 % slack)
+    thread wstepna_obrobka_sys.mieszanie_proc.input_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread wstepna_obrobka_sys.mieszanie_proc.output_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_control,     0,000 MIPS,    1,150 MIPS,
+    thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_decision_center,     0,000 MIPS,    1,150 MIPS,
+  process wstepna_obrobka_sys.mieszanie_proc,   8,000 MIPS,  4,600 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc total 4,600 MIPS below budget 8,000 MIPS (42,5 % slack)
+    thread wstepna_obrobka_sys.czajnik_proc.input_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread wstepna_obrobka_sys.czajnik_proc.output_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process wstepna_obrobka_sys.czajnik_proc,   8,000 MIPS,  3,450 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc total 3,450 MIPS below budget 8,000 MIPS (56,9 % slack)
+    thread wstepna_obrobka_sys.heater_control_proc.read_temp,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wstepna_obrobka_sys.heater_control_proc.control,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread wstepna_obrobka_sys.heater_control_proc.heater_ctrl,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc.heater_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process wstepna_obrobka_sys.heater_control_proc,   7,000 MIPS,  3,450 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+    thread wstepna_obrobka_sys.timer_control_proc.timer_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wstepna_obrobka_sys.timer_control_proc,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wstepna_obrobka_sys.button_control.button_control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wstepna_obrobka_sys.button_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wstepna_obrobka_sys.monitor_ctrl.control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wstepna_obrobka_sys.monitor_ctrl,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+system wstepna_obrobka_sys, 22,500 MIPS,17,800 MIPS,system WarzeniePiwa_impl_Instance.wstepna_obrobka_sys total 17,800 MIPS below budget 22,500 MIPS (20,9 % slack)
+  device kadz_filtracyjna_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device kadz_filtracyjna_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device kadz_filtracyjna_sys.timer,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.timer total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device kadz_filtracyjna_sys.water_dispenser,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_dispenser total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device kadz_filtracyjna_sys.water_lvl_sensor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_lvl_sensor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device kadz_filtracyjna_sys.kadz,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device kadz_filtracyjna_sys.monitor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.monitor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+    thread kadz_filtracyjna_sys.keyboard_cont_process.keyboard_control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process kadz_filtracyjna_sys.keyboard_cont_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread kadz_filtracyjna_sys.input_processing_process.process_thread,     1,000 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 1,000 by 0,150 MIPS
+  process kadz_filtracyjna_sys.input_processing_process,   1,500 MIPS,  1,150 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.input_processing_process total 1,150 MIPS below budget 1,500 MIPS (23,3 % slack)
+    thread kadz_filtracyjna_sys.kadz_control_process.control_thread,     0,000 MIPS,    5,980 MIPS,
+    thread kadz_filtracyjna_sys.kadz_control_process.input_gate_c,     2,500 MIPS,    5,980 MIPS,Error: subtotal/actual exceeds budget 2,500 by 3,480 MIPS
+    thread kadz_filtracyjna_sys.kadz_control_process.output_gate_c,     2,500 MIPS,    5,980 MIPS,Error: subtotal/actual exceeds budget 2,500 by 3,480 MIPS
+  process kadz_filtracyjna_sys.kadz_control_process,   0,800 MIPS,  17,940 MIPS,Error: subtotal/actual exceeds budget 0,800 by 17,140 MIPS
+    thread kadz_filtracyjna_sys.water_control_process.sensor_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread kadz_filtracyjna_sys.water_control_process.control_thread,     1,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process.control_thread total 1,150 MIPS below budget 1,500 MIPS (23,3 % slack)
+    thread kadz_filtracyjna_sys.water_control_process.decision_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process kadz_filtracyjna_sys.water_control_process,   8,000 MIPS,  3,450 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process total 3,450 MIPS below budget 8,000 MIPS (56,9 % slack)
+    thread kadz_filtracyjna_sys.button_control.button_control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process kadz_filtracyjna_sys.button_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread kadz_filtracyjna_sys.timer_control_proc.timer_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process kadz_filtracyjna_sys.timer_control_proc,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread kadz_filtracyjna_sys.monitor_ctrl.control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process kadz_filtracyjna_sys.monitor_ctrl,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+system kadz_filtracyjna_sys, 10,000 MIPS,27,840 MIPS,Error: subtotal/actual exceeds budget 10,000 by 17,840 MIPS
+  device warzenie_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device warzenie_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device warzenie_sys.temp_sensor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.temp_sensor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device warzenie_sys.pressure_sensor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.pressure_sensor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device warzenie_sys.heater,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.heater total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device warzenie_sys.pressure_controler,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.pressure_controler total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device warzenie_sys.KadzWarzelna,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.KadzWarzelna total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device warzenie_sys.timer,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.timer total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device warzenie_sys.monitor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.warzenie_sys.monitor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+    thread warzenie_sys.keyboard_cont_process.keyboard_control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process warzenie_sys.keyboard_cont_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread warzenie_sys.input_processing_process.process_thread,     1,000 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 1,000 by 0,150 MIPS
+  process warzenie_sys.input_processing_process,   1,500 MIPS,  1,150 MIPS,process WarzeniePiwa_impl_Instance.warzenie_sys.input_processing_process total 1,150 MIPS below budget 1,500 MIPS (23,3 % slack)
+    thread warzenie_sys.KadzWarzelna_proc.input_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.KadzWarzelna_proc.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread warzenie_sys.KadzWarzelna_proc.output_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.KadzWarzelna_proc.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread warzenie_sys.KadzWarzelna_proc.KadzWarzelna_decision_center,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process warzenie_sys.KadzWarzelna_proc,   1,500 MIPS,  3,450 MIPS,Error: subtotal/actual exceeds budget 1,500 by 1,950 MIPS
+    thread warzenie_sys.heater_control_proc.read_temp,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread warzenie_sys.heater_control_proc.control,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread warzenie_sys.heater_control_proc.heater_ctrl,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc.heater_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process warzenie_sys.heater_control_proc,   7,000 MIPS,  3,450 MIPS,process WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+    thread warzenie_sys.pressure_control_proc.read_pressure,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread warzenie_sys.pressure_control_proc.control,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread warzenie_sys.pressure_control_proc.pressure_ctrl,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc.pressure_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process warzenie_sys.pressure_control_proc,   7,000 MIPS,  3,450 MIPS,process WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+    thread warzenie_sys.timer_control_proc.timer_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process warzenie_sys.timer_control_proc,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread warzenie_sys.button_control.button_control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process warzenie_sys.button_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread warzenie_sys.monitor_ctrl.control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process warzenie_sys.monitor_ctrl,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+system warzenie_sys, 10,000 MIPS,17,000 MIPS,Error: subtotal/actual exceeds budget 10,000 by 7,000 MIPS
+  device parowanie_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.parowanie_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device parowanie_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.parowanie_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device parowanie_sys.parownik,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.parowanie_sys.parownik total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device parowanie_sys.moisture_lvl_sensor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.parowanie_sys.moisture_lvl_sensor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device parowanie_sys.monitor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.parowanie_sys.monitor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+    thread parowanie_sys.keyboard_cont_process.keyboard_control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process parowanie_sys.keyboard_cont_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread parowanie_sys.input_processing_process.process_thread,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.input_processing_process.process_thread total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process parowanie_sys.input_processing_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread parowanie_sys.moisture_control_process.sensor_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread parowanie_sys.moisture_control_process.control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread parowanie_sys.moisture_control_process.decision_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread parowanie_sys.moisture_control_process.input_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread parowanie_sys.moisture_control_process.output_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process parowanie_sys.moisture_control_process,   0,800 MIPS,  5,750 MIPS,Error: subtotal/actual exceeds budget 0,800 by 4,950 MIPS
+    thread parowanie_sys.button_control.button_control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process parowanie_sys.button_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread parowanie_sys.monitor_ctrl.control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process parowanie_sys.monitor_ctrl,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+system parowanie_sys, 5,000 MIPS,10,850 MIPS,Error: subtotal/actual exceeds budget 5,000 by 5,850 MIPS
+  device wirowanie_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wirowanie_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wirowanie_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wirowanie_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wirowanie_sys.wirownik,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wirowanie_sys.wirownik total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wirowanie_sys.wir,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wirowanie_sys.wir total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wirowanie_sys.timer,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wirowanie_sys.timer total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device wirowanie_sys.monitor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wirowanie_sys.monitor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+    thread wirowanie_sys.keyboard_cont_process.keyboard_control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wirowanie_sys.keyboard_cont_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wirowanie_sys.input_processing_process.process_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wirowanie_sys.input_processing_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wirowanie_sys.wirownike_control_process.control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wirowanie_sys.wirownike_control_process.decision_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wirowanie_sys.wirownike_control_process.input_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wirowanie_sys.wirownike_control_process.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread wirowanie_sys.wirownike_control_process.output_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.wirowanie_sys.wirownike_control_process.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process wirowanie_sys.wirownike_control_process,   2,500 MIPS,  4,600 MIPS,Error: subtotal/actual exceeds budget 2,500 by 2,100 MIPS
+    thread wirowanie_sys.button_control.button_control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wirowanie_sys.button_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wirowanie_sys.timer_control_proc.timer_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wirowanie_sys.timer_control_proc,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread wirowanie_sys.monitor_ctrl.control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process wirowanie_sys.monitor_ctrl,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+system wirowanie_sys, 5,000 MIPS,10,950 MIPS,Error: subtotal/actual exceeds budget 5,000 by 5,950 MIPS
+  device fermentacja_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.fermentacja_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device fermentacja_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.fermentacja_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device fermentacja_sys.timer,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.fermentacja_sys.timer total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device fermentacja_sys.zbiornik,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.fermentacja_sys.zbiornik total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device fermentacja_sys.monitor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.fermentacja_sys.monitor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+    thread fermentacja_sys.keyboard_cont_process.keyboard_control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process fermentacja_sys.keyboard_cont_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread fermentacja_sys.input_processing_process.process_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process fermentacja_sys.input_processing_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread fermentacja_sys.timer_control_proc.timer_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process fermentacja_sys.timer_control_proc,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread fermentacja_sys.button_control.button_control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process fermentacja_sys.button_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread fermentacja_sys.fermentacja_control.input_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.fermentacja_sys.fermentacja_control.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread fermentacja_sys.fermentacja_control.output_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.fermentacja_sys.fermentacja_control.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread fermentacja_sys.fermentacja_control.fermentacja_decision_center,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process fermentacja_sys.fermentacja_control,   2,500 MIPS,  3,450 MIPS,Error: subtotal/actual exceeds budget 2,500 by 0,950 MIPS
+    thread fermentacja_sys.monitor_ctrl.control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process fermentacja_sys.monitor_ctrl,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+system fermentacja_sys, 5,000 MIPS,9,700 MIPS,Error: subtotal/actual exceeds budget 5,000 by 4,700 MIPS
+  device butelkowanie_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device butelkowanie_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device butelkowanie_sys.temp_sensor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.temp_sensor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device butelkowanie_sys.pressure_sensor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_sensor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device butelkowanie_sys.heater,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.heater total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device butelkowanie_sys.pressure_controler,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_controler total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device butelkowanie_sys.butelki,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.butelki total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device butelkowanie_sys.timer,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.timer total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+  device butelkowanie_sys.monitor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.butelkowanie_sys.monitor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
+    thread butelkowanie_sys.keyboard_cont_process.keyboard_control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process butelkowanie_sys.keyboard_cont_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread butelkowanie_sys.input_processing_process.process_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process butelkowanie_sys.input_processing_process,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread butelkowanie_sys.butelkowanie_proc.input_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.butelkowanie_proc.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread butelkowanie_sys.butelkowanie_proc.output_gate_c,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.butelkowanie_proc.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread butelkowanie_sys.butelkowanie_proc.butelkowanie_decision_center,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process butelkowanie_sys.butelkowanie_proc,   2,000 MIPS,  3,450 MIPS,Error: subtotal/actual exceeds budget 2,000 by 1,450 MIPS
+    thread butelkowanie_sys.heater_control_proc.read_temp,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread butelkowanie_sys.heater_control_proc.control,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread butelkowanie_sys.heater_control_proc.heater_ctrl,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc.heater_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process butelkowanie_sys.heater_control_proc,   7,000 MIPS,  3,450 MIPS,process WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+    thread butelkowanie_sys.pressure_control_proc.read_pressure,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread butelkowanie_sys.pressure_control_proc.control,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+    thread butelkowanie_sys.pressure_control_proc.pressure_ctrl,     2,500 MIPS,    1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc.pressure_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  process butelkowanie_sys.pressure_control_proc,   7,000 MIPS,  3,450 MIPS,process WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+    thread butelkowanie_sys.timer_control_proc.timer_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process butelkowanie_sys.timer_control_proc,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread butelkowanie_sys.button_control.button_control_thread,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process butelkowanie_sys.button_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+    thread butelkowanie_sys.monitor_ctrl.control,     0,800 MIPS,    1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  process butelkowanie_sys.monitor_ctrl,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+system butelkowanie_sys, 10,500 MIPS,17,000 MIPS,Error: subtotal/actual exceeds budget 10,500 by 6,500 MIPS
+Total,,118,790 MIPS
+
+
+Detailed Workload Report:  for Processor wstepna_obrobka_sys.cpu with Capacity 11,500 MIPS
+
+Component,Budget,Actual
+  thread wstepna_obrobka_sys.keyboard_cont_process.keyboard_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wstepna_obrobka_sys.keyboard_cont_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wstepna_obrobka_sys.input_processing_process.process_thread,   0,000 MIPS,  0,000 MIPS,
+process wstepna_obrobka_sys.input_processing_process, 0,800 MIPS,0,000 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.input_processing_process total 0,000 MIPS below budget 0,800 MIPS (100,0 % slack)
+  thread wstepna_obrobka_sys.mieszanie_proc.input_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread wstepna_obrobka_sys.mieszanie_proc.output_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_control,   0,000 MIPS,  1,150 MIPS,
+  thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_decision_center,   0,000 MIPS,  1,150 MIPS,
+process wstepna_obrobka_sys.mieszanie_proc, 8,000 MIPS,4,600 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc total 4,600 MIPS below budget 8,000 MIPS (42,5 % slack)
+  thread wstepna_obrobka_sys.czajnik_proc.input_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread wstepna_obrobka_sys.czajnik_proc.output_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process wstepna_obrobka_sys.czajnik_proc, 8,000 MIPS,3,450 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc total 3,450 MIPS below budget 8,000 MIPS (56,9 % slack)
+  thread wstepna_obrobka_sys.heater_control_proc.read_temp,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wstepna_obrobka_sys.heater_control_proc.control,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread wstepna_obrobka_sys.heater_control_proc.heater_ctrl,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc.heater_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process wstepna_obrobka_sys.heater_control_proc, 7,000 MIPS,3,450 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+  thread wstepna_obrobka_sys.timer_control_proc.timer_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wstepna_obrobka_sys.timer_control_proc, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wstepna_obrobka_sys.button_control.button_control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wstepna_obrobka_sys.button_control, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wstepna_obrobka_sys.monitor_ctrl.control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wstepna_obrobka_sys.monitor_ctrl, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+Total,,16,900 MIPS
+
+
+Detailed Workload Report:  for Processor kadz_filtracyjna_sys.cpu with Capacity 11,500 MIPS
+
+Component,Budget,Actual
+  thread kadz_filtracyjna_sys.keyboard_cont_process.keyboard_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process kadz_filtracyjna_sys.keyboard_cont_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread kadz_filtracyjna_sys.input_processing_process.process_thread,   1,000 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 1,000 by 0,150 MIPS
+process kadz_filtracyjna_sys.input_processing_process, 1,500 MIPS,1,150 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.input_processing_process total 1,150 MIPS below budget 1,500 MIPS (23,3 % slack)
+  thread kadz_filtracyjna_sys.kadz_control_process.control_thread,   0,000 MIPS,  5,980 MIPS,
+  thread kadz_filtracyjna_sys.kadz_control_process.input_gate_c,   2,500 MIPS,  5,980 MIPS,Error: subtotal/actual exceeds budget 2,500 by 3,480 MIPS
+  thread kadz_filtracyjna_sys.kadz_control_process.output_gate_c,   2,500 MIPS,  5,980 MIPS,Error: subtotal/actual exceeds budget 2,500 by 3,480 MIPS
+process kadz_filtracyjna_sys.kadz_control_process, 0,800 MIPS,17,940 MIPS,Error: subtotal/actual exceeds budget 0,800 by 17,140 MIPS
+  thread kadz_filtracyjna_sys.water_control_process.sensor_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread kadz_filtracyjna_sys.water_control_process.control_thread,   1,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process.control_thread total 1,150 MIPS below budget 1,500 MIPS (23,3 % slack)
+  thread kadz_filtracyjna_sys.water_control_process.decision_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process kadz_filtracyjna_sys.water_control_process, 8,000 MIPS,3,450 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process total 3,450 MIPS below budget 8,000 MIPS (56,9 % slack)
+  thread kadz_filtracyjna_sys.button_control.button_control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process kadz_filtracyjna_sys.button_control, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread kadz_filtracyjna_sys.timer_control_proc.timer_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process kadz_filtracyjna_sys.timer_control_proc, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread kadz_filtracyjna_sys.monitor_ctrl.control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process kadz_filtracyjna_sys.monitor_ctrl, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+Total,,27,140 MIPS
+
+
+Detailed Workload Report:  for Processor warzenie_sys.cpu with Capacity 11,500 MIPS
+
+Component,Budget,Actual
+  thread warzenie_sys.keyboard_cont_process.keyboard_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process warzenie_sys.keyboard_cont_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread warzenie_sys.input_processing_process.process_thread,   1,000 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 1,000 by 0,150 MIPS
+process warzenie_sys.input_processing_process, 1,500 MIPS,1,150 MIPS,process WarzeniePiwa_impl_Instance.warzenie_sys.input_processing_process total 1,150 MIPS below budget 1,500 MIPS (23,3 % slack)
+  thread warzenie_sys.KadzWarzelna_proc.input_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.KadzWarzelna_proc.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread warzenie_sys.KadzWarzelna_proc.output_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.KadzWarzelna_proc.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread warzenie_sys.KadzWarzelna_proc.KadzWarzelna_decision_center,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process warzenie_sys.KadzWarzelna_proc, 1,500 MIPS,3,450 MIPS,Error: subtotal/actual exceeds budget 1,500 by 1,950 MIPS
+  thread warzenie_sys.heater_control_proc.read_temp,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread warzenie_sys.heater_control_proc.control,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread warzenie_sys.heater_control_proc.heater_ctrl,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc.heater_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process warzenie_sys.heater_control_proc, 7,000 MIPS,3,450 MIPS,process WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+  thread warzenie_sys.pressure_control_proc.read_pressure,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread warzenie_sys.pressure_control_proc.control,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread warzenie_sys.pressure_control_proc.pressure_ctrl,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc.pressure_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process warzenie_sys.pressure_control_proc, 7,000 MIPS,3,450 MIPS,process WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+  thread warzenie_sys.timer_control_proc.timer_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process warzenie_sys.timer_control_proc, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread warzenie_sys.button_control.button_control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process warzenie_sys.button_control, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread warzenie_sys.monitor_ctrl.control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process warzenie_sys.monitor_ctrl, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+Total,,16,100 MIPS
+
+
+Detailed Workload Report:  for Processor parowanie_sys.cpu with Capacity 11,500 MIPS
+
+Component,Budget,Actual
+  thread parowanie_sys.keyboard_cont_process.keyboard_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process parowanie_sys.keyboard_cont_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread parowanie_sys.input_processing_process.process_thread,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.input_processing_process.process_thread total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process parowanie_sys.input_processing_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread parowanie_sys.moisture_control_process.sensor_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread parowanie_sys.moisture_control_process.control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread parowanie_sys.moisture_control_process.decision_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread parowanie_sys.moisture_control_process.input_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread parowanie_sys.moisture_control_process.output_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process parowanie_sys.moisture_control_process, 0,800 MIPS,5,750 MIPS,Error: subtotal/actual exceeds budget 0,800 by 4,950 MIPS
+  thread parowanie_sys.button_control.button_control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process parowanie_sys.button_control, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread parowanie_sys.monitor_ctrl.control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process parowanie_sys.monitor_ctrl, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+Total,,10,350 MIPS
+
+
+Detailed Workload Report:  for Processor wirowanie_sys.cpu with Capacity 11,500 MIPS
+
+Component,Budget,Actual
+  thread wirowanie_sys.keyboard_cont_process.keyboard_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wirowanie_sys.keyboard_cont_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wirowanie_sys.input_processing_process.process_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wirowanie_sys.input_processing_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wirowanie_sys.wirownike_control_process.control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wirowanie_sys.wirownike_control_process.decision_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wirowanie_sys.wirownike_control_process.input_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wirowanie_sys.wirownike_control_process.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread wirowanie_sys.wirownike_control_process.output_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.wirowanie_sys.wirownike_control_process.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process wirowanie_sys.wirownike_control_process, 2,500 MIPS,4,600 MIPS,Error: subtotal/actual exceeds budget 2,500 by 2,100 MIPS
+  thread wirowanie_sys.button_control.button_control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wirowanie_sys.button_control, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wirowanie_sys.timer_control_proc.timer_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wirowanie_sys.timer_control_proc, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread wirowanie_sys.monitor_ctrl.control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process wirowanie_sys.monitor_ctrl, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+Total,,10,350 MIPS
+
+
+Detailed Workload Report:  for Processor fermentacja_sys.cpu with Capacity 11,500 MIPS
+
+Component,Budget,Actual
+  thread fermentacja_sys.keyboard_cont_process.keyboard_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process fermentacja_sys.keyboard_cont_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread fermentacja_sys.input_processing_process.process_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process fermentacja_sys.input_processing_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread fermentacja_sys.timer_control_proc.timer_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process fermentacja_sys.timer_control_proc, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread fermentacja_sys.button_control.button_control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process fermentacja_sys.button_control, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread fermentacja_sys.fermentacja_control.input_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.fermentacja_sys.fermentacja_control.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread fermentacja_sys.fermentacja_control.output_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.fermentacja_sys.fermentacja_control.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread fermentacja_sys.fermentacja_control.fermentacja_decision_center,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process fermentacja_sys.fermentacja_control, 2,500 MIPS,3,450 MIPS,Error: subtotal/actual exceeds budget 2,500 by 0,950 MIPS
+  thread fermentacja_sys.monitor_ctrl.control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process fermentacja_sys.monitor_ctrl, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+Total,,9,200 MIPS
+
+
+Detailed Workload Report:  for Processor butelkowanie_sys.cpu with Capacity 11,500 MIPS
+
+Component,Budget,Actual
+  thread butelkowanie_sys.keyboard_cont_process.keyboard_control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process butelkowanie_sys.keyboard_cont_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread butelkowanie_sys.input_processing_process.process_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process butelkowanie_sys.input_processing_process, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread butelkowanie_sys.butelkowanie_proc.input_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.butelkowanie_proc.input_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread butelkowanie_sys.butelkowanie_proc.output_gate_c,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.butelkowanie_proc.output_gate_c total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread butelkowanie_sys.butelkowanie_proc.butelkowanie_decision_center,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process butelkowanie_sys.butelkowanie_proc, 2,000 MIPS,3,450 MIPS,Error: subtotal/actual exceeds budget 2,000 by 1,450 MIPS
+  thread butelkowanie_sys.heater_control_proc.read_temp,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread butelkowanie_sys.heater_control_proc.control,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread butelkowanie_sys.heater_control_proc.heater_ctrl,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc.heater_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process butelkowanie_sys.heater_control_proc, 7,000 MIPS,3,450 MIPS,process WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+  thread butelkowanie_sys.pressure_control_proc.read_pressure,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread butelkowanie_sys.pressure_control_proc.control,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc.control total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+  thread butelkowanie_sys.pressure_control_proc.pressure_ctrl,   2,500 MIPS,  1,150 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc.pressure_ctrl total 1,150 MIPS below budget 2,500 MIPS (54,0 % slack)
+process butelkowanie_sys.pressure_control_proc, 7,000 MIPS,3,450 MIPS,process WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc total 3,450 MIPS below budget 7,000 MIPS (50,7 % slack)
+  thread butelkowanie_sys.timer_control_proc.timer_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process butelkowanie_sys.timer_control_proc, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread butelkowanie_sys.button_control.button_control_thread,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process butelkowanie_sys.button_control, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+  thread butelkowanie_sys.monitor_ctrl.control,   0,800 MIPS,  1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+process butelkowanie_sys.monitor_ctrl, 0,800 MIPS,1,150 MIPS,Error: subtotal/actual exceeds budget 0,800 by 0,350 MIPS
+Total,,16,100 MIPS

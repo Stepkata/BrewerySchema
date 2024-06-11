@@ -15,7 +15,7 @@ public
 	    Deadline => 15ms;	
 	    Period => 20ms;
 	    Compute_Execution_Time => 0ms..2ms;		
-   		SEI::MIPSBudget => 0.3 mips;
+   		SEI::MIPSBudget => 0.8 mips;
    end ReadTemp;
    
    thread implementation ReadTemp.impl
@@ -36,7 +36,7 @@ public
 	    Deadline => 15ms;	
 	    Period => 20ms;
 	    Compute_Execution_Time => 0ms..2ms;	
-   		SEI::MIPSBudget => 0.3 mips;
+   		SEI::MIPSBudget => 2.5 mips;
    end DecideToTurnHeatOn;
    
    thread implementation DecideToTurnHeatOn.impl
@@ -53,7 +53,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
-			SEI::MIPSBudget => 0.3 mips;
+			SEI::MIPSBudget => 2.5 mips;
 	end HeaterControl;
 	
 	thread implementation HeaterControl.impl
@@ -69,7 +69,7 @@ public
 			input_data: in data port DataTypes::TemperatureType;
 			heater_control: out data port DataTypes::SwitchTrigger;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 7.0 mips;	
 	end HeaterControlProcess;
 	
 	process implementation HeaterControlProcess.impl
@@ -100,7 +100,7 @@ public
 			Deadline => 15ms;	
 			Period => 20ms;
 			Compute_Execution_Time => 0ms..2ms;	
-			SEI::MIPSBudget => 0.3 mips;	
+			SEI::MIPSBudget => 0.8 mips;	
 	end ReadPressure;
 	
 	thread implementation ReadPressure.impl
@@ -121,7 +121,7 @@ public
 			Deadline => 15ms;	
 			Period => 20ms;
 			Compute_Execution_Time => 0ms..2ms;	
-			SEI::MIPSBudget => 0.3 mips;
+			SEI::MIPSBudget => 2.5 mips;
 	end DecideToTurnPressureOn;
 	
 	thread implementation DecideToTurnPressureOn.impl
@@ -138,7 +138,7 @@ public
 			Deadline => 15ms;	
 			Period => 20ms;
 			Compute_Execution_Time => 0ms..2ms;	
-			SEI::MIPSBudget => 0.3 mips;
+			SEI::MIPSBudget => 2.5 mips;
 	end PressureControl;
 	
 	thread implementation PressureControl.impl
@@ -154,7 +154,7 @@ public
 			input_data: in data port DataTypes::PressureType;
 			pressure_control: out data port DataTypes::SwitchTrigger;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 7.0 mips;	
 	end PressureControlProcess;
 	
 	process implementation PressureControlProcess.impl
@@ -184,7 +184,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
-		    SEI::MIPSBudget => 0.3 mips;
+		    SEI::MIPSBudget => 2.5 mips;
 	end InputGateControl;
 	
 	thread implementation InputGateControl.impl
@@ -201,7 +201,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
-		    SEI::MIPSBudget => 0.3 mips;
+		    SEI::MIPSBudget => 2.5 mips;
 	end OutputGateControl;
 	
 	thread implementation OutputGateControl.impl
@@ -220,7 +220,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
-		    SEI::MIPSBudget => 0.3 mips;	
+		    SEI::MIPSBudget => 0.8 mips;	
 	end KeyboardControl;
 	
 	thread implementation KeyboardControl.impl
@@ -255,7 +255,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;		
-		    SEI::MIPSBudget => 0.3 mips;
+		    SEI::MIPSBudget => 0.8 mips;
 	end TimerControl;
 	
 	thread implementation TimerControl.impl
@@ -290,7 +290,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
-		    SEI::MIPSBudget => 0.3 mips;	
+		    SEI::MIPSBudget => 0.8 mips;	
 	end ButtonControl;
 	
 	thread implementation ButtonControl.impl
@@ -325,7 +325,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
-		    SEI::MIPSBudget => 0.3 mips;	
+		    SEI::MIPSBudget => 0.8 mips;	
 	end MonitorControl;
 	
 	thread implementation MonitorControl.impl

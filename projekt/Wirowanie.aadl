@@ -16,7 +16,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;
-		    SEI::MIPSBudget => 0.3 mips;
+		    SEI::MIPSBudget => 0.8 mips;
 	end ControlWirDevice;
 	
 	thread implementation ControlWirDevice.impl
@@ -38,7 +38,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;
-		    SEI::MIPSBudget => 0.3 mips;	
+		    SEI::MIPSBudget => 0.8 mips;	
 	end WirownikControlThread;
 	
 	thread implementation WirownikControlThread.impl
@@ -55,7 +55,7 @@ public
 			open_o_gate: out data port DataTypes::SwitchTrigger;
 			done: out data port DataTypes::SwitchTrigger;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 2.5 mips;	
 	end WirownikControlProcess;
 	
 	process implementation WirownikControlProcess.impl
@@ -89,7 +89,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
-		    SEI::MIPSBudget => 0.3 mips;
+		    SEI::MIPSBudget => 0.8 mips;
 	end PSystemControlCenterThread;
 	
 	thread implementation PSystemControlCenterThread.impl
@@ -122,8 +122,7 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
-       		SEI::GrossWeight => 0.9kg;
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 5.0 mips;	
 			SEI::MIPSCapacity => 2.4 mips;
 			SEI::WeightLimit => 20000.0kg;
 	end WirowanieSys;

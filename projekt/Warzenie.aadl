@@ -20,7 +20,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;
-		    SEI::MIPSBudget => 0.3 mips;	
+		    SEI::MIPSBudget => 0.8 mips;	
 	end KadzWarzelnaDecisionCenter;
 	
 	thread implementation KadzWarzelnaDecisionCenter.impl
@@ -37,7 +37,7 @@ public
 			OGateOpen: out data port DataTypes::SwitchTrigger;
 			ProcessDone: out data port DataTypes::SwitchTrigger;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 1.5 mips;	
 	end PodgrzewanieWKadzWarzelna;
 	
 	process implementation PodgrzewanieWKadzWarzelna.impl
@@ -70,7 +70,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;
-		    SEI::MIPSBudget => 0.3 mips;	
+		    SEI::MIPSBudget => 1.0 mips;	
 	end KWSystemControlCenterThread;
 	
 	thread implementation KWSystemControlCenterThread.impl
@@ -86,7 +86,7 @@ public
 			KadzWarzelnaDesiredPressure: out data port DataTypes::PressureType;
 			DisplayData: out data port DataTypes::SystemAppData;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 1.5 mips;	
 	end KWSystemControlCenterProcess;
 			
 	process implementation KWSystemControlCenterProcess.impl
@@ -107,8 +107,7 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
-       		SEI::GrossWeight => 0.9kg;
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 10.0 mips;	
 			SEI::MIPSCapacity => 2.4 mips;
 			SEI::WeightLimit => 20000.0kg;
 	end WarzenieSys;

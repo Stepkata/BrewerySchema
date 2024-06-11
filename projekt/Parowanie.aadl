@@ -16,7 +16,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;
-		    SEI::MIPSBudget => 0.3 mips;	
+		    SEI::MIPSBudget => 0.8 mips;	
 	end ReadMoistureLevel;
 	
 	thread implementation ReadMoistureLevel.impl
@@ -34,7 +34,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;
-		    SEI::MIPSBudget => 0.3 mips;
+		    SEI::MIPSBudget => 0.8 mips;
 	end ControlParownikDevice;
 	
 	thread implementation ControlParownikDevice.impl
@@ -56,7 +56,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
-		    SEI::MIPSBudget => 0.3 mips;
+		    SEI::MIPSBudget => 0.8 mips;
 	end ParownikControlThread;
 	
 	thread implementation ParownikControlThread.impl
@@ -109,7 +109,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;
-		    SEI::MIPSBudget => 0.3 mips;	
+		    SEI::MIPSBudget => 2.5 mips;	
 	end PSystemControlCenterThread;
 	
 	thread implementation PSystemControlCenterThread.impl
@@ -142,8 +142,7 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
-       		SEI::GrossWeight => 0.9kg;
-			SEI::MIPSBudget => 0.8 mips;
+			SEI::MIPSBudget => 5.0 mips;
 			SEI::MIPSCapacity => 2.4 mips;
 			SEI::WeightLimit => 20000.0kg;	
 	end ParowanieSys;

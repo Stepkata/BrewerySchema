@@ -55,31 +55,15 @@ public
 			TurnOn: out data port DataTypes::SwitchTrigger;
 			MieszadloProcessDone: out data port DataTypes::SwitchTrigger;	
 		properties
-			SEI::MIPSBudget => 0.8 mips;		
+			SEI::MIPSBudget => 8.0 mips;		
 	end Mieszanie;
 	
 	process implementation Mieszanie.impl
 		subcomponents
-			input_gate_c: thread CommonElements::InputGateControl.impl{
-		      Compute_Execution_Time => 52 ms .. 52 ms;
-		      Deadline               => 200 ms;
-		      Period                 => 100 ms;
-		    };
-			output_gate_c: thread CommonElements::OutputGateControl.impl{
-		      Compute_Execution_Time => 52 ms .. 52 ms;
-		      Deadline               => 200 ms;
-		      Period                 => 100 ms;
-		    };
-			mieszadlo_control: thread MieszadloControl.impl{
-		      Compute_Execution_Time => 52 ms .. 52 ms;
-		      Deadline               => 200 ms;
-		      Period                 => 100 ms;
-		    };
-			mieszadlo_decision_center: thread MieszadloDecisionCenter.impl{
-		      Compute_Execution_Time => 52 ms .. 52 ms;
-		      Deadline               => 200 ms;
-		      Period                 => 100 ms;
-		    };
+			input_gate_c: thread CommonElements::InputGateControl.impl;
+			output_gate_c: thread CommonElements::OutputGateControl.impl;
+			mieszadlo_control: thread MieszadloControl.impl;
+			mieszadlo_decision_center: thread MieszadloDecisionCenter.impl;
 		connections
 			start_conn: port Start -> mieszadlo_decision_center.Start;
 			desired_time_conn: port MieszadloTime -> mieszadlo_decision_center.DesiredTime;
@@ -107,6 +91,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
+		    SEI::MIPSBudget => 2.5 mips;
 	end CzajnikDecisionCenter;
 	
 	thread implementation CzajnikDecisionCenter.impl
@@ -123,26 +108,14 @@ public
 			OGateOpen: out data port DataTypes::SwitchTrigger;
 			ProcessDone: out data port DataTypes::SwitchTrigger;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 8.0 mips;	
 	end PodgrzewanieWCzajniku;
 	
 	process implementation PodgrzewanieWCzajniku.impl
 		subcomponents
-			input_gate_c: thread CommonElements::InputGateControl.impl{
-		      Compute_Execution_Time => 52 ms .. 52 ms;
-		      Deadline               => 200 ms;
-		      Period                 => 100 ms;
-		    };
-			output_gate_c: thread CommonElements::OutputGateControl.impl{
-		      Compute_Execution_Time => 52 ms .. 52 ms;
-		      Deadline               => 200 ms;
-		      Period                 => 100 ms;
-		    };
-			czajnik_decision_center: thread CzajnikDecisionCenter.impl{
-		      Compute_Execution_Time => 52 ms .. 52 ms;
-		      Deadline               => 200 ms;
-		      Period                 => 100 ms;
-		    };
+			input_gate_c: thread CommonElements::InputGateControl.impl;
+			output_gate_c: thread CommonElements::OutputGateControl.impl;
+			czajnik_decision_center: thread CzajnikDecisionCenter.impl;
 		connections
 			start_conn: port Start -> czajnik_decision_center.Start;
 			desired_time_conn: port CzajnikTime -> czajnik_decision_center.DesiredTime;
@@ -199,10 +172,9 @@ public
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
 		properties
-       		SEI::GrossWeight => 0.9kg;
        		SEI::WeightLimit => 20000.0kg;
-			SEI::MIPSBudget => 0.8 mips;
-			SEI::MIPSCapacity => 2.4 mips;	
+			SEI::MIPSBudget => 22.5 mips;
+			SEI::MIPSCapacity => 22.5 mips;	
 	end WstepnaObrobka;
 	
 	

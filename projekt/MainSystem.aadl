@@ -44,7 +44,7 @@ public
 			
 			DisplayData: out data port DataTypes::SystemAppData;
 		properties
-			SEI::MIPSBudget => 0.3 mips;
+			SEI::MIPSBudget => 2.6 mips;
 			Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
 		    Deadline => 15ms;	
@@ -86,7 +86,7 @@ public
 			
 			DisplayData: out data port DataTypes::SystemAppData;
 		properties
-			SEI::MIPSBudget => 0.8 mips;
+			SEI::MIPSBudget => 2.6 mips;
 				
 	end MainSystemSoftwareProcess;
 			
@@ -123,10 +123,9 @@ public
 
 	system WarzeniePiwa
 		properties
-       		SEI::GrossWeight => 0.9kg;
-       		SEI::WeightLimit => 20000.0kg;
-       		SEI::MIPSBudget => 0.8 mips;
-       		SEI::MIPSCapacity => 2.4 mips;
+       		SEI::WeightLimit => 200000.0kg;
+       		SEI::MIPSBudget => 50000.0 mips;
+       		SEI::MIPSCapacity => 50.0 mips;
        		SEI::BandWidthCapacity => 0.5 MBytesps;
 	end WarzeniePiwa;
 	
@@ -141,13 +140,17 @@ public
 			butelkowanie_sys: system Butelkowanie::ButelkowanieSys.impl;
 
 			monitor: device Devices::Monitor.impl;
-			monitor_ctrl: process CommonElements::MonitorControlProcess.impl;
+			monitor_ctrl: process CommonElements::MonitorControlProcess.impl{
+				SEI::MIPSBudget => 2.6 mips;
+			};
 			klawiatura: device Devices::Klawiatura.impl;
-			keyboard_cont_process: process CommonElements::KeyboardControlProcess.impl;
+			keyboard_cont_process: process CommonElements::KeyboardControlProcess.impl{
+				SEI::MIPSBudget => 2.6 mips;
+			};
 			main_sys: process MainSystemSoftwareProcess.impl;
 			sys_memory: memory Hardware::RAM.Standard;
 			Mag_bus: bus Hardware::Marine.Standard;
-			cpu: processor Hardware::corei5;
+			cpu: processor Hardware::corei7;
 		connections
 			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput{
 				SEI::BandWidthBudget => 12.0 Kbytesps;
