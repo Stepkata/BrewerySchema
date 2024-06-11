@@ -142,6 +142,7 @@ public
 		    Deadline => 15ms;	
 		    Period => 20ms;
 		    Compute_Execution_Time => 0ms..2ms;	
+		    SEI::MIPSBudget => 0.3 mips;
 	end KadzControlThread;
 	
 	thread implementation KadzControlThread.impl

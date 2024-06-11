@@ -11,6 +11,7 @@ public
 			On: in data port DataTypes::SwitchTrigger;
 			TurnOn: out data port DataTypes::SwitchTrigger;
 		properties
+			SEI::MIPSBudget => 0.3 mips;
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
 		    Deadline => 15ms;	
@@ -33,6 +34,7 @@ public
 			TurnMieszadloOn: out data port DataTypes::SwitchTrigger;	
 			Done: out data port DataTypes::SwitchTrigger;		
 		properties
+			SEI::MIPSBudget => 0.3 mips;
 		    Dispatch_Protocol => Periodic;
 		    Dispatch_Offset => 	2ms;
 		    Deadline => 15ms;	
@@ -136,6 +138,13 @@ public
 			CzajnikTime: out data port DataTypes::DateTime;
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
 			DisplayData: out data port DataTypes::SystemAppData;
+		properties
+		    Dispatch_Protocol => Periodic;
+		    Dispatch_Offset => 	2ms;
+		    Deadline => 15ms;	
+		    Period => 20ms;
+		    Compute_Execution_Time => 0ms..2ms;	
+		    SEI::MIPSBudget => 7.5 mips;
 	end WOSystemControlCenterThread;
 	
 	thread implementation WOSystemControlCenterThread.impl
@@ -151,7 +160,7 @@ public
 			CzajnikDesiredTemp: out data port DataTypes::TemperatureType;
 			DisplayData: out data port DataTypes::SystemAppData;
 		properties
-			SEI::MIPSBudget => 0.8 mips;	
+			SEI::MIPSBudget => 8.5 mips;	
 	end WOSystemControlCenterProcess;
 			
 	process implementation WOSystemControlCenterProcess.impl

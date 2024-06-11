@@ -1,9 +1,9 @@
 Not Bound Resource Budget Analysis Report
 
 Resource Summary: 
-  MIPS capacity 57,000 MIPS : MIPS budget 54,870 MIPS
+  MIPS capacity 57,000 MIPS : MIPS budget 54,520 MIPS
   8 out of 8 with MIPS capacity
-*   192 out of 193 with MIPS budget
+  193 out of 193 with MIPS budget
 
 
 
@@ -43,12 +43,12 @@ process main_sys, 2,600 MIPS,2,550 MIPS,process WarzeniePiwa_impl_Instance.main_
   device wstepna_obrobka_sys.monitor,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.monitor total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
     thread wstepna_obrobka_sys.keyboard_cont_process.keyboard_control,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.keyboard_cont_process.keyboard_control total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
   process wstepna_obrobka_sys.keyboard_cont_process,   0,800 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.keyboard_cont_process total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
-    thread wstepna_obrobka_sys.input_processing_process.process_thread,     0,000 MIPS,    0,000 MIPS,
-  process wstepna_obrobka_sys.input_processing_process,   0,800 MIPS,  0,000 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.input_processing_process total 0,000 MIPS below budget 0,800 MIPS (100,0 % slack)
+    thread wstepna_obrobka_sys.input_processing_process.process_thread,     7,500 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.input_processing_process.process_thread total 0,450 MIPS below budget 7,500 MIPS (94,0 % slack)
+  process wstepna_obrobka_sys.input_processing_process,   8,500 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.input_processing_process total 0,450 MIPS below budget 8,500 MIPS (94,7 % slack)
     thread wstepna_obrobka_sys.mieszanie_proc.input_gate_c,     2,500 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.input_gate_c total 0,450 MIPS below budget 2,500 MIPS (82,0 % slack)
     thread wstepna_obrobka_sys.mieszanie_proc.output_gate_c,     2,500 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.output_gate_c total 0,450 MIPS below budget 2,500 MIPS (82,0 % slack)
-    thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_control,     0,000 MIPS,    0,450 MIPS,
-    thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_decision_center,     0,000 MIPS,    0,450 MIPS,
+    thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_control,     0,300 MIPS,    0,450 MIPS,Error: subtotal/actual exceeds budget 0,300 by 0,150 MIPS
+    thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_decision_center,     0,300 MIPS,    0,450 MIPS,Error: subtotal/actual exceeds budget 0,300 by 0,150 MIPS
   process wstepna_obrobka_sys.mieszanie_proc,   8,000 MIPS,  1,800 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc total 1,800 MIPS below budget 8,000 MIPS (77,5 % slack)
     thread wstepna_obrobka_sys.czajnik_proc.input_gate_c,     2,500 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.input_gate_c total 0,450 MIPS below budget 2,500 MIPS (82,0 % slack)
     thread wstepna_obrobka_sys.czajnik_proc.output_gate_c,     2,500 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.output_gate_c total 0,450 MIPS below budget 2,500 MIPS (82,0 % slack)
@@ -64,7 +64,7 @@ process main_sys, 2,600 MIPS,2,550 MIPS,process WarzeniePiwa_impl_Instance.main_
   process wstepna_obrobka_sys.button_control,   0,800 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.button_control total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
     thread wstepna_obrobka_sys.monitor_ctrl.control,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.monitor_ctrl.control total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
   process wstepna_obrobka_sys.monitor_ctrl,   0,800 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.monitor_ctrl total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
-system wstepna_obrobka_sys, 22,500 MIPS,8,000 MIPS,system WarzeniePiwa_impl_Instance.wstepna_obrobka_sys total 8,000 MIPS below budget 22,500 MIPS (64,4 % slack)
+system wstepna_obrobka_sys, 22,500 MIPS,7,650 MIPS,system WarzeniePiwa_impl_Instance.wstepna_obrobka_sys total 7,650 MIPS below budget 22,500 MIPS (66,0 % slack)
   device kadz_filtracyjna_sys.start_button,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.start_button total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
   device kadz_filtracyjna_sys.klawiatura,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.klawiatura total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
   device kadz_filtracyjna_sys.timer,   0,100 MIPS,  0,000 MIPS,device WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.timer total 0,000 MIPS below budget 0,100 MIPS (100,0 % slack)
@@ -76,7 +76,7 @@ system wstepna_obrobka_sys, 22,500 MIPS,8,000 MIPS,system WarzeniePiwa_impl_Inst
   process kadz_filtracyjna_sys.keyboard_cont_process,   0,800 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.keyboard_cont_process total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
     thread kadz_filtracyjna_sys.input_processing_process.process_thread,     1,000 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.input_processing_process.process_thread total 0,450 MIPS below budget 1,000 MIPS (55,0 % slack)
   process kadz_filtracyjna_sys.input_processing_process,   1,500 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.input_processing_process total 0,450 MIPS below budget 1,500 MIPS (70,0 % slack)
-    thread kadz_filtracyjna_sys.kadz_control_process.control_thread,     0,000 MIPS,    2,340 MIPS,
+    thread kadz_filtracyjna_sys.kadz_control_process.control_thread,     0,300 MIPS,    2,340 MIPS,Error: subtotal/actual exceeds budget 0,300 by 2,040 MIPS
     thread kadz_filtracyjna_sys.kadz_control_process.input_gate_c,     2,500 MIPS,    2,340 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process.input_gate_c total 2,340 MIPS below budget 2,500 MIPS (6,4 % slack)
     thread kadz_filtracyjna_sys.kadz_control_process.output_gate_c,     2,500 MIPS,    2,340 MIPS,thread WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process.output_gate_c total 2,340 MIPS below budget 2,500 MIPS (6,4 % slack)
   process kadz_filtracyjna_sys.kadz_control_process,   7,500 MIPS,  7,020 MIPS,process WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process total 7,020 MIPS below budget 7,500 MIPS (6,4 % slack)
@@ -217,4 +217,4 @@ system fermentacja_sys, 5,000 MIPS,4,100 MIPS,system WarzeniePiwa_impl_Instance.
     thread butelkowanie_sys.monitor_ctrl.control,     0,800 MIPS,    0,450 MIPS,thread WarzeniePiwa_impl_Instance.butelkowanie_sys.monitor_ctrl.control total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
   process butelkowanie_sys.monitor_ctrl,   0,800 MIPS,  0,450 MIPS,process WarzeniePiwa_impl_Instance.butelkowanie_sys.monitor_ctrl total 0,450 MIPS below budget 0,800 MIPS (43,8 % slack)
 system butelkowanie_sys, 10,500 MIPS,7,200 MIPS,system WarzeniePiwa_impl_Instance.butelkowanie_sys total 7,200 MIPS below budget 10,500 MIPS (31,4 % slack)
-Total, ,54,870 MIPS,
+Total, ,54,520 MIPS,
