@@ -1,0 +1,211 @@
+Test scheduability Report
+
+Processor Utilization/Scheduling Results
+Schedulability Results
+cpu: Processor WarzeniePiwa_impl_Instance.cpu is schedulable with utilization 30.0%
+thread name, period, deadline, execution time, phase offset, priority, max response time, schedulability 
+WarzeniePiwa_impl_Instance.monitor_ctrl.control, 20000, 15000, 2000, 0, 3, 2000.0, true
+WarzeniePiwa_impl_Instance.keyboard_cont_process.keyboard_control, 20000, 15000, 2000, 0, 2, 4000.0, true
+WarzeniePiwa_impl_Instance.main_sys.main_thread, 20000, 15000, 2000, 0, 1, 6000.0, true
+
+
+Schedulability Results
+ERROR:  cpu: Processor WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.cpu is not schedulable with utilization 150.0%
+thread name, period, deadline, execution time, phase offset, priority, max response time, schedulability 
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.keyboard_cont_process.keyboard_control, 20000, 15000, 2000, 0, 15, 2000.0, true
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.input_processing_process.process_thread, 20000, 15000, 2000, 0, 14, 4000.0, true
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.input_gate_c, 20000, 15000, 2000, 0, 13, 6000.0, true
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.output_gate_c, 20000, 15000, 2000, 0, 12, 8000.0, true
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.mieszadlo_control, 20000, 15000, 2000, 0, 11, 10000.0, true
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.mieszanie_proc.mieszadlo_decision_center, 20000, 15000, 2000, 0, 10, 12000.0, true
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.input_gate_c, 20000, 15000, 2000, 0, 9, 14000.0, true
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.output_gate_c, 20000, 15000, 2000, 0, 8, 16000.0, false
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center, 20000, 15000, 2000, 0, 7, 18000.0, false
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc.read_temp, 20000, 15000, 2000, 0, 6, 20000.0, false
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc.control, 20000, 15000, 2000, 0, 5, 1002000.0, false
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.heater_control_proc.heater_ctrl, 20000, 15000, 2000, 0, 4, 1102000.0, false
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.timer_control_proc.timer_thread, 20000, 15000, 2000, 0, 3, 1130000.0, false
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.button_control.button_control_thread, 20000, 15000, 2000, 0, 2, 1224000.0, false
+WarzeniePiwa_impl_Instance.wstepna_obrobka_sys.monitor_ctrl.control, 20000, 15000, 2000, 0, 1, 1346000.0, false
+
+
+Schedulability Results
+ERROR:  cpu: Processor WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.cpu is not schedulable with utilization 236.0%
+thread name, period, deadline, execution time, phase offset, priority, max response time, schedulability 
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.keyboard_cont_process.keyboard_control, 20000, 15000, 2000, 0, 11, 2000.0, true
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.input_processing_process.process_thread, 20000, 15000, 2000, 0, 10, 4000.0, true
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process.sensor_thread, 20000, 15000, 2000, 0, 9, 6000.0, true
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process.control_thread, 20000, 15000, 2000, 0, 8, 8000.0, true
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.water_control_process.decision_thread, 20000, 15000, 2000, 0, 7, 10000.0, true
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.button_control.button_control_thread, 20000, 15000, 2000, 0, 6, 12000.0, true
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.timer_control_proc.timer_thread, 20000, 15000, 2000, 0, 5, 14000.0, true
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.monitor_ctrl.control, 20000, 15000, 2000, 0, 4, 16000.0, false
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process.control_thread, 100000, 200000, 52000, 0, 3, 260000.0, false
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process.input_gate_c, 100000, 200000, 52000, 0, 2, 1340000.0, false
+WarzeniePiwa_impl_Instance.kadz_filtracyjna_sys.kadz_control_process.output_gate_c, 100000, 200000, 52000, 0, 1, 1108000.0, false
+
+
+Schedulability Results
+ERROR:  cpu: Processor WarzeniePiwa_impl_Instance.warzenie_sys.cpu is not schedulable with utilization 140.0%
+thread name, period, deadline, execution time, phase offset, priority, max response time, schedulability 
+WarzeniePiwa_impl_Instance.warzenie_sys.keyboard_cont_process.keyboard_control, 20000, 15000, 2000, 0, 14, 2000.0, true
+WarzeniePiwa_impl_Instance.warzenie_sys.input_processing_process.process_thread, 20000, 15000, 2000, 0, 13, 4000.0, true
+WarzeniePiwa_impl_Instance.warzenie_sys.KadzWarzelna_proc.input_gate_c, 20000, 15000, 2000, 0, 12, 6000.0, true
+WarzeniePiwa_impl_Instance.warzenie_sys.KadzWarzelna_proc.output_gate_c, 20000, 15000, 2000, 0, 11, 8000.0, true
+WarzeniePiwa_impl_Instance.warzenie_sys.KadzWarzelna_proc.KadzWarzelna_decision_center, 20000, 15000, 2000, 0, 10, 10000.0, true
+WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc.read_temp, 20000, 15000, 2000, 0, 9, 12000.0, true
+WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc.control, 20000, 15000, 2000, 0, 8, 14000.0, true
+WarzeniePiwa_impl_Instance.warzenie_sys.heater_control_proc.heater_ctrl, 20000, 15000, 2000, 0, 7, 16000.0, false
+WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc.read_pressure, 20000, 15000, 2000, 0, 6, 18000.0, false
+WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc.control, 20000, 15000, 2000, 0, 5, 20000.0, false
+WarzeniePiwa_impl_Instance.warzenie_sys.pressure_control_proc.pressure_ctrl, 20000, 15000, 2000, 0, 4, 1002000.0, false
+WarzeniePiwa_impl_Instance.warzenie_sys.timer_control_proc.timer_thread, 20000, 15000, 2000, 0, 3, 1102000.0, false
+WarzeniePiwa_impl_Instance.warzenie_sys.button_control.button_control_thread, 20000, 15000, 2000, 0, 2, 1130000.0, false
+WarzeniePiwa_impl_Instance.warzenie_sys.monitor_ctrl.control, 20000, 15000, 2000, 0, 1, 1224000.0, false
+
+
+Schedulability Results
+ERROR:  cpu: Processor WarzeniePiwa_impl_Instance.parowanie_sys.cpu is not schedulable with utilization 90.0%
+thread name, period, deadline, execution time, phase offset, priority, max response time, schedulability 
+WarzeniePiwa_impl_Instance.parowanie_sys.keyboard_cont_process.keyboard_control, 20000, 15000, 2000, 0, 9, 2000.0, true
+WarzeniePiwa_impl_Instance.parowanie_sys.input_processing_process.process_thread, 20000, 15000, 2000, 0, 8, 4000.0, true
+WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.sensor_thread, 20000, 15000, 2000, 0, 7, 6000.0, true
+WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.control_thread, 20000, 15000, 2000, 0, 6, 8000.0, true
+WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.decision_thread, 20000, 15000, 2000, 0, 5, 10000.0, true
+WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.input_gate_c, 20000, 15000, 2000, 0, 4, 12000.0, true
+WarzeniePiwa_impl_Instance.parowanie_sys.moisture_control_process.output_gate_c, 20000, 15000, 2000, 0, 3, 14000.0, true
+WarzeniePiwa_impl_Instance.parowanie_sys.button_control.button_control_thread, 20000, 15000, 2000, 0, 2, 16000.0, false
+WarzeniePiwa_impl_Instance.parowanie_sys.monitor_ctrl.control, 20000, 15000, 2000, 0, 1, 18000.0, false
+
+
+Schedulability Results
+ERROR:  cpu: Processor WarzeniePiwa_impl_Instance.wirowanie_sys.cpu is not schedulable with utilization 90.0%
+thread name, period, deadline, execution time, phase offset, priority, max response time, schedulability 
+WarzeniePiwa_impl_Instance.wirowanie_sys.keyboard_cont_process.keyboard_control, 20000, 15000, 2000, 0, 9, 2000.0, true
+WarzeniePiwa_impl_Instance.wirowanie_sys.input_processing_process.process_thread, 20000, 15000, 2000, 0, 8, 4000.0, true
+WarzeniePiwa_impl_Instance.wirowanie_sys.wirownike_control_process.control_thread, 20000, 15000, 2000, 0, 7, 6000.0, true
+WarzeniePiwa_impl_Instance.wirowanie_sys.wirownike_control_process.decision_thread, 20000, 15000, 2000, 0, 6, 8000.0, true
+WarzeniePiwa_impl_Instance.wirowanie_sys.wirownike_control_process.input_gate_c, 20000, 15000, 2000, 0, 5, 10000.0, true
+WarzeniePiwa_impl_Instance.wirowanie_sys.wirownike_control_process.output_gate_c, 20000, 15000, 2000, 0, 4, 12000.0, true
+WarzeniePiwa_impl_Instance.wirowanie_sys.button_control.button_control_thread, 20000, 15000, 2000, 0, 3, 14000.0, true
+WarzeniePiwa_impl_Instance.wirowanie_sys.timer_control_proc.timer_thread, 20000, 15000, 2000, 0, 2, 16000.0, false
+WarzeniePiwa_impl_Instance.wirowanie_sys.monitor_ctrl.control, 20000, 15000, 2000, 0, 1, 18000.0, false
+
+
+Schedulability Results
+ERROR:  cpu: Processor WarzeniePiwa_impl_Instance.fermentacja_sys.cpu is not schedulable with utilization 80.0%
+thread name, period, deadline, execution time, phase offset, priority, max response time, schedulability 
+WarzeniePiwa_impl_Instance.fermentacja_sys.keyboard_cont_process.keyboard_control, 20000, 15000, 2000, 0, 8, 2000.0, true
+WarzeniePiwa_impl_Instance.fermentacja_sys.input_processing_process.process_thread, 20000, 15000, 2000, 0, 7, 4000.0, true
+WarzeniePiwa_impl_Instance.fermentacja_sys.timer_control_proc.timer_thread, 20000, 15000, 2000, 0, 6, 6000.0, true
+WarzeniePiwa_impl_Instance.fermentacja_sys.button_control.button_control_thread, 20000, 15000, 2000, 0, 5, 8000.0, true
+WarzeniePiwa_impl_Instance.fermentacja_sys.fermentacja_control.input_gate_c, 20000, 15000, 2000, 0, 4, 10000.0, true
+WarzeniePiwa_impl_Instance.fermentacja_sys.fermentacja_control.output_gate_c, 20000, 15000, 2000, 0, 3, 12000.0, true
+WarzeniePiwa_impl_Instance.fermentacja_sys.fermentacja_control.fermentacja_decision_center, 20000, 15000, 2000, 0, 2, 14000.0, true
+WarzeniePiwa_impl_Instance.fermentacja_sys.monitor_ctrl.control, 20000, 15000, 2000, 0, 1, 16000.0, false
+
+
+Schedulability Results
+ERROR:  cpu: Processor WarzeniePiwa_impl_Instance.butelkowanie_sys.cpu is not schedulable with utilization 140.0%
+thread name, period, deadline, execution time, phase offset, priority, max response time, schedulability 
+WarzeniePiwa_impl_Instance.butelkowanie_sys.keyboard_cont_process.keyboard_control, 20000, 15000, 2000, 0, 14, 2000.0, true
+WarzeniePiwa_impl_Instance.butelkowanie_sys.input_processing_process.process_thread, 20000, 15000, 2000, 0, 13, 4000.0, true
+WarzeniePiwa_impl_Instance.butelkowanie_sys.butelkowanie_proc.input_gate_c, 20000, 15000, 2000, 0, 12, 6000.0, true
+WarzeniePiwa_impl_Instance.butelkowanie_sys.butelkowanie_proc.output_gate_c, 20000, 15000, 2000, 0, 11, 8000.0, true
+WarzeniePiwa_impl_Instance.butelkowanie_sys.butelkowanie_proc.butelkowanie_decision_center, 20000, 15000, 2000, 0, 10, 10000.0, true
+WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc.read_temp, 20000, 15000, 2000, 0, 9, 12000.0, true
+WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc.control, 20000, 15000, 2000, 0, 8, 14000.0, true
+WarzeniePiwa_impl_Instance.butelkowanie_sys.heater_control_proc.heater_ctrl, 20000, 15000, 2000, 0, 7, 16000.0, false
+WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc.read_pressure, 20000, 15000, 2000, 0, 6, 18000.0, false
+WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc.control, 20000, 15000, 2000, 0, 5, 20000.0, false
+WarzeniePiwa_impl_Instance.butelkowanie_sys.pressure_control_proc.pressure_ctrl, 20000, 15000, 2000, 0, 4, 1002000.0, false
+WarzeniePiwa_impl_Instance.butelkowanie_sys.timer_control_proc.timer_thread, 20000, 15000, 2000, 0, 3, 1102000.0, false
+WarzeniePiwa_impl_Instance.butelkowanie_sys.button_control.button_control_thread, 20000, 15000, 2000, 0, 2, 1130000.0, false
+WarzeniePiwa_impl_Instance.butelkowanie_sys.monitor_ctrl.control, 20000, 15000, 2000, 0, 1, 1224000.0, false
+
+
+
+Thread binding report
+thread monitor_ctrl.control(2,55 MIPS) ==> processor cpu(25,5MIPS) Utilization 10,0%
+thread keyboard_cont_process.keyboard_control(2,55 MIPS) ==> processor cpu(25,5MIPS) Utilization 10,0%
+thread main_sys.main_thread(2,55 MIPS) ==> processor cpu(25,5MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.keyboard_cont_process.keyboard_control(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.input_processing_process.process_thread(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.mieszanie_proc.input_gate_c(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.mieszanie_proc.output_gate_c(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_control(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.mieszanie_proc.mieszadlo_decision_center(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.czajnik_proc.input_gate_c(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.czajnik_proc.output_gate_c(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.heater_control_proc.read_temp(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.heater_control_proc.control(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.heater_control_proc.heater_ctrl(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.timer_control_proc.timer_thread(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.button_control.button_control_thread(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wstepna_obrobka_sys.monitor_ctrl.control(0,450 MIPS) ==> processor wstepna_obrobka_sys.cpu(4,50MIPS) Utilization 10,0%
+thread kadz_filtracyjna_sys.keyboard_cont_process.keyboard_control(0,450 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 10,0%
+thread kadz_filtracyjna_sys.input_processing_process.process_thread(0,450 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 10,0%
+thread kadz_filtracyjna_sys.kadz_control_process.control_thread(2,34 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 52,0%
+thread kadz_filtracyjna_sys.kadz_control_process.input_gate_c(2,34 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 52,0%
+thread kadz_filtracyjna_sys.kadz_control_process.output_gate_c(2,34 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 52,0%
+thread kadz_filtracyjna_sys.water_control_process.sensor_thread(0,450 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 10,0%
+thread kadz_filtracyjna_sys.water_control_process.control_thread(0,450 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 10,0%
+thread kadz_filtracyjna_sys.water_control_process.decision_thread(0,450 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 10,0%
+thread kadz_filtracyjna_sys.button_control.button_control_thread(0,450 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 10,0%
+thread kadz_filtracyjna_sys.timer_control_proc.timer_thread(0,450 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 10,0%
+thread kadz_filtracyjna_sys.monitor_ctrl.control(0,450 MIPS) ==> processor kadz_filtracyjna_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.keyboard_cont_process.keyboard_control(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.input_processing_process.process_thread(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.KadzWarzelna_proc.input_gate_c(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.KadzWarzelna_proc.output_gate_c(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.KadzWarzelna_proc.KadzWarzelna_decision_center(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.heater_control_proc.read_temp(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.heater_control_proc.control(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.heater_control_proc.heater_ctrl(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.pressure_control_proc.read_pressure(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.pressure_control_proc.control(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.pressure_control_proc.pressure_ctrl(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.timer_control_proc.timer_thread(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.button_control.button_control_thread(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread warzenie_sys.monitor_ctrl.control(0,450 MIPS) ==> processor warzenie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.keyboard_cont_process.keyboard_control(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.input_processing_process.process_thread(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.moisture_control_process.sensor_thread(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.moisture_control_process.control_thread(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.moisture_control_process.decision_thread(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.moisture_control_process.input_gate_c(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.moisture_control_process.output_gate_c(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.button_control.button_control_thread(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread parowanie_sys.monitor_ctrl.control(0,450 MIPS) ==> processor parowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.keyboard_cont_process.keyboard_control(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.input_processing_process.process_thread(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.wirownike_control_process.control_thread(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.wirownike_control_process.decision_thread(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.wirownike_control_process.input_gate_c(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.wirownike_control_process.output_gate_c(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.button_control.button_control_thread(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.timer_control_proc.timer_thread(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread wirowanie_sys.monitor_ctrl.control(0,450 MIPS) ==> processor wirowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread fermentacja_sys.keyboard_cont_process.keyboard_control(0,450 MIPS) ==> processor fermentacja_sys.cpu(4,50MIPS) Utilization 10,0%
+thread fermentacja_sys.input_processing_process.process_thread(0,450 MIPS) ==> processor fermentacja_sys.cpu(4,50MIPS) Utilization 10,0%
+thread fermentacja_sys.timer_control_proc.timer_thread(0,450 MIPS) ==> processor fermentacja_sys.cpu(4,50MIPS) Utilization 10,0%
+thread fermentacja_sys.button_control.button_control_thread(0,450 MIPS) ==> processor fermentacja_sys.cpu(4,50MIPS) Utilization 10,0%
+thread fermentacja_sys.fermentacja_control.input_gate_c(0,450 MIPS) ==> processor fermentacja_sys.cpu(4,50MIPS) Utilization 10,0%
+thread fermentacja_sys.fermentacja_control.output_gate_c(0,450 MIPS) ==> processor fermentacja_sys.cpu(4,50MIPS) Utilization 10,0%
+thread fermentacja_sys.fermentacja_control.fermentacja_decision_center(0,450 MIPS) ==> processor fermentacja_sys.cpu(4,50MIPS) Utilization 10,0%
+thread fermentacja_sys.monitor_ctrl.control(0,450 MIPS) ==> processor fermentacja_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.keyboard_cont_process.keyboard_control(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.input_processing_process.process_thread(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.butelkowanie_proc.input_gate_c(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.butelkowanie_proc.output_gate_c(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.butelkowanie_proc.butelkowanie_decision_center(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.heater_control_proc.read_temp(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.heater_control_proc.control(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.heater_control_proc.heater_ctrl(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.pressure_control_proc.read_pressure(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.pressure_control_proc.control(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.pressure_control_proc.pressure_ctrl(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.timer_control_proc.timer_thread(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.button_control.button_control_thread(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%
+thread butelkowanie_sys.monitor_ctrl.control(0,450 MIPS) ==> processor butelkowanie_sys.cpu(4,50MIPS) Utilization 10,0%

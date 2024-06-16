@@ -3,13 +3,13 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 
 "Physical Bus","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
 "Mag_bus","2000.0","500.0","48.0","12.8"
-"Mag_bus","2000.0","500.0","300.0","15.599999999999998"
-"Mag_bus","2000.0","500.0","228.0","18.799999999999997"
-"Mag_bus","2000.0","500.0","264.0","20.8"
-"Mag_bus","2000.0","500.0","168.0","16.4"
-"Mag_bus","2000.0","500.0","168.0","18.2"
+"Mag_bus","2000.0","500.0","300.0","19.999999999999996"
+"Mag_bus","2000.0","500.0","228.0","18.999999999999996"
+"Mag_bus","2000.0","500.0","264.0","22.0"
+"Mag_bus","2000.0","500.0","168.0","16.6"
+"Mag_bus","2000.0","500.0","180.0","18.4"
 "Mag_bus","2000.0","500.0","168.0","18.4"
-"Mag_bus","2000.0","500.0","264.0","20.8"
+"Mag_bus","2000.0","500.0","264.0","22.0"
 
 "Bus Mag_bus has data overhead of 0 bytes"
 "Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
@@ -20,15 +20,22 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 
 "Bus Mag_bus has data overhead of 0 bytes"
 "Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"mieszadlo_decision_center.OpenInputGate -> input_gate_c.Open","","0.0","","0.0"
+"mieszadlo_decision_center.OpenOutputGate -> output_gate_c.Open","","0.0","","0.0"
+"mieszadlo_decision_center.TurnMieszadloOn -> mieszadlo_control.On","","0.0","","0.0"
+"czajnik_decision_center.OpenInputGate -> input_gate_c.Open","","0.0","","0.0"
+"czajnik_decision_center.OpenOutputGate -> output_gate_c.Open","","0.0","","0.0"
+"read_temp.read_data -> control.temp_data","","0.0","","0.4"
+"control.decision_heater -> heater_ctrl.turn_on","","0.0","","0.0"
 "start_button.Start -> button_control.button_control_thread.switch_on","","12.0","","0.0"
 "klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","12.0","","3.2"
 "temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data","","12.0","","0.4"
 "timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","12.0","","2.0"
 "keyboard_cont_process.keyboard_control.KeyboardInput -> input_processing_process.process_thread.UserInput","","12.0","","3.2"
-"input_processing_process.process_thread.MieszadloTime -> mieszanie_proc.mieszadlo_decision_center.DesiredTime","","12.0","","0.0"
-"input_processing_process.process_thread.CzajnikTime -> czajnik_proc.czajnik_decision_center.DesiredTime","","12.0","","0.0"
-"input_processing_process.process_thread.CzajnikDesiredTemp -> heater_control_proc.control.desired_temp_data","","12.0","","0.0"
-"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","12.0","","0.0"
+"input_processing_process.process_thread.MieszadloTime -> mieszanie_proc.mieszadlo_decision_center.DesiredTime","","12.0","","0.2"
+"input_processing_process.process_thread.CzajnikTime -> czajnik_proc.czajnik_decision_center.DesiredTime","","12.0","","0.2"
+"input_processing_process.process_thread.CzajnikDesiredTemp -> heater_control_proc.control.desired_temp_data","","12.0","","0.4"
+"input_processing_process.process_thread.DisplayData -> monitor_ctrl.control.SystemInput","","12.0","","3.2"
 "mieszanie_proc.input_gate_c.OpenGate -> kadz.OpenInputGate","","12.0","","0.0"
 "mieszanie_proc.output_gate_c.OpenGate -> kadz.OpenOutputGate","","12.0","","0.0"
 "mieszanie_proc.mieszadlo_control.TurnOn -> mieszadlo.On","","12.0","","0.0"
@@ -46,8 +53,33 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 "main_sys.main_thread.WstepnaObrobkaStart -> wstepna_obrobka_sys.start_button.RemoteStart","","12.0","","0.0"
 "wstepna_obrobka_sys.czajnik_proc.czajnik_decision_center.Done -> main_sys.main_thread.WstepnaObrobkaDone","","12.0","","0.0"
 
+"Connection mieszadlo_decision_center.OpenInputGate -> input_gate_c.Open bound to Mag_bus"
+"WARNING: Connection mieszadlo_decision_center.OpenInputGate -> input_gate_c.Open has no bandwidth budget"
+
+"Connection mieszadlo_decision_center.OpenOutputGate -> output_gate_c.Open bound to Mag_bus"
+"WARNING: Connection mieszadlo_decision_center.OpenOutputGate -> output_gate_c.Open has no bandwidth budget"
+
+"Connection mieszadlo_decision_center.TurnMieszadloOn -> mieszadlo_control.On bound to Mag_bus"
+"WARNING: Connection mieszadlo_decision_center.TurnMieszadloOn -> mieszadlo_control.On has no bandwidth budget"
+
+"Connection czajnik_decision_center.OpenInputGate -> input_gate_c.Open bound to Mag_bus"
+"WARNING: Connection czajnik_decision_center.OpenInputGate -> input_gate_c.Open has no bandwidth budget"
+
+"Connection czajnik_decision_center.OpenOutputGate -> output_gate_c.Open bound to Mag_bus"
+"WARNING: Connection czajnik_decision_center.OpenOutputGate -> output_gate_c.Open has no bandwidth budget"
+
+"Connection read_temp.read_data -> control.temp_data bound to Mag_bus"
+"WARNING: Connection read_temp.read_data -> control.temp_data has no bandwidth budget"
+
+"Connection control.decision_heater -> heater_ctrl.turn_on bound to Mag_bus"
+"WARNING: Connection control.decision_heater -> heater_ctrl.turn_on has no bandwidth budget"
+
 "Bus Mag_bus has data overhead of 0 bytes"
 "Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"control_thread.open_i_gate -> input_gate_c.Open","","0.0","","0.0"
+"control_thread.open_o_gate -> output_gate_c.Open","","0.0","","0.0"
+"sensor_thread.read_data -> decision_thread.curr_water_level","","0.0","","0.2"
+"decision_thread.get_more_water -> control_thread.turn_on_dec","","0.0","","0.0"
 "start_button.Start -> button_control.button_control_thread.switch_on","","12.0","","0.0"
 "klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","12.0","","3.2"
 "timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","12.0","","2.0"
@@ -68,8 +100,26 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 "main_sys.main_thread.KadzFiltracyjnaStart -> kadz_filtracyjna_sys.start_button.RemoteStart","","12.0","","0.0"
 "kadz_filtracyjna_sys.kadz_control_process.control_thread.done -> main_sys.main_thread.KadzFiltracyjnaDone","","12.0","","0.0"
 
+"Connection control_thread.open_i_gate -> input_gate_c.Open bound to Mag_bus"
+"WARNING: Connection control_thread.open_i_gate -> input_gate_c.Open has no bandwidth budget"
+
+"Connection control_thread.open_o_gate -> output_gate_c.Open bound to Mag_bus"
+"WARNING: Connection control_thread.open_o_gate -> output_gate_c.Open has no bandwidth budget"
+
+"Connection sensor_thread.read_data -> decision_thread.curr_water_level bound to Mag_bus"
+"WARNING: Connection sensor_thread.read_data -> decision_thread.curr_water_level has no bandwidth budget"
+
+"Connection decision_thread.get_more_water -> control_thread.turn_on_dec bound to Mag_bus"
+"WARNING: Connection decision_thread.get_more_water -> control_thread.turn_on_dec has no bandwidth budget"
+
 "Bus Mag_bus has data overhead of 0 bytes"
 "Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"KadzWarzelna_decision_center.OpenInputGate -> input_gate_c.Open","","0.0","","0.0"
+"KadzWarzelna_decision_center.OpenOutputGate -> output_gate_c.Open","","0.0","","0.0"
+"read_temp.read_data -> control.temp_data","","0.0","","0.4"
+"control.decision_heater -> heater_ctrl.turn_on","","0.0","","0.0"
+"read_pressure.read_data -> control.pressure_data","","0.0","","0.8"
+"control.decision_pressure_on -> pressure_ctrl.turn_on","","0.0","","0.0"
 "start_button.Start -> button_control.button_control_thread.switch_on","","12.0","","0.0"
 "klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","12.0","","3.2"
 "temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data","","12.0","","0.4"
@@ -93,8 +143,30 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 "main_sys.main_thread.WarzenieStart -> warzenie_sys.start_button.RemoteStart","","12.0","","0.0"
 "warzenie_sys.KadzWarzelna_proc.KadzWarzelna_decision_center.Done -> main_sys.main_thread.WarzenieDone","","12.0","","0.0"
 
+"Connection KadzWarzelna_decision_center.OpenInputGate -> input_gate_c.Open bound to Mag_bus"
+"WARNING: Connection KadzWarzelna_decision_center.OpenInputGate -> input_gate_c.Open has no bandwidth budget"
+
+"Connection KadzWarzelna_decision_center.OpenOutputGate -> output_gate_c.Open bound to Mag_bus"
+"WARNING: Connection KadzWarzelna_decision_center.OpenOutputGate -> output_gate_c.Open has no bandwidth budget"
+
+"Connection read_temp.read_data -> control.temp_data bound to Mag_bus"
+"WARNING: Connection read_temp.read_data -> control.temp_data has no bandwidth budget"
+
+"Connection control.decision_heater -> heater_ctrl.turn_on bound to Mag_bus"
+"WARNING: Connection control.decision_heater -> heater_ctrl.turn_on has no bandwidth budget"
+
+"Connection read_pressure.read_data -> control.pressure_data bound to Mag_bus"
+"WARNING: Connection read_pressure.read_data -> control.pressure_data has no bandwidth budget"
+
+"Connection control.decision_pressure_on -> pressure_ctrl.turn_on bound to Mag_bus"
+"WARNING: Connection control.decision_pressure_on -> pressure_ctrl.turn_on has no bandwidth budget"
+
 "Bus Mag_bus has data overhead of 0 bytes"
 "Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"sensor_thread.read_data -> decision_thread.curr_moisture_level","","0.0","","0.2"
+"decision_thread.parownik_on -> control_thread.turn_on_dec","","0.0","","0.0"
+"decision_thread.open_i_gate -> input_gate_c.Open","","0.0","","0.0"
+"decision_thread.open_o_gate -> output_gate_c.Open","","0.0","","0.0"
 "start_button.Start -> button_control.button_control_thread.switch_on","","12.0","","0.0"
 "klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","12.0","","3.2"
 "moisture_lvl_sensor.MoistureLevel -> moisture_control_process.sensor_thread.sensor_data","","12.0","","0.2"
@@ -110,8 +182,23 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 "main_sys.main_thread.ParowanieStart -> parowanie_sys.start_button.RemoteStart","","12.0","","0.0"
 "parowanie_sys.moisture_control_process.decision_thread.done -> main_sys.main_thread.ParowanieDone","","12.0","","0.0"
 
+"Connection sensor_thread.read_data -> decision_thread.curr_moisture_level bound to Mag_bus"
+"WARNING: Connection sensor_thread.read_data -> decision_thread.curr_moisture_level has no bandwidth budget"
+
+"Connection decision_thread.parownik_on -> control_thread.turn_on_dec bound to Mag_bus"
+"WARNING: Connection decision_thread.parownik_on -> control_thread.turn_on_dec has no bandwidth budget"
+
+"Connection decision_thread.open_i_gate -> input_gate_c.Open bound to Mag_bus"
+"WARNING: Connection decision_thread.open_i_gate -> input_gate_c.Open has no bandwidth budget"
+
+"Connection decision_thread.open_o_gate -> output_gate_c.Open bound to Mag_bus"
+"WARNING: Connection decision_thread.open_o_gate -> output_gate_c.Open has no bandwidth budget"
+
 "Bus Mag_bus has data overhead of 0 bytes"
 "Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"decision_thread.parownik_on -> control_thread.turn_on_dec","","0.0","","0.0"
+"decision_thread.open_i_gate -> input_gate_c.Open","","0.0","","0.0"
+"decision_thread.open_o_gate -> output_gate_c.Open","","0.0","","0.0"
 "start_button.Start -> button_control.button_control_thread.switch_on","","12.0","","0.0"
 "klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","12.0","","3.2"
 "timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","12.0","","2.0"
@@ -122,13 +209,25 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 "wirownike_control_process.input_gate_c.OpenGate -> wirownik.OpenInputGate","","12.0","","0.0"
 "wirownike_control_process.output_gate_c.OpenGate -> wirownik.OpenOutputGate","","12.0","","0.0"
 "button_control.button_control_thread.on -> wirownike_control_process.decision_thread.start","","12.0","","0.0"
+"timer_control_proc.timer_thread.CurrTime -> wirownike_control_process.decision_thread.curr_time","","12.0","","0.2"
 "monitor_ctrl.control.DisplayData -> monitor.DisplayData","","12.0","","3.2"
 "main_sys.main_thread.WirowanieUserInput -> wirowanie_sys.input_processing_process.process_thread.RemoteUserInput","","12.0","","3.2"
 "main_sys.main_thread.WirowanieStart -> wirowanie_sys.start_button.RemoteStart","","12.0","","0.0"
 "wirowanie_sys.wirownike_control_process.decision_thread.done -> main_sys.main_thread.WirowanieDone","","12.0","","0.0"
 
+"Connection decision_thread.parownik_on -> control_thread.turn_on_dec bound to Mag_bus"
+"WARNING: Connection decision_thread.parownik_on -> control_thread.turn_on_dec has no bandwidth budget"
+
+"Connection decision_thread.open_i_gate -> input_gate_c.Open bound to Mag_bus"
+"WARNING: Connection decision_thread.open_i_gate -> input_gate_c.Open has no bandwidth budget"
+
+"Connection decision_thread.open_o_gate -> output_gate_c.Open bound to Mag_bus"
+"WARNING: Connection decision_thread.open_o_gate -> output_gate_c.Open has no bandwidth budget"
+
 "Bus Mag_bus has data overhead of 0 bytes"
 "Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"fermentacja_decision_center.OpenInputGate -> input_gate_c.Open","","0.0","","0.0"
+"fermentacja_decision_center.OpenOutputGate -> output_gate_c.Open","","0.0","","0.0"
 "start_button.Start -> button_control.button_control_thread.switch_on","","12.0","","0.0"
 "klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","12.0","","3.2"
 "timer.CurrTime -> timer_control_proc.timer_thread.ReadTime","","12.0","","2.0"
@@ -144,8 +243,20 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 "main_sys.main_thread.FermentacjaStart -> fermentacja_sys.start_button.RemoteStart","","12.0","","0.0"
 "fermentacja_sys.fermentacja_control.fermentacja_decision_center.Done -> main_sys.main_thread.FermentacjaDone","","12.0","","0.0"
 
+"Connection fermentacja_decision_center.OpenInputGate -> input_gate_c.Open bound to Mag_bus"
+"WARNING: Connection fermentacja_decision_center.OpenInputGate -> input_gate_c.Open has no bandwidth budget"
+
+"Connection fermentacja_decision_center.OpenOutputGate -> output_gate_c.Open bound to Mag_bus"
+"WARNING: Connection fermentacja_decision_center.OpenOutputGate -> output_gate_c.Open has no bandwidth budget"
+
 "Bus Mag_bus has data overhead of 0 bytes"
 "Bound Virtual Bus/Connection","Capacity (KB/s)","Budget (KB/s)","Required Budget (KB/s)","Actual (KB/s)"
+"butelkowanie_decision_center.OpenInputGate -> input_gate_c.Open","","0.0","","0.0"
+"butelkowanie_decision_center.OpenOutputGate -> output_gate_c.Open","","0.0","","0.0"
+"read_temp.read_data -> control.temp_data","","0.0","","0.4"
+"control.decision_heater -> heater_ctrl.turn_on","","0.0","","0.0"
+"read_pressure.read_data -> control.pressure_data","","0.0","","0.8"
+"control.decision_pressure_on -> pressure_ctrl.turn_on","","0.0","","0.0"
 "start_button.Start -> button_control.button_control_thread.switch_on","","12.0","","0.0"
 "klawiatura.KeyInput -> keyboard_cont_process.keyboard_control.PureInput","","12.0","","3.2"
 "temp_sensor.Temp -> heater_control_proc.read_temp.sensor_data","","12.0","","0.4"
@@ -168,5 +279,23 @@ Bus load analysis of WarzeniePiwa_impl_Instance
 "main_sys.main_thread.ButelkowanieUserInput -> butelkowanie_sys.input_processing_process.process_thread.RemoteUserInput","","12.0","","3.2"
 "main_sys.main_thread.ButelkowanieStart -> butelkowanie_sys.start_button.RemoteStart","","12.0","","0.0"
 "butelkowanie_sys.butelkowanie_proc.butelkowanie_decision_center.Done -> main_sys.main_thread.ButelkowanieDone","","12.0","","0.0"
+
+"Connection butelkowanie_decision_center.OpenInputGate -> input_gate_c.Open bound to Mag_bus"
+"WARNING: Connection butelkowanie_decision_center.OpenInputGate -> input_gate_c.Open has no bandwidth budget"
+
+"Connection butelkowanie_decision_center.OpenOutputGate -> output_gate_c.Open bound to Mag_bus"
+"WARNING: Connection butelkowanie_decision_center.OpenOutputGate -> output_gate_c.Open has no bandwidth budget"
+
+"Connection read_temp.read_data -> control.temp_data bound to Mag_bus"
+"WARNING: Connection read_temp.read_data -> control.temp_data has no bandwidth budget"
+
+"Connection control.decision_heater -> heater_ctrl.turn_on bound to Mag_bus"
+"WARNING: Connection control.decision_heater -> heater_ctrl.turn_on has no bandwidth budget"
+
+"Connection read_pressure.read_data -> control.pressure_data bound to Mag_bus"
+"WARNING: Connection read_pressure.read_data -> control.pressure_data has no bandwidth budget"
+
+"Connection control.decision_pressure_on -> pressure_ctrl.turn_on bound to Mag_bus"
+"WARNING: Connection control.decision_pressure_on -> pressure_ctrl.turn_on has no bandwidth budget"
 
 

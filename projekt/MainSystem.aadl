@@ -150,6 +150,7 @@ public
 			main_sys: process MainSystemSoftwareProcess.impl;
 			sys_memory: memory Hardware::RAM.Standard;
 			Mag_bus: bus Hardware::Marine.Standard;
+			bridge: bus Hardware::bridge.Standard;
 			cpu: processor Hardware::corei7;
 		connections
 			keyboard_conn: port klawiatura.KeyInput -> keyboard_cont_process.KeyboardInput{
@@ -236,11 +237,16 @@ public
 				SEI::BandWidthBudget => 12.0 Kbytesps;
 				};
 			
-			eth1: bus access Mag_bus -> cpu.eth;
 			eth10: bus access Mag_bus -> monitor.eth;
 			eth4: bus access Mag_bus -> klawiatura.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
+	  		eth_cpu: bus access Mag_bus <-> cpu.eth;
+	  		
+	  		bridge0: bus access Mag_Bus <-> bridge.marine_main_access;
+	
 		properties
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to main_sys;
+			
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_sys;
 			Actual_Connection_Binding => (reference(wstepna_obrobka_sys.Mag_bus)) applies to setup_wstepna;
@@ -264,8 +270,18 @@ public
 			Actual_Connection_Binding => (reference(butelkowanie_sys.Mag_bus)) applies to setup_butelkowanie;
 			Actual_Connection_Binding => (reference(butelkowanie_sys.Mag_bus)) applies to start_butelkowanie;
 			Actual_Connection_Binding => (reference(butelkowanie_sys.Mag_bus)) applies to done_butelkowanie;
+			
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to main_sys_to_monitor;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to ctral_to_monitor;
+			
+			Actual_Connection_Binding => (reference(butelkowanie_sys.Mag_bus))applies to bridge.marine_sub1_access;
+			Actual_Connection_Binding => (reference(fermentacja_sys.Mag_bus))applies to bridge.marine_sub2_access;
+			Actual_Connection_Binding => (reference(wirowanie_sys.Mag_bus))applies to bridge.marine_sub3_access;
+			Actual_Connection_Binding => (reference(parowanie_sys.Mag_bus))applies to bridge.marine_sub4_access;
+			Actual_Connection_Binding => (reference(warzenie_sys.Mag_bus))applies to bridge.marine_sub5_access;
+			Actual_Connection_Binding => (reference(kadz_filtracyjna_sys.Mag_bus))applies to bridge.marine_sub6_access;
+			Actual_Connection_Binding => (reference(wstepna_obrobka_sys.Mag_bus))applies to bridge.marine_sub7_access;
+			
 			
 			Actual_Memory_Binding => (reference(sys_memory)) applies to keyboard_cont_process;
 			Actual_Memory_Binding => (reference(sys_memory)) applies to main_sys;

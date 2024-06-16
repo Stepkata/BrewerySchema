@@ -180,6 +180,7 @@ public
 			start: in data port DataTypes::SwitchTrigger;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
+				bus_access: requires bus access Hardware::Marine.Standard;
 		properties
        		SEI::WeightLimit => 20000.0kg;
 			SEI::MIPSBudget => 22.5 mips;
@@ -297,6 +298,10 @@ public
 			eth10: bus access Mag_bus -> monitor.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to mieszanie_proc;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to czajnik_proc;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to heater_control_proc;
+			
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to remote_input_conn;

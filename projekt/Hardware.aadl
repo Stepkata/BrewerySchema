@@ -2,7 +2,33 @@ package Hardware
 public
 	with SEI;
 	
-	bus Marine
+	bus Network
+	  properties
+	    SEI::GrossWeight => 0.02kg;
+	end Network;
+	
+	bus implementation Network.Standard
+	end Network.Standard;
+	
+	bus bridge
+	  features
+	    marine_main_access: requires bus access Marine.Standard;
+	    marine_sub1_access: requires bus access Marine.Standard;
+	    marine_sub2_access: requires bus access Marine.Standard;
+	    marine_sub3_access: requires bus access Marine.Standard;
+	    marine_sub4_access: requires bus access Marine.Standard;
+	    marine_sub5_access: requires bus access Marine.Standard;
+	    marine_sub6_access: requires bus access Marine.Standard;
+	    marine_sub7_access: requires bus access Marine.Standard;    
+
+	end bridge;
+	
+	bus implementation bridge.Standard
+		
+	end bridge.Standard;
+
+	
+	bus Marine	
 		properties
 			SEI::GrossWeight => 0.01kg;
 	    	Transmission_Time => [Fixed => 1ns..2ns; PerByte => 5ns ..6ns;];
@@ -15,7 +41,7 @@ public
 	end Marine.Standard;
 	
 	processor corei5
-	  features
+		features
 	   	eth: requires bus access Marine.Standard;
 	  properties
 		Scheduling_Protocol => (Round_Robin_Protocol);

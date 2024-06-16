@@ -194,6 +194,7 @@ public
 			start: in data port DataTypes::SwitchTrigger;
 			RemoteUserInput: in data port DataTypes::KeyboardInputData;
 			process_done: out data port DataTypes::SwitchTrigger;
+				bus_access: requires bus access Hardware::Marine.Standard;
 		properties
 			SEI::MIPSBudget => 11.5 mips;
 			SEI::MIPSCapacity => 11.5 mips;	
@@ -287,6 +288,9 @@ public
 			eth7: bus access Mag_bus -> kadz.eth;
 	  		BAC5: bus access Mag_Bus <-> sys_memory.BA1;
 		properties
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to kadz_control_process;
+			Actual_Connection_Binding => (reference(Mag_bus)) applies to water_control_process;
+			
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to keyboard_to_proc_conn;
 			Actual_Connection_Binding => (reference(Mag_bus)) applies to input_to_proc1;
